@@ -1,0 +1,173 @@
+"use client";
+
+import { FormEvent, useEffect, useRef, useState } from "react";
+import Link from "next/link";
+
+export default function QuoteForm() {
+  const [message, setMessage] = useState("");
+  const [status, setStatus] = useState<"idle" | "sending" | "success" | "error">("idle");
+  const startedAt = useRef(0);
+
+  useEffect(() => {
+    startedAt.current = Date.now();
+  }, []);
+
+  async function handleSubmit(event: FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+
+    const form = new FormData(event.currentTarget);
+    const formElement = event.currentTarget;
+
+    setStatus("sending");
+    setMessage("Sending your request…");
+
+    try {
+      const response = await fetch("/api/quote", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          name: form.get("name"),
+          phone: form.get("phone"),
+          email: form.get("email"),
+          zip: form.get("zip"),
+          structure: form.get("structure"),
+          details: form.get("details"),
+          website: form.get("website"),
+          startedAt: startedAt.current,
+        }),
+      });
+
+      const result = (await response.json()) as { message?: string };
+      if (!response.ok) {
+        throw new Error(result.message || "We could not send your request.");
+      }
+
+      formElement.reset();
+      startedAt.current = Date.now();
+      setStatus("success");
+      setMessage("Thanks! Your quote request was sent to Barry. We’ll be in touch soon.");
+    } catch (error) {
+      setStatus("error");
+      setMessage(
+        error instanceof Error
+          ? error.message
+          : "We could not send your request. Please call or text us instead.",
+      );
+    }
+  }
+
+  return (
+    <form
+      className="quote-form"
+      onSubmit={handleSubmit}
+      aria-busy={status === "sending"}
+    >
+      <div className="form-heading">
+        <p>Tell us about your project</p>
+        <span>Fields marked * are required</span>
+      </div>
+
+      <div className="form-grid">
+        <label className="form-honeypot" aria-hidden="true">
+          Website
+          <input type="text" name="website" tabIndex={-1} autoComplete="off" />
+        </label>
+        <label>
+          Your name *
+          <input
+            type="text"
+            name="name"
+            autoComplete="name"
+            placeholder="First and last name"
+            required
+          />
+        </label>
+        <label>
+          Phone number *
+          <input
+            type="tel"
+            name="phone"
+            autoComplete="tel"
+            placeholder="(828) 555-0123"
+            required
+          />
+        </label>
+        <label>
+          Email address *
+          <input
+            type="email"
+            name="email"
+            autoComplete="email"
+            placeholder="you@example.com"
+            required
+          />
+        </label>
+        <label>
+          ZIP code *
+          <input
+            type="text"
+            name="zip"
+            autoComplete="postal-code"
+            inputMode="numeric"
+            pattern="[0-9]{5}"
+            maxLength={5}
+            placeholder="Your 5-digit ZIP"
+            required
+          />
+          <small className="field-hint">We&apos;ll confirm availability for your location.</small>
+        </label>
+        <label>
+          What are you building? *
+          <select name="structure" defaultValue="" required>
+            <option value="" disabled>
+              Choose a structure
+            </option>
+            <option>Carport</option>
+            <option>Garage</option>
+            <option>RV cover</option>
+            <option>Barn</option>
+            <option>Commercial building</option>
+            <option>Not sure yet</option>
+          </select>
+        </label>
+        <label className="form-full">
+          Anything else we should know?
+          <textarea
+            name="details"
+            rows={4}
+            placeholder="Approximate size, colors, site details, or how you plan to use the building..."
+          />
+        </label>
+      </div>
+
+      <div className="form-submit">
+        <button
+          type="submit"
+          className="button button-dark"
+          disabled={status === "sending"}
+        >
+          {status === "sending" ? "Sending…" : "Send my quote request"}{" "}
+          <span aria-hidden="true">→</span>
+        </button>
+        <p>
+          Your details are sent securely to My Carport Guy. No email app is
+          required.
+        </p>
+      </div>
+      <p className="form-privacy">
+        By submitting, you agree that we may contact you about your project.
+        See our <Link href="/privacy">Privacy Policy</Link>.
+      </p>
+      <a className="form-text-option" href="sms:+18288391730">
+        Prefer text? Message (828) 839-1730
+      </a>
+      <p
+        className={`form-status form-status-${status}`}
+        aria-live="polite"
+        role={status === "error" ? "alert" : "status"}
+      >
+        {message}
+      </p>
+    </form>
+  );
+}
