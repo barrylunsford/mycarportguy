@@ -1,8 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import Header from "@/components/Header";
-
-const eagleRentToOwnUrl = "https://www.eaglecarports.com/financing/rent-to-own";
+import RentToOwnEstimator from "@/components/RentToOwnEstimator";
 
 export const metadata: Metadata = {
   title: "Rent-to-Own Metal Buildings",
@@ -26,8 +25,8 @@ export default function FinancingPage() {
               confirm eligibility, and understand the next steps before you commit.
             </p>
             <div className="financing-actions">
-              <a className="button" href={eagleRentToOwnUrl} target="_blank" rel="noreferrer">
-                Estimate a payment <span aria-hidden="true">↗</span>
+              <a className="button" href="#payment-estimator">
+                Estimate a payment <span aria-hidden="true">↓</span>
               </a>
               <Link className="text-link" href="/#quote">
                 Ask Barry about rent-to-own <span aria-hidden="true">→</span>
@@ -47,6 +46,8 @@ export default function FinancingPage() {
             <small>Eligibility and final terms are determined by Eagle Carports and Heartland.</small>
           </aside>
         </section>
+
+        <RentToOwnEstimator />
 
         <section className="financing-benefits">
           <div className="financing-section-heading">
