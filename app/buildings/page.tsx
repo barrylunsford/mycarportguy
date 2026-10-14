@@ -4,17 +4,44 @@ import BuildingCatalog from "@/components/BuildingCatalog";
 import { getProducts } from "@/lib/products";
 
 export const metadata: Metadata = {
-  title: "Browse Metal Buildings",
-  description: "Browse and filter Eagle Carports metal garages, carports, barns, RV covers, and other steel buildings by size, roof style, and capacity.",
+  title: "Metal Carports, Garages, Barns & RV Covers",
+  description: "Browse Eagle Carports metal carports, garages, barns, RV covers, combo units, and loafing sheds. Filter available buildings by size, roof style, and vehicle capacity.",
   alternates: { canonical: "/buildings" },
+  openGraph: {
+    url: "/buildings",
+    title: "Metal Carports, Garages, Barns & RV Covers",
+    description: "Compare Eagle Carports metal buildings by type, size, roof style, and capacity.",
+  },
 };
 
 export const dynamic = "force-dynamic";
 
 export default async function BuildingsPage() {
   const products = await getProducts();
+  const catalogProducts = products.filter((product) => !["carports", "garages", "rv-covers", "barns-buildings"].includes(product.id));
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "CollectionPage",
+    name: "Metal Buildings",
+    url: "https://www.mycarportguy.com/buildings",
+    description: metadata.description,
+    mainEntity: {
+      "@type": "ItemList",
+      numberOfItems: catalogProducts.length,
+      itemListElement: catalogProducts.map((product, index) => ({
+        "@type": "ListItem",
+        position: index + 1,
+        url: `https://www.mycarportguy.com/products/${product.slug}`,
+        name: product.name,
+      })),
+    },
+  };
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd).replace(/</g, "\\u003c") }}
+      />
       <Header />
       <main id="main-content" className="catalog-page">
         <section className="catalog-hero">

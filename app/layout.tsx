@@ -13,7 +13,7 @@ const manrope = Manrope({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://mycarportguy.com"),
+  metadataBase: new URL("https://www.mycarportguy.com"),
   title: {
     default: "My Carport Guy | Eagle Carports Dealer",
     template: "%s | My Carport Guy",
@@ -21,18 +21,14 @@ export const metadata: Metadata = {
   description:
     "Friendly help designing and ordering Eagle Carports carports, garages, RV covers, barns, and custom metal buildings across 21 states.",
   applicationName: "My Carport Guy",
-  keywords: [
-    "carports",
-    "metal garages",
-    "RV covers",
-    "metal barns",
-    "metal buildings",
-    "Eagle Carports dealer",
-  ],
-  alternates: { canonical: "/" },
+  creator: "My Carport Guy LLC",
+  publisher: "My Carport Guy LLC",
+  category: "Metal buildings",
+  formatDetection: { email: false, address: false, telephone: false },
   openGraph: {
     type: "website",
     url: "/",
+    locale: "en_US",
     siteName: "My Carport Guy",
     title: "My Carport Guy | Eagle Carports Dealer",
     description:
@@ -47,7 +43,46 @@ export const metadata: Metadata = {
   robots: {
     index: true,
     follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+      "max-video-preview": -1,
+    },
   },
+};
+
+const siteStructuredData = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebSite",
+      "@id": "https://www.mycarportguy.com/#website",
+      url: "https://www.mycarportguy.com/",
+      name: "My Carport Guy",
+      description: "Friendly help choosing and ordering Eagle Carports metal buildings.",
+      inLanguage: "en-US",
+      publisher: { "@id": "https://www.mycarportguy.com/#organization" },
+    },
+    {
+      "@type": "Organization",
+      "@id": "https://www.mycarportguy.com/#organization",
+      name: "My Carport Guy",
+      legalName: "My Carport Guy LLC",
+      url: "https://www.mycarportguy.com/",
+      telephone: "+1-828-839-1730",
+      email: "barry@mycarportguy.com",
+      description: "Independent Eagle Carports dealer helping customers choose, customize, and order metal carports, garages, RV covers, barns, and other steel buildings.",
+      contactPoint: {
+        "@type": "ContactPoint",
+        telephone: "+1-828-839-1730",
+        email: "barry@mycarportguy.com",
+        contactType: "sales",
+        availableLanguage: "English",
+      },
+    },
+  ],
 };
 
 export default function RootLayout({
@@ -58,6 +93,12 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${dmSans.variable} ${manrope.variable}`}>
       <body>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify(siteStructuredData).replace(/</g, "\\u003c"),
+          }}
+        />
         <a className="skip-link" href="#main-content">
           Skip to main content
         </a>

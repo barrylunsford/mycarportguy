@@ -8,6 +8,11 @@ export const metadata: Metadata = {
   description:
     "Explore Eagle Carports rent-to-own options for eligible metal buildings with help from your local My Carport Guy dealer.",
   alternates: { canonical: "/financing" },
+  openGraph: {
+    url: "/financing",
+    title: "Rent-to-Own Metal Buildings",
+    description: "Estimate rent-to-own payments for an Eagle Carports metal building and request current terms from My Carport Guy.",
+  },
 };
 
 export default function FinancingPage() {

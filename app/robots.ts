@@ -5,9 +5,9 @@ export default function robots(): MetadataRoute.Robots {
     rules: {
       userAgent: "*",
       allow: "/",
-      disallow: "/api/",
+      disallow: ["/api/", "/admin", "/admin/"],
     },
-    sitemap: "https://mycarportguy.com/sitemap.xml",
-    host: "https://mycarportguy.com",
+    sitemap: "https://www.mycarportguy.com/sitemap.xml",
+    host: "https://www.mycarportguy.com",
   };
 }

@@ -13,9 +13,22 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const product = await getProduct(slug);
   if (!product) return { title: "Product not found" };
   return {
-    title: product.name,
-    description: product.summary,
+    title: `${product.name} | Metal Building`,
+    description: `${product.summary} View details and request current pricing from My Carport Guy, an Eagle Carports dealer.`,
     alternates: { canonical: `/products/${product.slug}` },
+    openGraph: {
+      type: "website",
+      url: `/products/${product.slug}`,
+      title: product.name,
+      description: product.summary,
+      images: product.imageUrl ? [{ url: product.imageUrl, alt: product.name }] : undefined,
+    },
+    twitter: {
+      card: product.imageUrl ? "summary_large_image" : "summary",
+      title: product.name,
+      description: product.summary,
+      images: product.imageUrl ? [product.imageUrl] : undefined,
+    },
   };
 }
 
@@ -24,8 +37,24 @@ export default async function ProductPage({ params }: Props) {
   const product = await getProduct(slug);
   if (!product) notFound();
 
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "Product",
+    name: product.name,
+    description: product.description,
+    image: product.imageUrl || undefined,
+    sku: product.id.startsWith("sku-") ? product.id.slice(4).toUpperCase() : undefined,
+    category: product.category,
+    brand: { "@type": "Brand", name: "Eagle Carports" },
+    url: `https://www.mycarportguy.com/products/${product.slug}`,
+  };
+
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd).replace(/</g, "\\u003c") }}
+      />
       <Header />
       <main id="main-content" className="product-page">
         <section className="product-hero">

@@ -1,9 +1,21 @@
+import type { Metadata } from "next";
 import Header from "@/components/Header";
 import QuoteForm from "@/components/QuoteForm";
 import Image from "next/image";
 import { getProducts } from "@/lib/products";
 
 export const dynamic = "force-dynamic";
+
+export const metadata: Metadata = {
+  title: { absolute: "My Carport Guy | Carports, Garages, Barns & RV Covers" },
+  description: "Shop Eagle Carports metal carports, garages, barns, RV covers, and custom steel buildings with friendly dealer guidance, delivery, and installation across 21 states.",
+  alternates: { canonical: "/" },
+  openGraph: {
+    url: "/",
+    title: "My Carport Guy | Carports, Garages, Barns & RV Covers",
+    description: "Friendly dealer help choosing, customizing, and ordering an Eagle Carports metal building.",
+  },
+};
 
 const benefits = [
   "Local dealer guidance",
@@ -38,29 +50,9 @@ const serviceStates = [
 
 export default async function Home() {
   const structures = (await getProducts()).filter((product) => product.featured);
-  const jsonLd = {
-    "@context": "https://schema.org",
-    "@type": "HomeAndConstructionBusiness",
-    name: "My Carport Guy",
-    url: "https://mycarportguy.com",
-    telephone: "+1-828-839-1730",
-    email: "barry@mycarportguy.com",
-    description:
-      "Dealer assistance for Eagle Carports carports, garages, RV covers, barns, and custom metal buildings.",
-    areaServed: serviceStates.map((state) => ({
-      "@type": "State",
-      name: state,
-    })),
-  };
 
   return (
     <>
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify(jsonLd).replace(/</g, "\\u003c"),
-        }}
-      />
       <Header />
 
       <main id="main-content">

@@ -1,7 +1,8 @@
 import type { MetadataRoute } from "next";
 import { getProducts } from "@/lib/products";
 
-const baseUrl = "https://mycarportguy.com";
+const baseUrl = "https://www.mycarportguy.com";
+const buildingTypeIds = new Set(["carports", "garages", "rv-covers", "barns-buildings"]);
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const products = await getProducts();
@@ -21,7 +22,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       changeFrequency: "monthly",
       priority: 0.8,
     },
-    ...products.map((product) => ({
+    ...products.filter((product) => !buildingTypeIds.has(product.id)).map((product) => ({
       url: `${baseUrl}/products/${product.slug}`,
       changeFrequency: "monthly" as const,
       priority: 0.7,
