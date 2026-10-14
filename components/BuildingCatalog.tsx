@@ -6,6 +6,15 @@ import type { Product } from "@/lib/products";
 
 type Props = { products: Product[] };
 
+const buildingTypeCards = [
+  { id: "carports", label: "Carports", category: "Metal Carports", description: "Open-sided coverage for cars, trucks, and everyday equipment." },
+  { id: "garages", label: "Garages", category: "Metal Garages", description: "Fully enclosed protection for vehicles, storage, or workspace." },
+  { id: "rv-covers", label: "RV Covers", category: "Metal RV Covers", description: "High-clearance coverage for RVs, campers, and tall vehicles." },
+  { id: "barns-buildings", label: "Barns", category: "Metal Barns", description: "Versatile layouts for equipment, agriculture, and extra storage." },
+] as const;
+
+const buildingTypeIds = new Set<string>(buildingTypeCards.map((item) => item.id));
+
 function inferredDimensions(product: Product) {
   const match = product.name.match(/(\d+)x(\d+)x(\d+)/i);
   return {
@@ -38,14 +47,19 @@ export default function BuildingCatalog({ products }: Props) {
   const [length, setLength] = useState("All");
   const [height, setHeight] = useState("All");
 
-  const enriched = useMemo(() => products.map((product) => ({
+  const actualProducts = useMemo(
+    () => products.filter((product) => !buildingTypeIds.has(product.id)),
+    [products],
+  );
+
+  const enriched = useMemo(() => actualProducts.map((product) => ({
     product,
     ...inferredDimensions(product),
     roofStyle: inferredRoofStyle(product),
-  })), [products]);
+  })), [actualProducts]);
 
-  const categories = uniqueSorted(products.map((product) => product.category));
-  const capacities = uniqueSorted(products.map((product) => product.carCapacity));
+  const categories = uniqueSorted(actualProducts.map((product) => product.category));
+  const capacities = uniqueSorted(actualProducts.map((product) => product.carCapacity));
   const roofStyles = uniqueSorted(enriched.map((item) => item.roofStyle));
   const widths = uniqueSorted(enriched.map((item) => item.width));
   const lengths = uniqueSorted(enriched.map((item) => item.length));
@@ -73,8 +87,42 @@ export default function BuildingCatalog({ products }: Props) {
     setHeight("All");
   };
 
+  const chooseBuildingType = (selectedCategory: string) => {
+    reset();
+    setCategory(selectedCategory);
+    document.getElementById("building-results")?.scrollIntoView({ behavior: "smooth", block: "start" });
+  };
+
   return (
-    <div className="catalog-shell">
+    <>
+      <section className="building-type-section" aria-labelledby="building-type-heading">
+        <div className="building-type-heading">
+          <p className="eyebrow"><span />Start with a style</p>
+          <h2 id="building-type-heading">Shop by building type</h2>
+          <p>Choose a style to see only the structures in that category.</p>
+        </div>
+        <div className="building-type-grid">
+          {buildingTypeCards.map((item) => {
+            const count = actualProducts.filter((product) => product.category === item.category).length;
+            return (
+              <button
+                className={category === item.category ? "building-type-card active" : "building-type-card"}
+                key={item.id}
+                type="button"
+                onClick={() => chooseBuildingType(item.category)}
+                aria-pressed={category === item.category}
+              >
+                <span className="building-type-count">{count} {count === 1 ? "building" : "buildings"}</span>
+                <strong>{item.label}</strong>
+                <span>{item.description}</span>
+                <b>View {item.label.toLowerCase()} <span aria-hidden="true">→</span></b>
+              </button>
+            );
+          })}
+        </div>
+      </section>
+
+      <div className="catalog-shell" id="building-results">
       <aside className="catalog-filters" aria-label="Filter buildings">
         <div className="catalog-filter-heading">
           <div><span>Filter products</span><strong>{filtered.length} results</strong></div>
@@ -142,6 +190,7 @@ export default function BuildingCatalog({ products }: Props) {
           </div>
         )}
       </section>
-    </div>
+      </div>
+    </>
   );
 }
