@@ -2,6 +2,7 @@ import Link from "next/link";
 
 const navigation = [
   { label: "Browse buildings", href: "/buildings" },
+  { label: "Colors", href: "/colors" },
   { label: "How it works", href: "/#process" },
   { label: "Why us", href: "/#why-us" },
   { label: "Service area", href: "/service-areas/north-carolina" },

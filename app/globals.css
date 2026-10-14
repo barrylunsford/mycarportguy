@@ -423,6 +423,42 @@ footer p:last-child { text-align: right; }
 .catalog-empty p { max-width: 520px; margin: 0 0 24px; color: var(--muted); line-height: 1.6; }
 
 .financing-page { min-height: 100vh; background: var(--paper); }
+
+/* Colors */
+.colors-page { min-height: 100vh; background: var(--paper); }
+.colors-hero { display: grid; grid-template-columns: 1.05fr .95fr; min-height: 580px; background: var(--cream); }
+.colors-hero > div:first-child { display: flex; flex-direction: column; align-items: flex-start; justify-content: center; padding: clamp(64px,8vw,118px) max(28px,calc((100vw - 1240px)/2)); padding-right: clamp(35px,6vw,90px); }
+.colors-hero h1 { max-width: 760px; margin: 18px 0 24px; color: var(--navy); font-size: clamp(44px,6vw,76px); line-height: .98; letter-spacing: -.06em; }
+.colors-hero p:not(.eyebrow) { max-width: 660px; margin: 0 0 30px; color: var(--muted); font-size: 18px; line-height: 1.7; }
+.colors-building { position: relative; overflow: hidden; min-height: 480px; background: #d7e1df; }
+.colors-building::before { position: absolute; inset: auto -10% 0; height: 34%; background: #aab99d; content: ""; clip-path: polygon(0 45%,100% 0,100% 100%,0 100%); }
+.colors-building-roof { position: absolute; top: 25%; left: 14%; width: 72%; height: 25%; background: #244f3b; clip-path: polygon(50% 0,100% 65%,88% 80%,50% 30%,12% 80%,0 65%); filter: drop-shadow(0 16px 15px rgb(28 50 48 / 22%)); }
+.colors-building-wall { position: absolute; top: 43%; left: 23%; width: 54%; height: 38%; background: #a28d70; box-shadow: 18px 20px 32px rgb(28 50 48 / 18%); }
+.colors-building-wall::before { position: absolute; inset: 0; background: repeating-linear-gradient(90deg,transparent 0 22px,rgb(255 255 255 / 10%) 22px 24px); content: ""; }
+.colors-building-wall span { position: absolute; right: 12%; bottom: 0; width: 34%; height: 68%; background: #343a3b; border: 7px solid #244f3b; }
+.colors-section { padding: clamp(72px,9vw,125px) max(28px,calc((100vw - 1240px)/2)); }
+.colors-heading { max-width: 760px; margin-bottom: 44px; }
+.colors-heading h2, .colors-guide h2 { margin: 14px 0 18px; color: var(--navy); font-size: clamp(36px,4vw,54px); line-height: 1.05; letter-spacing: -.045em; }
+.colors-heading > p:last-child { color: var(--muted); font-size: 17px; line-height: 1.7; }
+.color-combo-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 20px; }
+.color-combo-card { overflow: hidden; border: 1px solid var(--line); border-radius: 4px; background: white; }
+.color-combo-swatch { display: grid; grid-template-columns: 1fr 1fr; height: 150px; }
+.color-combo-swatch span { display: block; }
+.color-combo-card h3 { margin: 0; padding: 20px; color: var(--navy); font-family: var(--font-display); font-size: 18px; }
+.colors-guide { display: grid; grid-template-columns: .8fr 1.2fr; gap: clamp(45px,7vw,100px); padding: clamp(72px,9vw,120px) max(28px,calc((100vw - 1240px)/2)); background: var(--navy); color: white; }
+.colors-guide h2 { color: white; }
+.colors-guide ol { display: grid; gap: 18px; margin: 0; padding: 0; list-style: none; }
+.colors-guide li { display: grid; grid-template-columns: 46px 1fr; gap: 18px; padding: 22px 0; border-bottom: 1px solid rgb(255 255 255 / 16%); }
+.colors-guide li > span { display: grid; width: 40px; height: 40px; place-items: center; border-radius: 50%; background: var(--gold); color: var(--navy); font-weight: 800; }
+.colors-guide strong { display: block; margin-bottom: 6px; font-family: var(--font-display); font-size: 20px; }
+.colors-guide li p { margin: 0; color: rgb(255 255 255 / 70%); line-height: 1.55; }
+.colors-note { display: grid; grid-template-columns: 180px 1fr; gap: 30px; margin: clamp(55px,7vw,90px) max(28px,calc((100vw - 1240px)/2)); padding: 30px; border-left: 5px solid var(--gold); background: var(--cream); }
+.colors-note strong { color: var(--navy); font-family: var(--font-display); font-size: 20px; }
+.colors-note p { margin: 0; color: var(--muted); line-height: 1.7; }
+.colors-cta { display: flex; align-items: center; justify-content: space-between; gap: 35px; padding: 46px max(28px,calc((100vw - 1240px)/2)); background: #e2e9e5; }
+.colors-cta strong, .colors-cta span { display: block; }
+.colors-cta strong { color: var(--navy); font-family: var(--font-display); font-size: 24px; }
+.colors-cta > div:last-child { display: flex; align-items: center; gap: 26px; }
 .financing-hero { padding: 92px max(28px,calc((100vw - 1180px)/2)); display: grid; grid-template-columns: 1.15fr .65fr; gap: 90px; align-items: center; background: linear-gradient(135deg,var(--cream),#e3eef0); }
 .financing-hero h1 { max-width: 760px; color: var(--navy); }
 .financing-hero > div > p:not(.eyebrow) { max-width: 680px; color: var(--muted); font-size: 18px; line-height: 1.75; }
@@ -490,7 +526,7 @@ footer p:last-child { text-align: right; }
   .trust-strip div:nth-child(2) { border-right: 0; }
   .section { padding-top: 78px; padding-bottom: 78px; }
   .structure-grid { grid-template-columns: 1fr 1fr; }
-  .split-heading, .process-section, .financing-section, .quote-section, .financing-hero, .financing-details, .rto-estimator { grid-template-columns: 1fr; gap: 42px; }
+  .split-heading, .process-section, .financing-section, .quote-section, .financing-hero, .financing-details, .rto-estimator, .colors-hero, .colors-guide { grid-template-columns: 1fr; gap: 42px; }
   .why-panel { grid-template-columns: 1fr; }
   .why-art { min-height: 430px; }
   .service-section { grid-template-columns: 1fr; }
@@ -512,6 +548,8 @@ footer p:last-child { text-align: right; }
   .catalog-grid { grid-template-columns: repeat(2,minmax(0,1fr)); }
   .financing-benefit-grid { grid-template-columns: 1fr 1fr; }
   .financing-steps ol { grid-template-columns: 1fr; }
+  .color-combo-grid { grid-template-columns: 1fr 1fr; }
+  .colors-building { min-height: 420px; }
 }
 
 @media (max-width: 580px) {
@@ -575,6 +613,14 @@ footer p:last-child { text-align: right; }
   .financing-hero-card { padding: 28px; }
   .rto-calculator { padding: 25px 20px; }
   .rto-term-options { grid-template-columns: 1fr 1fr; }
+  .colors-hero > div:first-child, .colors-section, .colors-guide { padding: 65px 22px; }
+  .colors-hero h1 { font-size: 43px; }
+  .colors-building { min-height: 330px; }
+  .color-combo-grid { grid-template-columns: 1fr; }
+  .color-combo-swatch { height: 120px; }
+  .colors-note { grid-template-columns: 1fr; margin: 45px 22px; }
+  .colors-cta, .colors-cta > div:last-child { align-items: stretch; flex-direction: column; }
+  .colors-cta .button { width: 100%; }
 }
 
 @media (prefers-reduced-motion: reduce) {
