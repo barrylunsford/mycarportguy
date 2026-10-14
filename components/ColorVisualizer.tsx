@@ -1,26 +1,27 @@
 "use client";
 
+import Image from "next/image";
 import { useState } from "react";
 
-type BuildingColor = { name: string; hex: string };
+type BuildingColor = { name: string; hex: string; index: number };
 
 const colors: BuildingColor[] = [
-  { name: "White", hex: "#eeeDE4" },
-  { name: "Pebble Beige", hex: "#c7b698" },
-  { name: "Sandstone", hex: "#a89b82" },
-  { name: "Rawhide", hex: "#c6a77f" },
-  { name: "Clay", hex: "#9b856a" },
-  { name: "Earth Brown", hex: "#574033" },
-  { name: "Pewter Gray", hex: "#767c7d" },
-  { name: "Quaker Gray", hex: "#4e5556" },
-  { name: "Royal Blue", hex: "#244c73" },
-  { name: "Galvalume", hex: "#b9bec0" },
-  { name: "Evergreen", hex: "#244f3b" },
-  { name: "Barn Red", hex: "#87352e" },
-  { name: "Black", hex: "#202224" },
-  { name: "Burgundy", hex: "#672f3b" },
-  { name: "Patriot Red", hex: "#a92e2b" },
-  { name: "Burnished Slate", hex: "#4e4b43" },
+  { name: "White", hex: "#eeeDE4", index: 1 },
+  { name: "Pebble Beige", hex: "#c7b698", index: 2 },
+  { name: "Sandstone", hex: "#a89b82", index: 3 },
+  { name: "Rawhide", hex: "#c6a77f", index: 4 },
+  { name: "Clay", hex: "#9b856a", index: 5 },
+  { name: "Earth Brown", hex: "#574033", index: 6 },
+  { name: "Pewter Gray", hex: "#767c7d", index: 7 },
+  { name: "Quaker Gray", hex: "#4e5556", index: 8 },
+  { name: "Royal Blue", hex: "#244c73", index: 9 },
+  { name: "Galvalume", hex: "#b9bec0", index: 10 },
+  { name: "Evergreen", hex: "#244f3b", index: 11 },
+  { name: "Barn Red", hex: "#87352e", index: 12 },
+  { name: "Black", hex: "#202224", index: 13 },
+  { name: "Burgundy", hex: "#672f3b", index: 14 },
+  { name: "Patriot Red", hex: "#a92e2b", index: 15 },
+  { name: "Burnished Slate", hex: "#4e4b43", index: 16 },
 ];
 
 const colorByName = new Map(colors.map((color) => [color.name, color]));
@@ -74,6 +75,9 @@ export default function ColorVisualizer() {
   const [trim, setTrim] = useState(colorByName.get("Evergreen")!);
   const [wall, setWall] = useState(colorByName.get("Clay")!);
 
+  const layerPath = (part: "roof" | "trim" | "wall", color: BuildingColor) =>
+    `/eagle-color-picker/${part}/${String(color.index).padStart(3, "0")}.png`;
+
   const applyCombination = (combination: (typeof popularCombinations)[number]) => {
     setRoof(colorByName.get(combination.roof)!);
     setTrim(colorByName.get(combination.trim)!);
@@ -91,21 +95,17 @@ export default function ColorVisualizer() {
       <div className="visualizer-shell">
         <div className="visualizer-stage">
           <div className="visualizer-scene" aria-label={`Sample building with ${roof.name} roof, ${trim.name} trim, and ${wall.name} walls`}>
-            <div className="visualizer-sun" />
-            <div className="visualizer-ground" />
-            <div className="visualizer-building">
-              <div className="visualizer-roof-side" style={{ backgroundColor: roof.hex }} />
-              <div className="visualizer-roof-front" style={{ backgroundColor: roof.hex, borderBottomColor: trim.hex }} />
-              <div className="visualizer-side-wall" style={{ backgroundColor: wall.hex }} />
-              <div className="visualizer-front-wall" style={{ backgroundColor: wall.hex }}>
-                <div className="visualizer-garage-door" style={{ borderColor: trim.hex }}>
-                  <i /><i /><i /><i />
-                </div>
-                <div className="visualizer-side-door" style={{ borderColor: trim.hex }} />
-              </div>
-              <div className="visualizer-trim-left" style={{ backgroundColor: trim.hex }} />
-              <div className="visualizer-trim-right" style={{ backgroundColor: trim.hex }} />
-            </div>
+            <Image
+              className="visualizer-photo"
+              src="/eagle-color-picker/base.webp"
+              alt="Eagle Carports metal garage color preview"
+              fill
+              priority
+              sizes="(max-width: 900px) 100vw, 58vw"
+            />
+            <Image className="visualizer-photo visualizer-layer" src={layerPath("roof", roof)} alt="" fill sizes="(max-width: 900px) 100vw, 58vw" />
+            <Image className="visualizer-photo visualizer-layer" src={layerPath("trim", trim)} alt="" fill sizes="(max-width: 900px) 100vw, 58vw" />
+            <Image className="visualizer-photo visualizer-layer" src={layerPath("wall", wall)} alt="" fill sizes="(max-width: 900px) 100vw, 58vw" />
           </div>
           <div className="visualizer-selection-summary" aria-live="polite">
             <div><span style={{ backgroundColor: roof.hex }} /><small>Roof</small><strong>{roof.name}</strong></div>

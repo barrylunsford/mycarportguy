@@ -34,9 +34,16 @@ export default function ColorsPage() {
               Try the color visualizer <span aria-hidden="true">↓</span>
             </a>
           </div>
-          <div className="colors-building" aria-hidden="true">
-            <div className="colors-building-roof" />
-            <div className="colors-building-wall"><span /></div>
+          <div className="colors-hero-palette" aria-hidden="true">
+            <span style={{ background: "#244f3b" }} />
+            <span style={{ background: "#f1f0e8" }} />
+            <span style={{ background: "#87352e" }} />
+            <span style={{ background: "#9b856a" }} />
+            <span style={{ background: "#202224" }} />
+            <span style={{ background: "#c7b698" }} />
+            <div>
+              <small>ROOF</small><strong>TRIM</strong><em>WALLS</em>
+            </div>
           </div>
         </section>
 
