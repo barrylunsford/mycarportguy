@@ -1,11 +1,12 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import Header from "@/components/Header";
+import ColorVisualizer from "@/components/ColorVisualizer";
 
 export const metadata: Metadata = {
   title: "Metal Building Colors & Popular Combinations",
   description:
-    "Explore popular Eagle Carports roof, trim, and wall color combinations, then use the official color picker to plan your metal building.",
+    "Try roof, trim, and wall colors on an interactive sample structure and explore popular Eagle Carports metal building color combinations.",
   alternates: { canonical: "/colors" },
   openGraph: {
     url: "/colors",
@@ -14,17 +15,6 @@ export const metadata: Metadata = {
       "Compare popular Eagle Carports color combinations and start planning your carport, garage, barn, or RV cover.",
   },
 };
-
-const colorCombinations = [
-  { name: "Evergreen & Clay", primary: "#244f3b", secondary: "#a28d70" },
-  { name: "Evergreen & White", primary: "#244f3b", secondary: "#f3f2eb" },
-  { name: "Black & White", primary: "#202224", secondary: "#f3f2eb" },
-  { name: "Black & Gray", primary: "#202224", secondary: "#858a8b" },
-  { name: "Red & White", primary: "#a92e2b", secondary: "#f3f2eb" },
-  { name: "Red & Rawhide", primary: "#8f3028", secondary: "#d0b58d" },
-  { name: "Gray & White", primary: "#6f7779", secondary: "#f3f2eb" },
-  { name: "Brown & Beige", primary: "#5a4031", secondary: "#d6c4a5" },
-];
 
 export default function ColorsPage() {
   return (
@@ -40,8 +30,8 @@ export default function ColorsPage() {
               building. Start with one of these popular combinations, then
               share your choices when you request a quote.
             </p>
-            <a className="button" href="#popular-colors">
-              Browse color combinations <span aria-hidden="true">↓</span>
+            <a className="button" href="#color-visualizer">
+              Try the color visualizer <span aria-hidden="true">↓</span>
             </a>
           </div>
           <div className="colors-building" aria-hidden="true">
@@ -50,28 +40,7 @@ export default function ColorsPage() {
           </div>
         </section>
 
-        <section className="colors-section" id="popular-colors">
-          <div className="colors-heading">
-            <p className="eyebrow"><span />Popular combinations</p>
-            <h2>A good place to start.</h2>
-            <p>
-              These combinations are featured by Eagle Carports. The first
-              color is commonly used for the roof and trim, with the second as
-              the coordinating wall color.
-            </p>
-          </div>
-          <div className="color-combo-grid">
-            {colorCombinations.map((combo) => (
-              <article className="color-combo-card" key={combo.name}>
-                <div className="color-combo-swatch" aria-hidden="true">
-                  <span style={{ backgroundColor: combo.primary }} />
-                  <span style={{ backgroundColor: combo.secondary }} />
-                </div>
-                <h3>{combo.name}</h3>
-              </article>
-            ))}
-          </div>
-        </section>
+        <ColorVisualizer />
 
         <section className="colors-guide">
           <div>
