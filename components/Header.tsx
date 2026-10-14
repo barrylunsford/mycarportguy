@@ -4,7 +4,7 @@ const navigation = [
   { label: "Browse buildings", href: "/buildings" },
   { label: "How it works", href: "/#process" },
   { label: "Why us", href: "/#why-us" },
-  { label: "Service area", href: "/#service-area" },
+  { label: "Service area", href: "/service-areas/north-carolina" },
   { label: "Financing", href: "/financing" },
 ];
 
