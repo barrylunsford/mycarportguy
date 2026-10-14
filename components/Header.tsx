@@ -5,7 +5,7 @@ const navigation = [
   { label: "How it works", href: "/#process" },
   { label: "Why us", href: "/#why-us" },
   { label: "Service area", href: "/#service-area" },
-  { label: "Financing", href: "/#financing" },
+  { label: "Financing", href: "/financing" },
 ];
 
 export default function Header() {

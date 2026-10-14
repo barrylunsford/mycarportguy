@@ -356,13 +356,8 @@ export default async function Home() {
               and rent-to-own options. Eligibility, terms, and availability
               vary.
             </p>
-            <a
-              href="https://www.eaglecarports.com/financing"
-              target="_blank"
-              rel="noreferrer"
-              className="text-link"
-            >
-              View Eagle financing options <span aria-hidden="true">↗</span>
+            <a href="/financing" className="text-link">
+              Explore rent-to-own <span aria-hidden="true">→</span>
             </a>
           </div>
         </section>
