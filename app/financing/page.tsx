@@ -100,7 +100,7 @@ export default function FinancingPage() {
           <ol>
             <li><span>1</span><div><h3>Choose your building</h3><p>Browse the catalog or tell us the size, style, and features you need.</p></div></li>
             <li><span>2</span><div><h3>Get current pricing</h3><p>We&apos;ll prepare the building details and confirm availability for your ZIP code.</p></div></li>
-            <li><span>3</span><div><h3>Review rent-to-own</h3><p>Use Eagle&apos;s estimator and review the current qualification requirements and documents.</p></div></li>
+            <li><span>3</span><div><h3>Review rent-to-own</h3><p>Use the estimator above, then review the current qualification requirements and documents with us.</p></div></li>
           </ol>
           <div className="financing-final-cta">
             <div><strong>Ready to compare your options?</strong><span>Start with a free, no-pressure building quote.</span></div>
