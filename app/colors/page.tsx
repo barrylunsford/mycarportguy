@@ -37,16 +37,11 @@ export default function ColorsPage() {
             <h1>Choose colors that feel at home on your property.</h1>
             <p>
               Coordinate the roof, trim, and walls of your Eagle Carports
-              building. Start with a proven combination or mix colors in
-              Eagle&apos;s interactive tool.
+              building. Start with one of these popular combinations, then
+              share your choices when you request a quote.
             </p>
-            <a
-              className="button"
-              href="https://www.eaglecarports.com/color-picker"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Open Eagle&apos;s color picker <span aria-hidden="true">↗</span>
+            <a className="button" href="#popular-colors">
+              Browse color combinations <span aria-hidden="true">↓</span>
             </a>
           </div>
           <div className="colors-building" aria-hidden="true">
@@ -55,7 +50,7 @@ export default function ColorsPage() {
           </div>
         </section>
 
-        <section className="colors-section">
+        <section className="colors-section" id="popular-colors">
           <div className="colors-heading">
             <p className="eyebrow"><span />Popular combinations</p>
             <h2>A good place to start.</h2>
@@ -84,7 +79,7 @@ export default function ColorsPage() {
             <h2>See the colors in context.</h2>
           </div>
           <ol>
-            <li><span>1</span><div><strong>Try the official picker</strong><p>Compare roof, trim, and wall combinations on a sample building.</p></div></li>
+            <li><span>1</span><div><strong>Compare combinations</strong><p>Choose a starting point for the roof, trim, and walls.</p></div></li>
             <li><span>2</span><div><strong>Design your building</strong><p>Use Eagle&apos;s 3D Builder to see colors on the structure you want.</p></div></li>
             <li><span>3</span><div><strong>Confirm before ordering</strong><p>Ask for current availability or a physical color sample when an exact match matters.</p></div></li>
           </ol>

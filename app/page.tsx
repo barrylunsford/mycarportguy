@@ -134,13 +134,8 @@ export default async function Home() {
               delivers, and installs your selected metal structure.
             </p>
           </div>
-          <a
-            href="https://build.eaglecarports.com/"
-            target="_blank"
-            rel="noreferrer"
-            className="text-link"
-          >
-            Try the Eagle 3D Builder <span aria-hidden="true">↗</span>
+          <a href="/colors" className="text-link">
+            Explore building colors <span aria-hidden="true">→</span>
           </a>
         </section>
 
