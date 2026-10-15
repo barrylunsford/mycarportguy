@@ -2,6 +2,7 @@
 
 import { FormEvent, useEffect, useRef, useState } from "react";
 import Link from "next/link";
+import { track } from "@vercel/analytics";
 
 export default function QuoteForm() {
   const [message, setMessage] = useState("");
@@ -18,6 +19,8 @@ export default function QuoteForm() {
   useEffect(() => {
     startedAt.current = Date.now();
     const params = new URLSearchParams(window.location.search);
+    // The quote builder passes selections through the URL after hydration.
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setSelection({
       structure: params.get("structure") || "",
       product: params.get("product") || "",
@@ -64,6 +67,11 @@ export default function QuoteForm() {
       formElement.reset();
       setSelection({ structure: "", product: "", roofColor: "", trimColor: "", wallColor: "" });
       startedAt.current = Date.now();
+      track("Quote Request Sent", {
+        structure: String(form.get("structure") || "Not specified"),
+        hasProduct: Boolean(form.get("product")),
+        hasColors: Boolean(form.get("roofColor") || form.get("trimColor") || form.get("wallColor")),
+      });
       setStatus("success");
       setMessage("Thanks! Your quote request was sent to Barry. We’ll be in touch soon.");
     } catch (error) {

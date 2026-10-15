@@ -388,6 +388,7 @@ export default async function Home() {
         </div>
         <div className="footer-legal">
           <div>
+            <a href="/about">About</a>
             <a href="/faq">FAQs</a>
             <a href="/privacy">Privacy</a>
             <a href="/terms">Terms</a>

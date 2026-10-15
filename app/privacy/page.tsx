@@ -15,7 +15,7 @@ export default function PrivacyPage() {
         <div className="legal-hero">
           <p className="eyebrow"><span />Your information</p>
           <h1>Privacy Policy</h1>
-          <p>Last updated October 13, 2026</p>
+          <p>Last updated October 15, 2026</p>
         </div>
         <article className="legal-content">
           <p className="legal-note">
@@ -39,6 +39,14 @@ export default function PrivacyPage() {
             <li>Prepare and support an order if you choose to move forward.</li>
             <li>Maintain, secure, and improve the website and inquiry process.</li>
           </ul>
+
+          <h2>Website analytics</h2>
+          <p>
+            We use Vercel Web Analytics to understand aggregate website traffic
+            and interactions, such as which pages are visited and when a quote
+            request is completed. This analytics service does not use cookies or
+            collect personal identifiers for this purpose.
+          </p>
 
           <h2>How information is shared</h2>
           <p>

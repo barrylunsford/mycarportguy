@@ -71,9 +71,7 @@ export default function ServiceAreasPage() {
           </div>
           <ul className="service-state-grid">
             {states.map((state) => (
-              <li key={state}>
-                {state === "North Carolina" ? <Link href="/service-areas/north-carolina">{state} <span>View details →</span></Link> : state}
-              </li>
+              <li key={state}>{state}</li>
             ))}
           </ul>
         </section>
