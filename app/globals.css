@@ -114,22 +114,13 @@ h1 em { color: #f39a72; font-style: normal; }
 .avatar-stack span:last-child { background: #f1d7a4; }
 .stars { color: #f2a274; letter-spacing: 2px; font-size: 12px; }
 .hero-trust p { margin: 3px 0 0; color: #b8cbd5; font-size: 12px; }
-.hero-visual { position: relative; min-height: 650px; background: linear-gradient(150deg,#dcecf0 0%,#b7d3dd 65%,#94b7c4 100%); overflow: hidden; }
+.hero-visual { position: relative; min-height: 650px; overflow: hidden; background: #d6e1df; }
+.hero-visual::after { position: absolute; inset: 0; background: linear-gradient(180deg,transparent 58%,rgba(6,29,48,.58)); content: ""; pointer-events: none; }
+.hero-visual > img { width: 100%; height: 100%; display: block; object-fit: cover; object-position: 28% center; }
 .hero-glow { position: absolute; border-radius: 50%; filter: blur(2px); opacity: .08; border: 70px solid white; }
 .hero-glow-one { width: 390px; height: 390px; left: -210px; top: -210px; }
 .hero-glow-two { width: 260px; height: 260px; left: 35%; bottom: -200px; }
-.sun-disc { position: absolute; width: 210px; height: 210px; right: 4%; top: 5%; border-radius: 50%; background: rgba(255,245,217,.55); }
-.land { position: absolute; left: -15%; width: 130%; border-radius: 50% 50% 0 0; transform: rotate(-5deg); }
-.land-back { height: 270px; bottom: 80px; background: #9eb4a2; opacity: .7; }
-.land-front { height: 210px; bottom: -70px; background: #657b67; transform: rotate(3deg); }
-.building { position: absolute; width: 62%; height: 40%; left: 17%; top: 37%; filter: drop-shadow(20px 28px 18px rgba(23,48,68,.24)); }
-.building-front { position: absolute; width: 64%; height: 76%; bottom: 0; left: 0; background: #e5e6df; clip-path: polygon(50% 0,100% 27%,100% 100%,0 100%,0 27%); }
-.building-side { position: absolute; width: 42%; height: 58%; right: 0; bottom: 0; background: #acb7b2; clip-path: polygon(0 0,100% 24%,100% 100%,0 100%); }
-.building-roof { position: absolute; width: 72%; height: 28%; left: -4%; top: 5%; background: #30526a; clip-path: polygon(0 82%,47% 0,100% 70%,93% 100%,47% 27%,6% 100%); z-index: 2; }
-.garage-door { position: absolute; width: 55%; height: 59%; left: 23%; bottom: 0; background: #82929a; border: 7px solid #f4f2e9; }
-.garage-door span { display: block; height: 25%; border-bottom: 2px solid rgba(255,255,255,.4); }
-.building-shadow { position: absolute; width: 110%; height: 30%; left: -2%; bottom: -20%; background: rgba(27,47,48,.25); filter: blur(15px); border-radius: 50%; }
-.visual-caption { position: absolute; right: 35px; bottom: 25px; color: rgba(255,255,255,.8); font-size: 11px; font-weight: 800; text-transform: uppercase; letter-spacing: .16em; }
+.visual-caption { position: absolute; z-index: 1; right: 35px; bottom: 25px; color: white; font-size: 11px; font-weight: 800; text-transform: uppercase; letter-spacing: .16em; text-shadow: 0 2px 12px rgba(0,0,0,.45); }
 
 .trust-strip { min-height: 76px; padding: 18px max(24px,calc((100vw - 1240px)/2)); display: grid; grid-template-columns: repeat(4,1fr); align-items: center; background: white; border-bottom: 1px solid var(--line); }
 .trust-strip div { display: flex; justify-content: center; align-items: center; gap: 12px; color: #3b505f; font-size: 13px; font-weight: 750; border-right: 1px solid var(--line); }

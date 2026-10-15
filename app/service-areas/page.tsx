@@ -5,12 +5,12 @@ import Header from "@/components/Header";
 
 export const metadata: Metadata = {
   title: "Metal Building Service Area",
-  description: "Check My Carport Guy's 21-state service area for Eagle Carports metal building delivery and installation, then confirm availability for your ZIP code.",
+  description: "Check My Carport Guy's 21-state service area for carport and metal-building delivery and installation, then confirm availability for your ZIP code.",
   alternates: { canonical: "/service-areas" },
   openGraph: {
     url: "/service-areas",
     title: "My Carport Guy Metal Building Service Area",
-    description: "My Carport Guy provides friendly Eagle Carports dealer guidance with metal building delivery and installation across 21 states.",
+    description: "My Carport Guy provides friendly dealer guidance with carport and metal-building delivery and installation across 21 states.",
   },
 };
 
@@ -45,7 +45,7 @@ export default function ServiceAreasPage() {
             <p className="eyebrow"><span />21-state service area</p>
             <h1>Building coverage from the Rockies to the East Coast.</h1>
             <p>
-              My Carport Guy helps customers throughout Eagle Carports&apos; service
+              My Carport Guy helps customers throughout our service
               region choose and order metal carports, garages, barns, RV covers,
               and commercial buildings.
             </p>

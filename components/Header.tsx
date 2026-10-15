@@ -14,7 +14,7 @@ export default function Header() {
   return (
     <header className="site-header">
       <div className="announcement">
-        <p>Your local dealer for Eagle Carports metal buildings.</p>
+        <p>Your local source for carports and metal buildings.</p>
         <a href="tel:+18288391730">Call (828) 839-1730</a>
       </div>
 

@@ -99,7 +99,7 @@ export default function ColorVisualizer() {
             <Image
               className="visualizer-photo"
               src="/eagle-color-picker/base.webp"
-              alt="Eagle Carports metal garage color preview"
+              alt="Metal garage color preview"
               fill
               priority
               sizes="(max-width: 900px) 100vw, 58vw"

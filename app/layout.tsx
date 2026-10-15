@@ -21,7 +21,7 @@ export const metadata: Metadata = {
     template: "%s | My Carport Guy",
   },
   description:
-    "My Carport Guy provides friendly dealer help designing and ordering Eagle Carports carports, garages, RV covers, barns, and custom metal buildings across 21 states.",
+    "My Carport Guy provides friendly help designing and ordering carports, garages, RV covers, barns, and custom metal buildings across 21 states.",
   applicationName: "My Carport Guy",
   creator: "My Carport Guy LLC",
   publisher: "My Carport Guy LLC",
@@ -34,13 +34,13 @@ export const metadata: Metadata = {
     siteName: "My Carport Guy",
     title: "My Carport Guy | Metal Carports, Garages & Buildings",
     description:
-      "My Carport Guy helps you choose and order an Eagle Carports structure that fits your property, needs, and budget.",
+      "My Carport Guy helps you choose and order a carport or metal building that fits your property, needs, and budget.",
   },
   twitter: {
     card: "summary",
     title: "My Carport Guy | Metal Carports, Garages & Buildings",
     description:
-      "Friendly help choosing and ordering Eagle Carports carports, garages, RV covers, barns, and metal buildings.",
+      "Friendly help choosing and ordering carports, garages, RV covers, barns, and metal buildings.",
   },
   robots: {
     index: true,
@@ -68,7 +68,7 @@ const siteStructuredData = {
       "@id": "https://www.mycarportguy.com/#website",
       url: "https://www.mycarportguy.com/",
       name: "My Carport Guy",
-      description: "Friendly help choosing and ordering Eagle Carports metal buildings.",
+      description: "Friendly help choosing and ordering carports and metal buildings.",
       inLanguage: "en-US",
       publisher: { "@id": "https://www.mycarportguy.com/#organization" },
     },

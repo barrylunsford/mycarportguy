@@ -4,7 +4,7 @@ import Header from "@/components/Header";
 
 export const metadata: Metadata = {
   title: "About",
-  description: "Learn how My Carport Guy provides straightforward, personal help choosing and ordering Eagle Carports metal buildings.",
+  description: "Learn how My Carport Guy provides straightforward, personal help choosing and ordering carports and metal buildings.",
   alternates: { canonical: "/about" },
   openGraph: {
     url: "/about",
@@ -35,7 +35,7 @@ export default function AboutPage() {
           <aside className="about-card">
             <span>MY CARPORT GUY LLC</span>
             <strong>Friendly guidance.<br />Clear choices.<br />No sales pressure.</strong>
-            <p>Online service for customers throughout Eagle Carports&apos; 21-state delivery and installation region.</p>
+            <p>Online service for customers throughout our 21-state delivery and installation region.</p>
           </aside>
         </section>
 

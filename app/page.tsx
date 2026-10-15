@@ -9,19 +9,19 @@ export const dynamic = "force-dynamic";
 
 export const metadata: Metadata = {
   title: { absolute: "My Carport Guy | Carports, Garages, Barns & RV Covers" },
-  description: "My Carport Guy helps you shop and customize Eagle Carports metal carports, garages, barns, RV covers, and steel buildings across 21 states.",
+  description: "My Carport Guy helps you shop and customize metal carports, garages, barns, RV covers, and steel buildings across 21 states.",
   alternates: { canonical: "/" },
   openGraph: {
     url: "/",
     title: "My Carport Guy | Carports, Garages, Barns & RV Covers",
-    description: "My Carport Guy provides friendly dealer help choosing, customizing, and ordering an Eagle Carports metal building.",
+    description: "My Carport Guy provides friendly help choosing, customizing, and ordering a metal building.",
   },
 };
 
 const benefits = [
   "Local dealer guidance",
   "Made-to-fit designs",
-  "Eagle steel construction",
+  "Durable steel construction",
   "Delivery & installation",
 ];
 
@@ -52,6 +52,7 @@ const serviceStates = [
 export default async function Home() {
   const products = await getProducts();
   const structures = products.filter((product) => product.featured);
+  const heroImage = products.find((product) => product.id === "sku-fb30")?.imageUrl;
   const representativeImages: Record<string, string> = {
     carports: "sku-fb13",
     garages: "sku-fb30",
@@ -79,7 +80,7 @@ export default async function Home() {
             </h1>
             <p className="hero-copy">
               From daily drivers to weekend adventures, we&apos;ll help you
-              choose and customize an Eagle Carports structure that fits your
+              choose and customize a carport or metal building that fits your
               life, your land, and your budget.
             </p>
             <div className="hero-actions">
@@ -106,21 +107,11 @@ export default async function Home() {
           </div>
 
           <div className="hero-visual" aria-hidden="true">
-            <div className="sun-disc" />
-            <div className="land land-back" />
-            <div className="land land-front" />
-            <div className="building">
-              <div className="building-roof" />
-              <div className="building-side" />
-              <div className="building-front">
-                <div className="garage-door">
-                  <span />
-                  <span />
-                  <span />
-                </div>
-              </div>
-              <div className="building-shadow" />
-            </div>
+            {heroImage ? (
+              // This photo is decorative; the adjacent hero copy describes the offering.
+              // eslint-disable-next-line @next/next/no-img-element
+              <img src={heroImage} alt="" />
+            ) : null}
             <p className="visual-caption">Designed around your property</p>
           </div>
         </section>
@@ -158,7 +149,7 @@ export default async function Home() {
             </div>
             <p>
               Every property is different. We&apos;ll help you find the right
-              Eagle Carports style, size, and options—without making it
+              building style, size, and options—without making it
               complicated.
             </p>
           </div>
@@ -199,7 +190,7 @@ export default async function Home() {
             <h2>A better building process starts with a real conversation.</h2>
             <p>
               No pressure. No runaround. Just practical help from people who
-              know the Eagle Carports product line and care about getting your
+              know the carport and metal-building options and care about getting your
               order right.
             </p>
             <a href="#quote" className="text-link">
@@ -264,7 +255,7 @@ export default async function Home() {
                 </div>
                 <div>
                   <strong>Built for real life</strong>
-                  <span>Customizable Eagle structures for vehicles, equipment, work, and storage.</span>
+                  <span>Customizable structures for vehicles, equipment, work, and storage.</span>
                 </div>
                 <div>
                   <strong>Clear and upfront</strong>
@@ -279,11 +270,11 @@ export default async function Home() {
           <div className="service-copy">
             <p className="eyebrow">
               <span />
-              Eagle Carports service area
+              Carport and metal-building service area
             </p>
             <h2>Delivery and installation across 21 states.</h2>
             <p>
-              Eagle Carports serves communities across the South, Southeast,
+              Delivery and installation are available across the South, Southeast,
               Midwest, and Southwest. Share your ZIP code and we&apos;ll confirm
               product availability, delivery details, and requirements for your
               exact location.
@@ -372,7 +363,7 @@ export default async function Home() {
             <h2>Your new space starts with a simple hello.</h2>
             <p>
               Tell us what you have in mind. We&apos;ll help you explore the
-              Eagle Carports options and prepare the right order for your
+              available options and prepare the right order for your
               property.
             </p>
             <div className="quote-contact">

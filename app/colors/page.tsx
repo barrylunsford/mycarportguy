@@ -6,13 +6,13 @@ import ColorVisualizer from "@/components/ColorVisualizer";
 export const metadata: Metadata = {
   title: "Metal Building Color Visualizer",
   description:
-    "Use My Carport Guy's interactive visualizer to compare roof, trim, and wall colors for Eagle Carports metal buildings.",
+    "Use My Carport Guy's interactive visualizer to compare roof, trim, and wall colors for carports and metal buildings.",
   alternates: { canonical: "/colors" },
   openGraph: {
     url: "/colors",
     title: "Metal Building Color Visualizer | My Carport Guy",
     description:
-      "Compare Eagle Carports color combinations with My Carport Guy and start planning your carport, garage, barn, or RV cover.",
+      "Compare metal-building color combinations with My Carport Guy and start planning your carport, garage, barn, or RV cover.",
   },
 };
 
@@ -26,7 +26,7 @@ export default function ColorsPage() {
             <p className="eyebrow"><span />Make it yours</p>
             <h1>Choose colors that feel at home on your property.</h1>
             <p>
-              Coordinate the roof, trim, and walls of your Eagle Carports
+              Coordinate the roof, trim, and walls of your metal
               building. Start with one of these popular combinations, then
               share your choices when you request a quote.
             </p>

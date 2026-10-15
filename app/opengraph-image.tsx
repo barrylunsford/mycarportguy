@@ -1,6 +1,6 @@
 import { ImageResponse } from "next/og";
 
-export const alt = "My Carport Guy — Eagle Carports dealer";
+export const alt = "My Carport Guy — carports and metal buildings";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
@@ -32,7 +32,7 @@ export default function OpenGraphImage() {
           </div>
         </div>
         <div style={{ display: "flex", fontSize: 22, color: "#f4cab7" }}>
-          Your friendly Eagle Carports dealer · (828) 839-1730
+          Friendly carport and metal-building help · (828) 839-1730
         </div>
       </div>
     ),
