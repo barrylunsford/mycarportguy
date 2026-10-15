@@ -1,6 +1,7 @@
 import Script from "next/script";
 
-const measurementId = process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS_ID;
+const measurementId =
+  process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS_ID || "G-71BQ7G5NR0";
 
 export default function GoogleAnalytics() {
   if (!measurementId) return null;
