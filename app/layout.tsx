@@ -15,11 +15,11 @@ const manrope = Manrope({
 export const metadata: Metadata = {
   metadataBase: new URL("https://www.mycarportguy.com"),
   title: {
-    default: "My Carport Guy | Eagle Carports Dealer",
+    default: "My Carport Guy | Metal Carports, Garages & Buildings",
     template: "%s | My Carport Guy",
   },
   description:
-    "Friendly help designing and ordering Eagle Carports carports, garages, RV covers, barns, and custom metal buildings across 21 states.",
+    "My Carport Guy provides friendly dealer help designing and ordering Eagle Carports carports, garages, RV covers, barns, and custom metal buildings across 21 states.",
   applicationName: "My Carport Guy",
   creator: "My Carport Guy LLC",
   publisher: "My Carport Guy LLC",
@@ -30,15 +30,15 @@ export const metadata: Metadata = {
     url: "/",
     locale: "en_US",
     siteName: "My Carport Guy",
-    title: "My Carport Guy | Eagle Carports Dealer",
+    title: "My Carport Guy | Metal Carports, Garages & Buildings",
     description:
-      "Friendly help choosing and ordering an Eagle Carports structure that fits your property, needs, and budget.",
+      "My Carport Guy helps you choose and order an Eagle Carports structure that fits your property, needs, and budget.",
   },
   twitter: {
     card: "summary",
-    title: "My Carport Guy | Eagle Carports Dealer",
+    title: "My Carport Guy | Metal Carports, Garages & Buildings",
     description:
-      "Friendly help choosing and ordering carports, garages, RV covers, barns, and metal buildings.",
+      "Friendly help choosing and ordering Eagle Carports carports, garages, RV covers, barns, and metal buildings.",
   },
   robots: {
     index: true,

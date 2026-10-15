@@ -8,12 +8,12 @@ export const dynamic = "force-dynamic";
 
 export const metadata: Metadata = {
   title: { absolute: "My Carport Guy | Carports, Garages, Barns & RV Covers" },
-  description: "Shop Eagle Carports metal carports, garages, barns, RV covers, and custom steel buildings with friendly dealer guidance, delivery, and installation across 21 states.",
+  description: "My Carport Guy helps you shop and customize Eagle Carports metal carports, garages, barns, RV covers, and steel buildings across 21 states.",
   alternates: { canonical: "/" },
   openGraph: {
     url: "/",
     title: "My Carport Guy | Carports, Garages, Barns & RV Covers",
-    description: "Friendly dealer help choosing, customizing, and ordering an Eagle Carports metal building.",
+    description: "My Carport Guy provides friendly dealer help choosing, customizing, and ordering an Eagle Carports metal building.",
   },
 };
 

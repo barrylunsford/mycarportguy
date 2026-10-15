@@ -5,11 +5,11 @@ import Header from "@/components/Header";
 export const metadata: Metadata = {
   title: "Metal Carports & Garages in North Carolina",
   description:
-    "Shop Eagle Carports metal carports, garages, barns, and RV covers in North Carolina with friendly dealer guidance, delivery, and professional installation.",
+    "My Carport Guy helps North Carolina customers shop Eagle Carports metal carports, garages, barns, and RV covers with delivery and professional installation.",
   alternates: { canonical: "/service-areas/north-carolina" },
   openGraph: {
     url: "/service-areas/north-carolina",
-    title: "Metal Carports & Garages in North Carolina",
+    title: "My Carport Guy | Metal Buildings in North Carolina",
     description:
       "Get help choosing and ordering an Eagle Carports metal building for your North Carolina property.",
   },
@@ -18,7 +18,7 @@ export const metadata: Metadata = {
 const jsonLd = {
   "@context": "https://schema.org",
   "@type": "Service",
-  name: "Eagle Carports metal buildings in North Carolina",
+  name: "My Carport Guy metal buildings in North Carolina",
   serviceType: "Metal carport and building sales",
   provider: { "@id": "https://www.mycarportguy.com/#organization" },
   areaServed: {

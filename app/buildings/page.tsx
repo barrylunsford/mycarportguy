@@ -4,13 +4,13 @@ import BuildingCatalog from "@/components/BuildingCatalog";
 import { getProducts } from "@/lib/products";
 
 export const metadata: Metadata = {
-  title: "Metal Carports, Garages, Barns & RV Covers",
-  description: "Browse Eagle Carports metal carports, garages, barns, RV covers, combo units, and loafing sheds. Filter available buildings by size, roof style, and vehicle capacity.",
+  title: "Metal Buildings for Sale",
+  description: "My Carport Guy helps you compare Eagle Carports metal carports, garages, barns, RV covers, combo units, and loafing sheds by size, roof style, and capacity.",
   alternates: { canonical: "/buildings" },
   openGraph: {
     url: "/buildings",
-    title: "Metal Carports, Garages, Barns & RV Covers",
-    description: "Compare Eagle Carports metal buildings by type, size, roof style, and capacity.",
+    title: "Metal Buildings for Sale | My Carport Guy",
+    description: "Compare Eagle Carports metal buildings by type, size, roof style, and capacity with help from My Carport Guy.",
   },
 };
 

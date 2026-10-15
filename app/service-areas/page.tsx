@@ -4,13 +4,13 @@ import Link from "next/link";
 import Header from "@/components/Header";
 
 export const metadata: Metadata = {
-  title: "Eagle Carports Service Area",
-  description: "View the 21-state My Carport Guy and Eagle Carports delivery and installation service area, then confirm availability for your ZIP code.",
+  title: "Metal Building Service Area",
+  description: "Check My Carport Guy's 21-state service area for Eagle Carports metal building delivery and installation, then confirm availability for your ZIP code.",
   alternates: { canonical: "/service-areas" },
   openGraph: {
     url: "/service-areas",
-    title: "Eagle Carports Service Area | My Carport Guy",
-    description: "Metal building delivery and installation across 21 states, with friendly dealer guidance from My Carport Guy.",
+    title: "My Carport Guy Metal Building Service Area",
+    description: "My Carport Guy provides friendly Eagle Carports dealer guidance with metal building delivery and installation across 21 states.",
   },
 };
 
@@ -24,7 +24,7 @@ const states = [
 const jsonLd = {
   "@context": "https://schema.org",
   "@type": "Service",
-  name: "Eagle Carports metal building sales, delivery, and installation",
+  name: "My Carport Guy metal building service area",
   serviceType: "Metal carport and building sales",
   provider: { "@id": "https://www.mycarportguy.com/#organization" },
   areaServed: states.map((name) => ({ "@type": "State", name })),

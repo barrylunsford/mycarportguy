@@ -4,12 +4,12 @@ import Header from "@/components/Header";
 
 export const metadata: Metadata = {
   title: "Metal Building FAQs",
-  description: "Answers about Eagle Carports ordering, deposits, permits, site preparation, delivery, installation, financing, and warranties from My Carport Guy.",
+  description: "My Carport Guy answers common questions about Eagle Carports ordering, deposits, permits, site preparation, installation, financing, and warranties.",
   alternates: { canonical: "/faq" },
   openGraph: {
     url: "/faq",
     title: "Metal Building FAQs | My Carport Guy",
-    description: "Straightforward answers about ordering and installing an Eagle Carports metal building.",
+    description: "Straightforward Eagle Carports ordering and installation answers from My Carport Guy.",
   },
 };
 

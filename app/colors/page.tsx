@@ -4,15 +4,15 @@ import Header from "@/components/Header";
 import ColorVisualizer from "@/components/ColorVisualizer";
 
 export const metadata: Metadata = {
-  title: "Metal Building Colors & Popular Combinations",
+  title: "Metal Building Color Visualizer",
   description:
-    "Try roof, trim, and wall colors on an interactive sample structure and explore popular Eagle Carports metal building color combinations.",
+    "Use My Carport Guy's interactive visualizer to compare roof, trim, and wall colors for Eagle Carports metal buildings.",
   alternates: { canonical: "/colors" },
   openGraph: {
     url: "/colors",
-    title: "Metal Building Colors & Popular Combinations",
+    title: "Metal Building Color Visualizer | My Carport Guy",
     description:
-      "Compare popular Eagle Carports color combinations and start planning your carport, garage, barn, or RV cover.",
+      "Compare Eagle Carports color combinations with My Carport Guy and start planning your carport, garage, barn, or RV cover.",
   },
 };
 

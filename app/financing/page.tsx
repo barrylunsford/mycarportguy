@@ -6,12 +6,12 @@ import RentToOwnEstimator from "@/components/RentToOwnEstimator";
 export const metadata: Metadata = {
   title: "Rent-to-Own Metal Buildings",
   description:
-    "Explore Eagle Carports rent-to-own options for eligible metal buildings with help from your local My Carport Guy dealer.",
+    "My Carport Guy helps you explore Eagle Carports rent-to-own options and estimate payments for eligible metal buildings.",
   alternates: { canonical: "/financing" },
   openGraph: {
     url: "/financing",
-    title: "Rent-to-Own Metal Buildings",
-    description: "Estimate rent-to-own payments for an Eagle Carports metal building and request current terms from My Carport Guy.",
+    title: "Rent-to-Own Metal Buildings | My Carport Guy",
+    description: "Estimate payments and request current Eagle Carports rent-to-own terms from My Carport Guy.",
   },
 };
 

@@ -19,14 +19,14 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     openGraph: {
       type: "website",
       url: `/products/${product.slug}`,
-      title: product.name,
-      description: product.summary,
+      title: `${product.name} | My Carport Guy`,
+      description: `${product.summary} Request current pricing from My Carport Guy.`,
       images: product.imageUrl ? [{ url: product.imageUrl, alt: product.name }] : undefined,
     },
     twitter: {
       card: product.imageUrl ? "summary_large_image" : "summary",
-      title: product.name,
-      description: product.summary,
+      title: `${product.name} | My Carport Guy`,
+      description: `${product.summary} Request current pricing from My Carport Guy.`,
       images: product.imageUrl ? [product.imageUrl] : undefined,
     },
   };
