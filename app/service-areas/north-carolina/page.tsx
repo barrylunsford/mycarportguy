@@ -40,6 +40,7 @@ export default function NorthCarolinaServiceAreaPage() {
       <Header />
       <main id="main-content" className="financing-page">
         <section className="catalog-hero">
+          <Link className="service-area-back" href="/service-areas">← View the full service area</Link>
           <p className="eyebrow"><span />Serving North Carolina</p>
           <h1>Metal carports and buildings made for North Carolina properties.</h1>
           <p>

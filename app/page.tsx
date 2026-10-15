@@ -286,10 +286,10 @@ export default async function Home() {
           </div>
           <div className="service-map">
             <Image
-              src="/eagle-service-area.png"
+              src="/service-area-map-brand.png"
               alt="Eagle Carports service area covering 21 states from Colorado and New Mexico through the Midwest, South, and East Coast"
-              width={1488}
-              height={1146}
+              width={1429}
+              height={1101}
               sizes="(max-width: 900px) 100vw, 58vw"
             />
             <details>
@@ -388,6 +388,7 @@ export default async function Home() {
         </div>
         <div className="footer-legal">
           <div>
+            <a href="/faq">FAQs</a>
             <a href="/privacy">Privacy</a>
             <a href="/terms">Terms</a>
           </div>
