@@ -2,7 +2,7 @@
 
 import { FormEvent, useEffect, useRef, useState } from "react";
 import Link from "next/link";
-import { track } from "@vercel/analytics";
+import { trackEvent } from "@/lib/analytics";
 import { buildingColors } from "@/lib/building-colors";
 
 export default function QuoteForm() {
@@ -74,7 +74,7 @@ export default function QuoteForm() {
       formElement.reset();
       setSelection({ structure: "", product: "", roofColor: "", trimColor: "", wallColor: "" });
       startedAt.current = Date.now();
-      track("Quote Request Sent", {
+      trackEvent("Quote Request Sent", "generate_lead", {
         structure: String(form.get("structure") || "Not specified"),
         hasProduct: Boolean(form.get("product")),
         hasColors: Boolean(form.get("roofColor") || form.get("trimColor") || form.get("wallColor")),

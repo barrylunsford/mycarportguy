@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from "next";
 import { DM_Sans, Manrope } from "next/font/google";
 import { Analytics } from "@vercel/analytics/next";
 import AnalyticsEvents from "@/components/AnalyticsEvents";
+import GoogleAnalytics from "@/components/GoogleAnalytics";
 import "./globals.css";
 
 const dmSans = DM_Sans({
@@ -111,6 +112,7 @@ export default function RootLayout({
         </a>
         {children}
         <AnalyticsEvents />
+        <GoogleAnalytics />
         <Analytics />
       </body>
     </html>
