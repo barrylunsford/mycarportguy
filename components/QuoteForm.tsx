@@ -53,6 +53,12 @@ export default function QuoteForm() {
           roofColor: form.get("roofColor"),
           trimColor: form.get("trimColor"),
           wallColor: form.get("wallColor"),
+          preferredContact: form.get("preferredContact"),
+          timeframe: form.get("timeframe"),
+          intendedUse: form.get("intendedUse"),
+          bestTime: form.get("bestTime"),
+          dimensions: form.get("dimensions"),
+          siteReadiness: form.get("siteReadiness"),
           details: form.get("details"),
           website: form.get("website"),
           startedAt: startedAt.current,
@@ -71,6 +77,8 @@ export default function QuoteForm() {
         structure: String(form.get("structure") || "Not specified"),
         hasProduct: Boolean(form.get("product")),
         hasColors: Boolean(form.get("roofColor") || form.get("trimColor") || form.get("wallColor")),
+        preferredContact: String(form.get("preferredContact") || "Not specified"),
+        timeframe: String(form.get("timeframe") || "Not specified"),
       });
       setStatus("success");
       setMessage("Thanks! Your quote request was sent. We’ll be in touch soon.");
@@ -174,6 +182,72 @@ export default function QuoteForm() {
             <option>Barn</option>
             <option>Commercial building</option>
             <option>Not sure yet</option>
+          </select>
+        </label>
+        <div className="form-section-heading form-full">
+          <strong>A few quick project details</strong>
+          <span>These help us respond with the most useful information.</span>
+        </div>
+        <label>
+          How should we contact you? *
+          <select name="preferredContact" defaultValue="" required>
+            <option value="" disabled>Choose a contact method</option>
+            <option>Call</option>
+            <option>Text</option>
+            <option>Email</option>
+            <option>No preference</option>
+          </select>
+        </label>
+        <label>
+          Project timeframe *
+          <select name="timeframe" defaultValue="" required>
+            <option value="" disabled>Choose a timeframe</option>
+            <option>As soon as possible</option>
+            <option>Within 1–3 months</option>
+            <option>Within 3–6 months</option>
+            <option>More than 6 months</option>
+            <option>Just researching</option>
+          </select>
+        </label>
+        <label>
+          What will you use it for?
+          <select name="intendedUse" defaultValue="">
+            <option value="">Choose an intended use</option>
+            <option>Cars or trucks</option>
+            <option>RV or camper</option>
+            <option>Boat or recreational equipment</option>
+            <option>Workshop</option>
+            <option>Farm equipment or livestock</option>
+            <option>Storage</option>
+            <option>Commercial use</option>
+            <option>Other</option>
+          </select>
+        </label>
+        <label>
+          Best time to contact you
+          <select name="bestTime" defaultValue="">
+            <option value="">Any time</option>
+            <option>Morning</option>
+            <option>Afternoon</option>
+            <option>Evening</option>
+          </select>
+        </label>
+        <label>
+          Approximate dimensions
+          <input
+            type="text"
+            name="dimensions"
+            placeholder="Example: 24 × 30 × 10"
+            maxLength={80}
+          />
+        </label>
+        <label>
+          Is the installation site ready?
+          <select name="siteReadiness" defaultValue="">
+            <option value="">Not sure yet</option>
+            <option>Yes—level and accessible</option>
+            <option>In progress</option>
+            <option>No—site work is still needed</option>
           </select>
         </label>
         <label className="form-full">

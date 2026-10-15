@@ -11,6 +11,12 @@ type QuoteRequest = {
   roofColor?: unknown;
   trimColor?: unknown;
   wallColor?: unknown;
+  preferredContact?: unknown;
+  timeframe?: unknown;
+  intendedUse?: unknown;
+  bestTime?: unknown;
+  dimensions?: unknown;
+  siteReadiness?: unknown;
   details?: unknown;
   website?: unknown;
   startedAt?: unknown;
@@ -51,6 +57,12 @@ export async function POST(request: Request) {
   const roofColor = clean(payload.roofColor, 60);
   const trimColor = clean(payload.trimColor, 60);
   const wallColor = clean(payload.wallColor, 60);
+  const preferredContact = clean(payload.preferredContact, 40);
+  const timeframe = clean(payload.timeframe, 60);
+  const intendedUse = clean(payload.intendedUse, 100);
+  const bestTime = clean(payload.bestTime, 40);
+  const dimensions = clean(payload.dimensions, 80);
+  const siteReadiness = clean(payload.siteReadiness, 100);
   const details = clean(payload.details, 2_000);
   const website = clean(payload.website, 200);
   const startedAt = Number(payload.startedAt);
@@ -71,7 +83,9 @@ export async function POST(request: Request) {
     !phone ||
     !validEmail ||
     !validZip ||
-    !structure
+    !structure ||
+    !preferredContact ||
+    !timeframe
   ) {
     return Response.json(
       { message: "Please check the required fields and try again." },
@@ -99,6 +113,12 @@ export async function POST(request: Request) {
     roofColor: escapeHtml(roofColor || "Not selected"),
     trimColor: escapeHtml(trimColor || "Not selected"),
     wallColor: escapeHtml(wallColor || "Not selected"),
+    preferredContact: escapeHtml(preferredContact),
+    timeframe: escapeHtml(timeframe),
+    intendedUse: escapeHtml(intendedUse || "Not provided"),
+    bestTime: escapeHtml(bestTime || "Any time"),
+    dimensions: escapeHtml(dimensions || "Not provided"),
+    siteReadiness: escapeHtml(siteReadiness || "Not sure yet"),
     details: escapeHtml(details || "Not provided"),
   };
 
@@ -126,6 +146,12 @@ export async function POST(request: Request) {
             <tr><td style="padding:8px 0;font-weight:bold">Roof color</td><td>${safe.roofColor}</td></tr>
             <tr><td style="padding:8px 0;font-weight:bold">Trim color</td><td>${safe.trimColor}</td></tr>
             <tr><td style="padding:8px 0;font-weight:bold">Wall color</td><td>${safe.wallColor}</td></tr>
+            <tr><td style="padding:8px 0;font-weight:bold">Preferred contact</td><td>${safe.preferredContact}</td></tr>
+            <tr><td style="padding:8px 0;font-weight:bold">Project timeframe</td><td>${safe.timeframe}</td></tr>
+            <tr><td style="padding:8px 0;font-weight:bold">Intended use</td><td>${safe.intendedUse}</td></tr>
+            <tr><td style="padding:8px 0;font-weight:bold">Best contact time</td><td>${safe.bestTime}</td></tr>
+            <tr><td style="padding:8px 0;font-weight:bold">Approximate dimensions</td><td>${safe.dimensions}</td></tr>
+            <tr><td style="padding:8px 0;font-weight:bold">Site readiness</td><td>${safe.siteReadiness}</td></tr>
           </table>
           <h2 style="margin-top:24px;color:#0a2740">Project details</h2>
           <p style="white-space:pre-wrap;line-height:1.6">${safe.details}</p>
@@ -142,6 +168,12 @@ export async function POST(request: Request) {
         `Roof color: ${roofColor || "Not selected"}`,
         `Trim color: ${trimColor || "Not selected"}`,
         `Wall color: ${wallColor || "Not selected"}`,
+        `Preferred contact: ${preferredContact}`,
+        `Project timeframe: ${timeframe}`,
+        `Intended use: ${intendedUse || "Not provided"}`,
+        `Best contact time: ${bestTime || "Any time"}`,
+        `Approximate dimensions: ${dimensions || "Not provided"}`,
+        `Site readiness: ${siteReadiness || "Not sure yet"}`,
         `Project details: ${details || "Not provided"}`,
       ].join("\n"),
     }),

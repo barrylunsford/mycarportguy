@@ -219,6 +219,10 @@ h1 em { color: #f39a72; font-style: normal; }
 .form-heading p { margin: 0; color: var(--navy); font-family: var(--font-display); font-size: 22px; font-weight: 850; }
 .form-heading span { color: var(--muted); font-size: 11px; }
 .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 19px; }
+.form-section-heading { margin-top: 7px; padding: 18px 0 2px; border-top: 1px solid #dce3e1; }
+.form-section-heading strong, .form-section-heading span { display: block; }
+.form-section-heading strong { color: var(--navy); font-family: var(--font-display); font-size: 18px; }
+.form-section-heading span { margin-top: 5px; color: var(--muted); font-size: 12px; line-height: 1.5; }
 .form-grid label { color: #304858; font-size: 12px; font-weight: 800; }
 .form-grid input, .form-grid select, .form-grid textarea {
   width: 100%; margin-top: 8px; padding: 14px 15px; border: 1px solid #cbd4d5; border-radius: 6px;
