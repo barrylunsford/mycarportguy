@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import Header from "@/components/Header";
 import QuoteForm from "@/components/QuoteForm";
 import Image from "next/image";
@@ -49,7 +50,14 @@ const serviceStates = [
 ];
 
 export default async function Home() {
-  const structures = (await getProducts()).filter((product) => product.featured);
+  const products = await getProducts();
+  const structures = products.filter((product) => product.featured);
+  const representativeImages: Record<string, string> = {
+    carports: "sku-fb13",
+    garages: "sku-fb30",
+    "rv-covers": "sku-fb51",
+    "barns-buildings": "sku-fb196",
+  };
 
   return (
     <>
@@ -157,24 +165,27 @@ export default async function Home() {
 
           <div className="structure-grid">
             {structures.map((structure, index) => (
-              <article
+              <Link
                 className={`structure-card structure-${index % 4}`}
                 key={structure.id}
+                href={`/products/${structure.slug}`}
+                aria-label={structure.name}
               >
-                <div className="card-art">
-                  <span className="card-number">{String(index + 1).padStart(2, "0")}</span>
-                  <div className="mini-building">
-                    <span />
-                  </div>
+                <div className="card-art" aria-hidden="true">
+                  {products.find((product) => product.id === representativeImages[structure.id])?.imageUrl ? (
+                    // These catalog photos are decorative here; the link already has an accessible name.
+                    // eslint-disable-next-line @next/next/no-img-element
+                    <img
+                      src={products.find((product) => product.id === representativeImages[structure.id])?.imageUrl}
+                      alt=""
+                    />
+                  ) : null}
                 </div>
                 <div className="card-body">
-                  <h3>{structure.name}</h3>
+                  <h3>{structure.name}<span className="card-arrow" aria-hidden="true">→</span></h3>
                   <p>{structure.summary}</p>
-                  <a href={`/products/${structure.slug}`} aria-label={`Learn more about ${structure.name}`}>
-                    Learn more <span aria-hidden="true">↗</span>
-                  </a>
                 </div>
-              </article>
+              </Link>
             ))}
           </div>
         </section>
