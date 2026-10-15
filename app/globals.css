@@ -223,6 +223,7 @@ h1 em { color: #f39a72; font-style: normal; }
 .form-section-heading strong, .form-section-heading span { display: block; }
 .form-section-heading strong { color: var(--navy); font-family: var(--font-display); font-size: 18px; }
 .form-section-heading span { margin-top: 5px; color: var(--muted); font-size: 12px; line-height: 1.5; }
+.form-color-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 14px; }
 .form-grid label { color: #304858; font-size: 12px; font-weight: 800; }
 .form-grid input, .form-grid select, .form-grid textarea {
   width: 100%; margin-top: 8px; padding: 14px 15px; border: 1px solid #cbd4d5; border-radius: 6px;
@@ -243,8 +244,15 @@ h1 em { color: #f39a72; font-style: normal; }
 .form-privacy { margin: 15px 0 0; color: var(--muted); font-size: 11px; line-height: 1.55; }
 .form-privacy a { color: var(--orange-dark); font-weight: 800; text-decoration: underline; text-underline-offset: 2px; }
 .form-text-option { display: inline-block; margin-top: 16px; color: var(--orange-dark); font-size: 12px; font-weight: 800; text-decoration: underline; text-underline-offset: 3px; }
-.form-status { min-height: 16px; margin: 10px 0 0; color: #417353; font-size: 12px; font-weight: 700; }
-.form-status-error { color: #a13d28; }
+.form-confirmation { margin-top: 22px; padding: 18px; display: flex; align-items: flex-start; gap: 13px; border: 1px solid; border-radius: 9px; }
+.form-confirmation > span { flex: 0 0 auto; width: 30px; height: 30px; display: grid; place-items: center; border-radius: 50%; color: white; font-size: 17px; font-weight: 900; }
+.form-confirmation strong { display: block; color: var(--navy); font-family: var(--font-display); font-size: 18px; }
+.form-confirmation p { margin: 4px 0 0; color: #38504b; font-size: 13px; line-height: 1.55; }
+.form-confirmation-success { border-color: #9bc7ae; background: #e8f4ed; }
+.form-confirmation-success > span { background: #347052; }
+.form-confirmation-error { border-color: #e0a08d; background: #fbece6; }
+.form-confirmation-error > span { background: #a13d28; }
+.form-confirmation-error p { color: #713c30; }
 footer { min-height: 170px; padding: 48px max(28px,calc((100vw - 1240px)/2)); display: grid; grid-template-columns: 1fr 1fr 1fr; align-items: center; gap: 30px; background: var(--navy-deep); color: #a9bec9; font-size: 12px; }
 .footer-brand { color: white; }
 .footer-contact { display: flex; flex-direction: column; align-items: flex-start; gap: 7px; }
@@ -707,6 +715,7 @@ footer p:last-child { text-align: right; }
   .lead-time-content { padding: 0 12px 18px; }
   .lead-time-scroll img { min-width: 760px; }
   .form-grid { grid-template-columns: 1fr; }
+  .form-color-grid { grid-template-columns: 1fr; }
   .form-full { grid-column: auto; }
   .form-submit { align-items: stretch; flex-direction: column; }
   .form-submit .button { width: 100%; }

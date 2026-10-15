@@ -3,6 +3,7 @@
 import { FormEvent, useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { track } from "@vercel/analytics";
+import { buildingColors } from "@/lib/building-colors";
 
 export default function QuoteForm() {
   const [message, setMessage] = useState("");
@@ -109,9 +110,6 @@ export default function QuoteForm() {
           <input type="text" name="website" tabIndex={-1} autoComplete="off" />
         </label>
         <input type="hidden" name="product" value={selection.product} readOnly />
-        <input type="hidden" name="roofColor" value={selection.roofColor} readOnly />
-        <input type="hidden" name="trimColor" value={selection.trimColor} readOnly />
-        <input type="hidden" name="wallColor" value={selection.wallColor} readOnly />
         {(selection.product || selection.roofColor || selection.trimColor || selection.wallColor) && (
           <div className="quote-prefill form-full">
             <strong>Your saved selections</strong>
@@ -184,6 +182,27 @@ export default function QuoteForm() {
             <option>Not sure yet</option>
           </select>
         </label>
+        <div className="form-section-heading form-full">
+          <strong>Choose your colors</strong>
+          <span>Select each color now, or leave it as “Not sure yet.”</span>
+        </div>
+        <div className="form-color-grid form-full">
+          {(["roofColor", "trimColor", "wallColor"] as const).map((field) => (
+            <label key={field}>
+              {field === "roofColor" ? "Roof color" : field === "trimColor" ? "Trim color" : "Wall color"}
+              <select
+                name={field}
+                value={selection[field]}
+                onChange={(event) => setSelection((current) => ({ ...current, [field]: event.target.value }))}
+              >
+                <option value="">Not sure yet</option>
+                {buildingColors.map((color) => (
+                  <option key={color.name} value={color.name}>{color.name}</option>
+                ))}
+              </select>
+            </label>
+          ))}
+        </div>
         <div className="form-section-heading form-full">
           <strong>A few quick project details</strong>
           <span>These help us respond with the most useful information.</span>
@@ -281,13 +300,24 @@ export default function QuoteForm() {
       <a className="form-text-option" href="sms:+18288391730">
         Prefer text? Message (828) 839-1730
       </a>
-      <p
-        className={`form-status form-status-${status}`}
-        aria-live="polite"
-        role={status === "error" ? "alert" : "status"}
-      >
-        {message}
-      </p>
+      {status === "success" && (
+        <div className="form-confirmation form-confirmation-success" role="status" aria-live="polite">
+          <span aria-hidden="true">✓</span>
+          <div>
+            <strong>Quote request sent</strong>
+            <p>Thank you! We received your project details and will be in touch soon.</p>
+          </div>
+        </div>
+      )}
+      {status === "error" && (
+        <div className="form-confirmation form-confirmation-error" role="alert" aria-live="assertive">
+          <span aria-hidden="true">!</span>
+          <div>
+            <strong>We couldn&apos;t send your request</strong>
+            <p>{message}</p>
+          </div>
+        </div>
+      )}
     </form>
   );
 }
