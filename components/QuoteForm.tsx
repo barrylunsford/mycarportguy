@@ -6,10 +6,25 @@ import Link from "next/link";
 export default function QuoteForm() {
   const [message, setMessage] = useState("");
   const [status, setStatus] = useState<"idle" | "sending" | "success" | "error">("idle");
+  const [selection, setSelection] = useState({
+    structure: "",
+    product: "",
+    roofColor: "",
+    trimColor: "",
+    wallColor: "",
+  });
   const startedAt = useRef(0);
 
   useEffect(() => {
     startedAt.current = Date.now();
+    const params = new URLSearchParams(window.location.search);
+    setSelection({
+      structure: params.get("structure") || "",
+      product: params.get("product") || "",
+      roofColor: params.get("roofColor") || "",
+      trimColor: params.get("trimColor") || "",
+      wallColor: params.get("wallColor") || "",
+    });
   }, []);
 
   async function handleSubmit(event: FormEvent<HTMLFormElement>) {
@@ -31,6 +46,10 @@ export default function QuoteForm() {
           email: form.get("email"),
           zip: form.get("zip"),
           structure: form.get("structure"),
+          product: form.get("product"),
+          roofColor: form.get("roofColor"),
+          trimColor: form.get("trimColor"),
+          wallColor: form.get("wallColor"),
           details: form.get("details"),
           website: form.get("website"),
           startedAt: startedAt.current,
@@ -43,6 +62,7 @@ export default function QuoteForm() {
       }
 
       formElement.reset();
+      setSelection({ structure: "", product: "", roofColor: "", trimColor: "", wallColor: "" });
       startedAt.current = Date.now();
       setStatus("success");
       setMessage("Thanks! Your quote request was sent to Barry. We’ll be in touch soon.");
@@ -72,6 +92,19 @@ export default function QuoteForm() {
           Website
           <input type="text" name="website" tabIndex={-1} autoComplete="off" />
         </label>
+        <input type="hidden" name="product" value={selection.product} readOnly />
+        <input type="hidden" name="roofColor" value={selection.roofColor} readOnly />
+        <input type="hidden" name="trimColor" value={selection.trimColor} readOnly />
+        <input type="hidden" name="wallColor" value={selection.wallColor} readOnly />
+        {(selection.product || selection.roofColor || selection.trimColor || selection.wallColor) && (
+          <div className="quote-prefill form-full">
+            <strong>Your saved selections</strong>
+            {selection.product && <span>Building: {selection.product}</span>}
+            {selection.roofColor && <span>Roof: {selection.roofColor}</span>}
+            {selection.trimColor && <span>Trim: {selection.trimColor}</span>}
+            {selection.wallColor && <span>Walls: {selection.wallColor}</span>}
+          </div>
+        )}
         <label>
           Your name *
           <input
@@ -118,7 +151,12 @@ export default function QuoteForm() {
         </label>
         <label>
           What are you building? *
-          <select name="structure" defaultValue="" required>
+          <select
+            name="structure"
+            value={selection.structure}
+            onChange={(event) => setSelection((current) => ({ ...current, structure: event.target.value }))}
+            required
+          >
             <option value="" disabled>
               Choose a structure
             </option>

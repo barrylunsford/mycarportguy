@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import Link from "next/link";
 import { useState } from "react";
 
 type BuildingColor = { name: string; hex: string; index: number };
@@ -112,6 +113,12 @@ export default function ColorVisualizer() {
             <div><span style={{ backgroundColor: trim.hex }} /><small>Trim</small><strong>{trim.name}</strong></div>
             <div><span style={{ backgroundColor: wall.hex }} /><small>Walls</small><strong>{wall.name}</strong></div>
           </div>
+          <Link
+            className="button visualizer-quote-button"
+            href={`/?structure=Garage&roofColor=${encodeURIComponent(roof.name)}&trimColor=${encodeURIComponent(trim.name)}&wallColor=${encodeURIComponent(wall.name)}#quote`}
+          >
+            Quote these colors <span aria-hidden="true">→</span>
+          </Link>
         </div>
 
         <div className="visualizer-controls">

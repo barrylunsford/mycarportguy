@@ -7,6 +7,10 @@ type QuoteRequest = {
   email?: unknown;
   zip?: unknown;
   structure?: unknown;
+  product?: unknown;
+  roofColor?: unknown;
+  trimColor?: unknown;
+  wallColor?: unknown;
   details?: unknown;
   website?: unknown;
   startedAt?: unknown;
@@ -43,6 +47,10 @@ export async function POST(request: Request) {
   const email = clean(payload.email, 160).toLowerCase();
   const zip = clean(payload.zip, 10);
   const structure = clean(payload.structure, 80);
+  const product = clean(payload.product, 160);
+  const roofColor = clean(payload.roofColor, 60);
+  const trimColor = clean(payload.trimColor, 60);
+  const wallColor = clean(payload.wallColor, 60);
   const details = clean(payload.details, 2_000);
   const website = clean(payload.website, 200);
   const startedAt = Number(payload.startedAt);
@@ -87,6 +95,10 @@ export async function POST(request: Request) {
     email: escapeHtml(email),
     zip: escapeHtml(zip),
     structure: escapeHtml(structure),
+    product: escapeHtml(product || "Not selected"),
+    roofColor: escapeHtml(roofColor || "Not selected"),
+    trimColor: escapeHtml(trimColor || "Not selected"),
+    wallColor: escapeHtml(wallColor || "Not selected"),
     details: escapeHtml(details || "Not provided"),
   };
 
@@ -110,6 +122,10 @@ export async function POST(request: Request) {
             <tr><td style="padding:8px 0;font-weight:bold">Email</td><td>${safe.email}</td></tr>
             <tr><td style="padding:8px 0;font-weight:bold">ZIP code</td><td>${safe.zip}</td></tr>
             <tr><td style="padding:8px 0;font-weight:bold">Structure</td><td>${safe.structure}</td></tr>
+            <tr><td style="padding:8px 0;font-weight:bold">Building</td><td>${safe.product}</td></tr>
+            <tr><td style="padding:8px 0;font-weight:bold">Roof color</td><td>${safe.roofColor}</td></tr>
+            <tr><td style="padding:8px 0;font-weight:bold">Trim color</td><td>${safe.trimColor}</td></tr>
+            <tr><td style="padding:8px 0;font-weight:bold">Wall color</td><td>${safe.wallColor}</td></tr>
           </table>
           <h2 style="margin-top:24px;color:#0a2740">Project details</h2>
           <p style="white-space:pre-wrap;line-height:1.6">${safe.details}</p>
@@ -122,6 +138,10 @@ export async function POST(request: Request) {
         `Email: ${email}`,
         `ZIP code: ${zip}`,
         `Structure: ${structure}`,
+        `Building: ${product || "Not selected"}`,
+        `Roof color: ${roofColor || "Not selected"}`,
+        `Trim color: ${trimColor || "Not selected"}`,
+        `Wall color: ${wallColor || "Not selected"}`,
         `Project details: ${details || "Not provided"}`,
       ].join("\n"),
     }),

@@ -228,6 +228,9 @@ h1 em { color: #f39a72; font-style: normal; }
 .quote-contact .quote-email { margin-top: 10px; font-family: var(--font-body); font-size: 15px; font-weight: 700; text-decoration: underline; text-decoration-color: rgba(255,255,255,.45); text-underline-offset: 4px; }
 .quote-contact small { margin-top: 7px; color: #ffe3d7; }
 .quote-form { padding: clamp(28px,4vw,46px); border-radius: 12px; background: var(--paper); color: var(--ink); box-shadow: 0 25px 70px rgba(107,38,12,.22); }
+.quote-prefill { display: flex; flex-wrap: wrap; gap: 8px 16px; padding: 16px 18px; border: 1px solid #cbd8d5; border-radius: 8px; background: #edf3f1; }
+.quote-prefill strong { width: 100%; color: var(--navy); }
+.quote-prefill span { color: var(--muted); font-size: 14px; }
 .form-heading { margin-bottom: 26px; display: flex; align-items: baseline; justify-content: space-between; gap: 20px; }
 .form-heading p { margin: 0; color: var(--navy); font-family: var(--font-display); font-size: 22px; font-weight: 850; }
 .form-heading span { color: var(--muted); font-size: 11px; }
@@ -461,6 +464,7 @@ footer p:last-child { text-align: right; }
 .visualizer-scene { position: relative; overflow: hidden; aspect-ratio: 16 / 9; min-height: 0; background: #dce9eb; }
 .visualizer-photo { object-fit: cover; }
 .visualizer-layer { transition: opacity .15s ease; }
+.visualizer-quote-button { display: flex; margin: 0 24px 24px; justify-content: center; }
 .visualizer-sun { position: absolute; top: 9%; right: 12%; width: 90px; height: 90px; border-radius: 50%; background: #f0c771; box-shadow: 0 0 0 22px rgb(240 199 113 / 18%); }
 .visualizer-ground { position: absolute; right: -10%; bottom: -15%; left: -10%; height: 44%; border-radius: 50% 50% 0 0; background: #92a482; transform: rotate(-3deg); }
 .visualizer-building { position: absolute; left: 9%; bottom: 16%; width: 80%; height: 56%; filter: drop-shadow(18px 24px 18px rgb(30 48 49 / 23%)); }

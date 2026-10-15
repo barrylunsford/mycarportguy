@@ -36,6 +36,17 @@ export default async function ProductPage({ params }: Props) {
   const { slug } = await params;
   const product = await getProduct(slug);
   if (!product) notFound();
+  const category = product.category.toLowerCase();
+  const structureType = category.includes("barn")
+    ? "Barn"
+    : category.includes("rv")
+      ? "RV cover"
+      : category.includes("carport")
+        ? "Carport"
+        : category.includes("commercial")
+          ? "Commercial building"
+          : "Garage";
+  const quoteUrl = `/?structure=${encodeURIComponent(structureType)}&product=${encodeURIComponent(product.name)}#quote`;
 
   const jsonLd = {
     "@context": "https://schema.org",
@@ -73,7 +84,7 @@ export default async function ProductPage({ params }: Props) {
                   Customize this design <span aria-hidden="true">↗</span>
                 </a>
               )}
-              <Link className="button" href="/#quote">Request a free quote <span aria-hidden="true">→</span></Link>
+              <Link className="button" href={quoteUrl}>Request a free quote <span aria-hidden="true">→</span></Link>
               <a className="text-link" href="tel:+18288391730">Call (828) 839-1730</a>
             </div>
           </div>
