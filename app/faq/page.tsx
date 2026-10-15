@@ -16,7 +16,7 @@ export const metadata: Metadata = {
 const faqs = [
   {
     question: "What does My Carport Guy do?",
-    answer: "My Carport Guy is an independent Eagle Carports dealer. Barry helps you compare building types, sizes, colors, options, and payment choices, then assists with preparing and submitting the order. Eagle Carports manufactures the building and coordinates delivery and installation.",
+    answer: "My Carport Guy is an independent Eagle Carports dealer. We help you compare building types, sizes, colors, options, and payment choices, then assist with preparing and submitting the order. Eagle Carports manufactures the building and coordinates delivery and installation.",
   },
   {
     question: "How does the ordering process work?",
@@ -117,7 +117,7 @@ export default function FaqPage() {
         </section>
 
         <section className="faq-cta">
-          <div><strong>Still have a question?</strong><span>Tell Barry about your property and the building you have in mind.</span></div>
+          <div><strong>Still have a question?</strong><span>Tell us about your property and the building you have in mind.</span></div>
           <div>
             <a className="button" href="tel:+18288391730">Call (828) 839-1730</a>
             <Link className="button button-dark" href="/#quote">Request a quote</Link>

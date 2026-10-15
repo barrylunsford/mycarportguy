@@ -73,7 +73,7 @@ export default function QuoteForm() {
         hasColors: Boolean(form.get("roofColor") || form.get("trimColor") || form.get("wallColor")),
       });
       setStatus("success");
-      setMessage("Thanks! Your quote request was sent to Barry. We’ll be in touch soon.");
+      setMessage("Thanks! Your quote request was sent. We’ll be in touch soon.");
     } catch (error) {
       setStatus("error");
       setMessage(

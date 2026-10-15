@@ -367,8 +367,8 @@ export default async function Home() {
             <div className="quote-contact">
               <span>Prefer to talk?</span>
               <a href="tel:+18288391730">(828) 839-1730</a>
-              <a className="quote-email" href="mailto:barry@mycarportguy.com">
-                barry@mycarportguy.com
+              <a className="quote-email" href="mailto:sales@mycarportguy.com">
+                sales@mycarportguy.com
               </a>
               <small>Friendly help. No sales pressure.</small>
             </div>
@@ -384,7 +384,7 @@ export default async function Home() {
         </a>
         <div className="footer-contact">
           <a href="tel:+18288391730">(828) 839-1730</a>
-          <a href="mailto:barry@mycarportguy.com">barry@mycarportguy.com</a>
+          <a href="mailto:sales@mycarportguy.com">sales@mycarportguy.com</a>
         </div>
         <div className="footer-legal">
           <div>

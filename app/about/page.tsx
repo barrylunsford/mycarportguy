@@ -4,7 +4,7 @@ import Header from "@/components/Header";
 
 export const metadata: Metadata = {
   title: "About",
-  description: "Meet Barry and learn how My Carport Guy provides straightforward, personal help choosing and ordering Eagle Carports metal buildings.",
+  description: "Learn how My Carport Guy provides straightforward, personal help choosing and ordering Eagle Carports metal buildings.",
   alternates: { canonical: "/about" },
   openGraph: {
     url: "/about",
@@ -24,11 +24,11 @@ export default function AboutPage() {
             <h1>A real person helping you make a confident choice.</h1>
             <p>
               My Carport Guy is an online metal-building dealership based in
-              Rhodhiss, North Carolina. Barry provides personal guidance from
+              Rhodhiss, North Carolina. We provide personal guidance from
               the first question through a carefully prepared order.
             </p>
             <div className="about-actions">
-              <Link href="/#quote" className="button">Tell Barry about your project <span aria-hidden="true">→</span></Link>
+              <Link href="/#quote" className="button">Tell us about your project <span aria-hidden="true">→</span></Link>
               <a href="tel:+18288391730" className="text-link">Call (828) 839-1730</a>
             </div>
           </div>
@@ -51,7 +51,7 @@ export default function AboutPage() {
               property needs before you commit.
             </p>
             <p>
-              Barry helps customers compare building types, dimensions, roof
+              We help customers compare building types, dimensions, roof
               styles, colors, doors, windows, financing options, site requirements,
               and current lead times without turning the conversation into a
               high-pressure sales pitch.
@@ -68,7 +68,7 @@ export default function AboutPage() {
         <section className="about-values">
           <article><span>01</span><h3>Listen first</h3><p>Your property, priorities, and budget guide the recommendation.</p></article>
           <article><span>02</span><h3>Explain clearly</h3><p>Understand the options, preparation, timing, and next steps before ordering.</p></article>
-          <article><span>03</span><h3>Stay accessible</h3><p>Call, text, or email Barry when you need help with your project.</p></article>
+          <article><span>03</span><h3>Stay accessible</h3><p>Call, text, or email us when you need help with your project.</p></article>
         </section>
 
         <section className="about-contact">

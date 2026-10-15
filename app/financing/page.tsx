@@ -34,7 +34,7 @@ export default function FinancingPage() {
                 Estimate a payment <span aria-hidden="true">↓</span>
               </a>
               <Link className="text-link" href="/#quote">
-                Ask Barry about rent-to-own <span aria-hidden="true">→</span>
+                Ask about rent-to-own <span aria-hidden="true">→</span>
               </Link>
             </div>
           </div>
@@ -93,7 +93,7 @@ export default function FinancingPage() {
               you get a current estimate for your exact structure and location.
             </p>
             <a href="tel:+18288391730">Call (828) 839-1730</a>
-            <a href="mailto:barry@mycarportguy.com">barry@mycarportguy.com</a>
+            <a href="mailto:sales@mycarportguy.com">sales@mycarportguy.com</a>
           </aside>
         </section>
 

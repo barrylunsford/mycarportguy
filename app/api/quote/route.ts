@@ -1,4 +1,4 @@
-const DESTINATION_EMAIL = "barry@mycarportguy.com";
+const DESTINATION_EMAIL = "sales@mycarportguy.com";
 const MAX_BODY_BYTES = 12_000;
 
 type QuoteRequest = {

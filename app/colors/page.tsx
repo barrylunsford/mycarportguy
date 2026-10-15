@@ -71,7 +71,7 @@ export default function ColorsPage() {
         </aside>
 
         <section className="colors-cta">
-          <div><strong>Ready to build your combination?</strong><span>Browse structures or tell Barry what you have in mind.</span></div>
+          <div><strong>Ready to build your combination?</strong><span>Browse structures or tell us what you have in mind.</span></div>
           <div>
             <Link href="/buildings" className="text-link">Browse buildings <span aria-hidden="true">→</span></Link>
             <Link href="/#quote" className="button">Request a quote <span aria-hidden="true">→</span></Link>

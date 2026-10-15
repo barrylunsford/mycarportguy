@@ -89,7 +89,7 @@ export default function TermsPage() {
           <h2>Changes and contact</h2>
           <p>
             We may update these terms, with the revision date shown above. Questions
-            may be sent to <a href="mailto:barry@mycarportguy.com">barry@mycarportguy.com</a>
+            may be sent to <a href="mailto:sales@mycarportguy.com">sales@mycarportguy.com</a>
             {" "}or <a href="tel:+18288391730">(828) 839-1730</a>.
           </p>
         </article>

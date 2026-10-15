@@ -74,17 +74,8 @@ export default async function ProductPage({ params }: Props) {
             <h1>{product.name}</h1>
             <p>{product.summary}</p>
             <div className="product-hero-actions">
-              {product.designUrl && (
-                <a
-                  className="button button-builder"
-                  href={product.designUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  Customize this design <span aria-hidden="true">↗</span>
-                </a>
-              )}
-              <Link className="button" href={quoteUrl}>Request a free quote <span aria-hidden="true">→</span></Link>
+              <Link className="button button-builder" href={quoteUrl}>Design your building <span aria-hidden="true">→</span></Link>
+              <Link className="text-link" href="/colors">Explore colors</Link>
               <a className="text-link" href="tel:+18288391730">Call (828) 839-1730</a>
             </div>
           </div>
@@ -107,7 +98,7 @@ export default async function ProductPage({ params }: Props) {
           <aside>
             <div><span>Options</span><strong>{product.sizeNote || "Ask about available configurations"}</strong></div>
             <div><span>Pricing</span><strong>{product.priceLabel}</strong></div>
-            <div><span>Next step</span><strong>{product.designUrl ? "Customize this design, then request your quote" : "Share your ZIP code and project details"}</strong></div>
+            <div><span>Next step</span><strong>Use this as inspiration, then tell us how you want yours configured</strong></div>
           </aside>
         </section>
       </main>

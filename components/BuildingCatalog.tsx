@@ -7,10 +7,10 @@ import type { Product } from "@/lib/products";
 type Props = { products: Product[] };
 
 const buildingTypeCards = [
-  { id: "carports", label: "Carports", category: "Metal Carports", description: "Open-sided coverage for cars, trucks, and everyday equipment." },
-  { id: "garages", label: "Garages", category: "Metal Garages", description: "Fully enclosed protection for vehicles, storage, or workspace." },
-  { id: "rv-covers", label: "RV Covers", category: "Metal RV Covers", description: "High-clearance coverage for RVs, campers, and tall vehicles." },
-  { id: "barns-buildings", label: "Barns", category: "Metal Barns", description: "Versatile layouts for equipment, agriculture, and extra storage." },
+  { id: "carports", label: "Carports", category: "Metal Carports", structure: "Carport", description: "Open-sided coverage for cars, trucks, and everyday equipment." },
+  { id: "garages", label: "Garages", category: "Metal Garages", structure: "Garage", description: "Fully enclosed protection for vehicles, storage, or workspace." },
+  { id: "rv-covers", label: "RV Covers", category: "Metal RV Covers", structure: "RV cover", description: "High-clearance coverage for RVs, campers, and tall vehicles." },
+  { id: "barns-buildings", label: "Barns", category: "Metal Barns", structure: "Barn", description: "Versatile layouts for equipment, agriculture, and extra storage." },
 ] as const;
 
 const buildingTypeIds = new Set<string>(buildingTypeCards.map((item) => item.id));
@@ -31,6 +31,15 @@ function inferredRoofStyle(product: Product) {
   if (name.includes("boxed eave")) return "Boxed Eave Roof";
   if (name.includes("regular")) return "Regular Roof";
   return "";
+}
+
+function categoryToStructure(category: string) {
+  const value = category.toLowerCase();
+  if (value.includes("barn")) return "Barn";
+  if (value.includes("rv")) return "RV cover";
+  if (value.includes("carport")) return "Carport";
+  if (value.includes("commercial")) return "Commercial building";
+  return "Garage";
 }
 
 function uniqueSorted(values: Array<string | number | undefined>) {
@@ -97,26 +106,30 @@ export default function BuildingCatalog({ products }: Props) {
     <>
       <section className="building-type-section" aria-labelledby="building-type-heading">
         <div className="building-type-heading">
-          <p className="eyebrow"><span />Start with a style</p>
-          <h2 id="building-type-heading">Shop by building type</h2>
-          <p>Choose a style to see only the structures in that category.</p>
+          <p className="eyebrow"><span />Choose a starting point</p>
+          <h2 id="building-type-heading">What kind of building do you need?</h2>
+          <p>Select a type to explore examples, or start your own design right away.</p>
         </div>
         <div className="building-type-grid">
           {buildingTypeCards.map((item) => {
             const count = actualProducts.filter((product) => product.category === item.category).length;
             return (
-              <button
+              <article
                 className={category === item.category ? "building-type-card active" : "building-type-card"}
                 key={item.id}
-                type="button"
-                onClick={() => chooseBuildingType(item.category)}
-                aria-pressed={category === item.category}
               >
-                <span className="building-type-count">{count} {count === 1 ? "building" : "buildings"}</span>
+                <span className="building-type-count">{count} inspiration {count === 1 ? "example" : "examples"}</span>
                 <strong>{item.label}</strong>
                 <span>{item.description}</span>
-                <b>View {item.label.toLowerCase()} <span aria-hidden="true">→</span></b>
-              </button>
+                <div className="building-type-actions">
+                  <button type="button" onClick={() => chooseBuildingType(item.category)} aria-pressed={category === item.category}>
+                    Explore examples
+                  </button>
+                  <Link href={`/?structure=${encodeURIComponent(item.structure)}#quote`}>
+                    Design yours <span aria-hidden="true">→</span>
+                  </Link>
+                </div>
+              </article>
             );
           })}
         </div>
@@ -125,11 +138,11 @@ export default function BuildingCatalog({ products }: Props) {
       <div className="catalog-shell" id="building-results">
       <aside className="catalog-filters" aria-label="Filter buildings">
         <div className="catalog-filter-heading">
-          <div><span>Filter products</span><strong>{filtered.length} results</strong></div>
+          <div><span>Filter inspiration</span><strong>{filtered.length} examples</strong></div>
           <button type="button" onClick={reset}>Reset</button>
         </div>
         <label className="catalog-search">
-          <span>Search buildings</span>
+          <span>Search examples</span>
           <input value={query} onChange={(event) => setQuery(event.target.value)} placeholder="Search by name or size…" />
         </label>
         <fieldset>
@@ -153,7 +166,7 @@ export default function BuildingCatalog({ products }: Props) {
 
       <section className="catalog-results" aria-live="polite">
         <div className="catalog-results-heading">
-          <p><strong>{filtered.length}</strong> buildings match your filters</p>
+          <p><strong>{filtered.length}</strong> design examples match your filters</p>
         </div>
         {filtered.length ? (
           <div className="catalog-grid">
@@ -175,8 +188,8 @@ export default function BuildingCatalog({ products }: Props) {
                     {product.sizeNote && <span>{product.sizeNote.split("·")[0]}</span>}
                   </div>
                   <div className="catalog-card-footer">
-                    <strong>{product.priceLabel}</strong>
-                    <Link href={`/products/${product.slug}`}>View details <span aria-hidden="true">→</span></Link>
+                    <Link href={`/products/${product.slug}`}>View details</Link>
+                    <Link className="catalog-design-link" href={`/?structure=${encodeURIComponent(categoryToStructure(product.category))}&product=${encodeURIComponent(product.name)}#quote`}>Start with this design <span aria-hidden="true">→</span></Link>
                   </div>
                 </div>
               </article>
@@ -185,7 +198,7 @@ export default function BuildingCatalog({ products }: Props) {
         ) : (
           <div className="catalog-empty">
             <h2>No exact matches yet.</h2>
-            <p>Clear a filter or contact us—we can help configure a building around your needs.</p>
+            <p>Clear a filter or start a custom request—we can help configure a building around your needs.</p>
             <button className="button button-dark" type="button" onClick={reset}>Clear all filters</button>
           </div>
         )}

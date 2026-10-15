@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import Header from "@/components/Header";
 import BuildingCatalog from "@/components/BuildingCatalog";
 import { getProducts } from "@/lib/products";
@@ -46,8 +47,16 @@ export default async function BuildingsPage() {
       <main id="main-content" className="catalog-page">
         <section className="catalog-hero">
           <p className="eyebrow"><span />Find your building</p>
-          <h1>Built for your vehicles, your property, and your plans.</h1>
-          <p>Compare available Eagle Carports structures, narrow the choices by features, and request current pricing from your local dealer.</p>
+          <h1>Start with an idea. Make the building your own.</h1>
+          <p>Choose a structure type, explore examples by size and features, then tell us how you want yours configured. The buildings shown here are starting points—not your only choices.</p>
+          <div className="catalog-hero-actions">
+            <Link className="button" href="/#quote">Design your building <span aria-hidden="true">→</span></Link>
+            <Link className="text-link" href="/colors">Explore available colors</Link>
+          </div>
+        </section>
+        <section className="custom-building-note" aria-label="Custom building process">
+          <strong>Every building is customizable.</strong>
+          <span>Adjust the size, roof style, colors, doors, windows, and other options to fit your property and plans.</span>
         </section>
         <BuildingCatalog products={products} />
       </main>
