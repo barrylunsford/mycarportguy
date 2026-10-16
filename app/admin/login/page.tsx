@@ -20,7 +20,7 @@ export default async function AdminLoginPage({ searchParams }: Props) {
         <Link href="/" className="admin-login-brand">My Carport Guy</Link>
         <p className="eyebrow"><span />Private dashboard</p>
         <h1>Welcome back.</h1>
-        <p>Sign in to manage products and prebuilt design links.</p>
+        <p>Sign in to manage products, design links, and quote requests.</p>
         {!isAdminConfigured() ? (
           <div className="admin-login-error">
             Admin login is not configured yet.
