@@ -282,9 +282,9 @@ export default async function Home() {
             <a href="#quote" className="button">
               Check my ZIP code <span aria-hidden="true">→</span>
             </a>
-            <a href="/service-areas/north-carolina" className="text-link">
+            <Link href="/service-areas/north-carolina" className="text-link">
               North Carolina service details <span aria-hidden="true">→</span>
-            </a>
+            </Link>
           </div>
           <div className="service-map">
             <Image

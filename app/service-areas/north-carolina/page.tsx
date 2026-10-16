@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import Header from "@/components/Header";
+import { northCarolinaLocations } from "@/lib/north-carolina-locations";
 
 export const metadata: Metadata = {
   title: "Metal Carports & Garages in North Carolina",
@@ -89,6 +90,21 @@ export default function NorthCarolinaServiceAreaPage() {
         </section>
 
         <section className="financing-steps">
+          <div className="financing-section-heading">
+            <p className="eyebrow"><span />North Carolina communities</p>
+            <h2>Local guidance for nearby markets.</h2>
+            <p className="nc-location-intro">Explore practical ordering information for your area. Don&apos;t see your city? We can still confirm availability using your ZIP code.</p>
+          </div>
+          <div className="nc-location-grid">
+            {northCarolinaLocations.map((location) => (
+              <Link key={location.slug} href={`/service-areas/north-carolina/${location.slug}`}>
+                <span>{location.region}</span>
+                <strong>{location.city}</strong>
+                <small>View local building guide →</small>
+              </Link>
+            ))}
+          </div>
+
           <div className="financing-section-heading">
             <p className="eyebrow"><span />Ready to get started?</p>
             <h2>Find a building, then request current pricing.</h2>

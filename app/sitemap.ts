@@ -1,5 +1,6 @@
 import type { MetadataRoute } from "next";
 import { getProducts } from "@/lib/products";
+import { northCarolinaLocations } from "@/lib/north-carolina-locations";
 
 const baseUrl = "https://www.mycarportguy.com";
 const buildingTypeIds = new Set(["carports", "garages", "rv-covers", "barns-buildings"]);
@@ -47,6 +48,11 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       changeFrequency: "monthly",
       priority: 0.8,
     },
+    ...northCarolinaLocations.map((location) => ({
+      url: `${baseUrl}/service-areas/north-carolina/${location.slug}`,
+      changeFrequency: "monthly" as const,
+      priority: 0.72,
+    })),
     ...products.filter((product) => !buildingTypeIds.has(product.id)).map((product) => ({
       url: `${baseUrl}/products/${product.slug}`,
       changeFrequency: "monthly" as const,
