@@ -244,22 +244,30 @@ export default async function Home() {
               </p>
               <h2>We make big projects feel easy.</h2>
               <p>
-                A metal building is a real investment. You deserve honest
-                answers and thoughtful local guidance, backed by an established
-                American metal-building manufacturer.
+                A metal building is a real investment. You deserve a helpful
+                person, straightforward answers, and confidence about what
+                happens before and after you order.
               </p>
               <div className="why-points">
                 <div>
-                  <strong>People first</strong>
-                  <span>A local contact to help you compare options and place your order.</span>
+                  <strong>Personal help choosing your building</strong>
+                  <span>Compare sizes, roof styles, doors, windows, colors, and options with guidance from a real person.</span>
                 </div>
                 <div>
-                  <strong>Built for real life</strong>
-                  <span>Customizable structures for vehicles, equipment, work, and storage.</span>
+                  <strong>Pricing and availability for your ZIP code</strong>
+                  <span>We&apos;ll confirm which buildings are available in your area and prepare current pricing around your choices.</span>
                 </div>
                 <div>
-                  <strong>Clear and upfront</strong>
-                  <span>Clear choices, site-preparation guidance, and no confusing sales talk.</span>
+                  <strong>Professional delivery and installation</strong>
+                  <span>Your selected structure is delivered and installed at your prepared site by the manufacturer&apos;s crew.</span>
+                </div>
+                <div>
+                  <strong>Site-preparation and permit guidance</strong>
+                  <span>We&apos;ll explain the questions to ask locally and the site details to confirm before installation.</span>
+                </div>
+                <div>
+                  <strong>A free quote without the pressure</strong>
+                  <span>Call, text, or email when you&apos;re ready. We&apos;ll help you move at the pace that feels right.</span>
                 </div>
               </div>
             </div>

@@ -187,5 +187,74 @@ export async function POST(request: Request) {
     );
   }
 
+  const confirmationResponse = await fetch("https://api.resend.com/emails", {
+    method: "POST",
+    headers: {
+      Authorization: `Bearer ${apiKey}`,
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      from,
+      to: [email],
+      reply_to: DESTINATION_EMAIL,
+      subject: "We received your quote request | My Carport Guy",
+      html: `
+        <div style="margin:0;padding:32px 16px;background:#f4f1eb;font-family:Arial,sans-serif;color:#173044">
+          <div style="max-width:620px;margin:0 auto;overflow:hidden;border-radius:12px;background:#ffffff;box-shadow:0 12px 35px rgba(10,39,64,.10)">
+            <div style="padding:26px 32px;background:#0a2740;color:#ffffff">
+              <div style="font-size:12px;font-weight:bold;letter-spacing:2px;color:#f58b60">MY CARPORT GUY</div>
+              <h1 style="margin:12px 0 0;font-size:28px;line-height:1.2">Thanks, ${safe.name}. We received your request.</h1>
+            </div>
+            <div style="padding:32px">
+              <p style="margin:0;font-size:16px;line-height:1.7">Your quote request is safely in our inbox. We&apos;ll review the details and contact you using your preferred method.</p>
+              <div style="margin:26px 0;padding:22px;border-left:4px solid #ed713e;background:#f8f5f0">
+                <h2 style="margin:0 0 14px;font-size:18px;color:#0a2740">What happens next</h2>
+                <ol style="margin:0;padding-left:20px;line-height:1.75">
+                  <li>We review your building ideas and installation ZIP code.</li>
+                  <li>We confirm available options and any details still needed.</li>
+                  <li>We contact you with guidance and current pricing.</li>
+                </ol>
+              </div>
+              <h2 style="margin:0 0 12px;font-size:18px;color:#0a2740">Your request</h2>
+              <table style="width:100%;border-collapse:collapse;font-size:14px">
+                <tr><td style="padding:9px 0;border-bottom:1px solid #e4e8e8;font-weight:bold">Structure</td><td style="padding:9px 0;border-bottom:1px solid #e4e8e8;text-align:right">${safe.structure}</td></tr>
+                <tr><td style="padding:9px 0;border-bottom:1px solid #e4e8e8;font-weight:bold">ZIP code</td><td style="padding:9px 0;border-bottom:1px solid #e4e8e8;text-align:right">${safe.zip}</td></tr>
+                <tr><td style="padding:9px 0;border-bottom:1px solid #e4e8e8;font-weight:bold">Preferred contact</td><td style="padding:9px 0;border-bottom:1px solid #e4e8e8;text-align:right">${safe.preferredContact}</td></tr>
+                <tr><td style="padding:9px 0;font-weight:bold">Timeframe</td><td style="padding:9px 0;text-align:right">${safe.timeframe}</td></tr>
+              </table>
+              <p style="margin:28px 0 0;line-height:1.65">Need to add something? Reply to this email, call, or text <a href="tel:+18288391730" style="color:#c95226;font-weight:bold">(828) 839-1730</a>.</p>
+            </div>
+            <div style="padding:20px 32px;background:#eef3f3;color:#526774;font-size:12px;line-height:1.6">My Carport Guy is an online metal-building dealer. There is no public showroom or customer pickup location.</div>
+          </div>
+        </div>
+      `,
+      text: [
+        `Thanks, ${name}. We received your quote request.`,
+        "",
+        "What happens next:",
+        "1. We review your building ideas and installation ZIP code.",
+        "2. We confirm available options and any details still needed.",
+        "3. We contact you with guidance and current pricing.",
+        "",
+        `Structure: ${structure}`,
+        `ZIP code: ${zip}`,
+        `Preferred contact: ${preferredContact}`,
+        `Timeframe: ${timeframe}`,
+        "",
+        "Need to add something? Reply to this email, call, or text (828) 839-1730.",
+      ].join("\n"),
+    }),
+  });
+
+  // The customer already sees an on-page success message once the business
+  // notification is delivered, so a confirmation-email failure should not
+  // make the form appear unsuccessful or encourage a duplicate submission.
+  if (!confirmationResponse.ok) {
+    console.error(
+      "Customer quote confirmation was not delivered.",
+      confirmationResponse.status,
+    );
+  }
+
   return Response.json({ ok: true });
 }
