@@ -2,10 +2,13 @@
 
 import { useMemo, useState } from "react";
 import Link from "next/link";
+import AdminQuotes from "@/components/AdminQuotes";
 import type { Product } from "@/lib/products";
+import type { QuoteLead } from "@/lib/quote-types";
 
 type Props = {
   initialProducts: Product[];
+  initialQuotes: QuoteLead[];
   editable: boolean;
   loginConfigured: boolean;
 };
@@ -31,7 +34,8 @@ const blankProduct = (): Product => ({
   sortOrder: 0,
 });
 
-export default function AdminDashboard({ initialProducts, editable, loginConfigured }: Props) {
+export default function AdminDashboard({ initialProducts, initialQuotes, editable, loginConfigured }: Props) {
+  const [view, setView] = useState<"products" | "quotes">("products");
   const [products, setProducts] = useState(initialProducts);
   const [selectedId, setSelectedId] = useState(initialProducts[0]?.id ?? "");
   const [query, setQuery] = useState("");
@@ -120,6 +124,10 @@ export default function AdminDashboard({ initialProducts, editable, loginConfigu
     <div className="admin-app">
       <header className="admin-topbar">
         <Link className="admin-brand" href="/">My Carport Guy</Link>
+        <nav className="admin-primary-nav" aria-label="Admin sections">
+          <button type="button" className={view === "products" ? "active" : ""} onClick={() => setView("products")}>Products</button>
+          <button type="button" className={view === "quotes" ? "active" : ""} onClick={() => setView("quotes")}>Quotes{initialQuotes.filter((quote) => quote.status === "New").length > 0 && <span>{initialQuotes.filter((quote) => quote.status === "New").length}</span>}</button>
+        </nav>
         <div>
           <span className={`admin-mode ${editable ? "" : "locked"}`}>
             {editable ? "Local editing" : "Hosted editing locked"}
@@ -142,7 +150,7 @@ export default function AdminDashboard({ initialProducts, editable, loginConfigu
         </div>
       )}
 
-      <main className="admin-shell">
+      {view === "quotes" ? <AdminQuotes initialQuotes={initialQuotes} editable={editable} /> : <main className="admin-shell">
         <aside className="admin-sidebar">
           <div className="admin-sidebar-heading">
             <div>
@@ -278,7 +286,7 @@ export default function AdminDashboard({ initialProducts, editable, loginConfigu
             <div className="admin-empty"><h1>No products yet</h1><p>Add your first product to get started.</p></div>
           )}
         </section>
-      </main>
+      </main>}
     </div>
   );
 }

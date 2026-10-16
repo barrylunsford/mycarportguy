@@ -1,5 +1,5 @@
 import { createServer } from "node:http";
-import { timingSafeEqual } from "node:crypto";
+import { randomUUID, timingSafeEqual } from "node:crypto";
 import { promises as fs } from "node:fs";
 import path from "node:path";
 
@@ -7,7 +7,10 @@ const port = Number(process.env.PORT || 3100);
 const host = process.env.HOST || "127.0.0.1";
 const token = String(process.env.CATALOG_API_TOKEN || "");
 const dataFile = process.env.CATALOG_PRODUCTS_FILE || "/root/mycarportguy-data/products.json";
+const quotesFile = process.env.CATALOG_QUOTES_FILE || "/root/mycarportguy-data/quotes.json";
 const maxBodyBytes = 250_000;
+const quoteStatuses = new Set(["New", "Contacted", "Quoted", "Won", "Lost"]);
+let quoteWriteQueue = Promise.resolve();
 
 function json(response, status, body) {
   response.writeHead(status, {
@@ -71,6 +74,49 @@ async function saveProducts(products) {
   await pruneBackups(backupDirectory);
 }
 
+async function readQuotes() {
+  try {
+    const raw = JSON.parse(await fs.readFile(quotesFile, "utf8"));
+    return Array.isArray(raw) ? raw : [];
+  } catch (error) {
+    if (error?.code === "ENOENT") return [];
+    throw error;
+  }
+}
+
+async function saveQuotes(quotes) {
+  const directory = path.dirname(quotesFile);
+  await fs.mkdir(directory, { recursive: true, mode: 0o700 });
+  const temporaryFile = `${quotesFile}.tmp`;
+  await fs.writeFile(temporaryFile, `${JSON.stringify(quotes, null, 2)}\n`, {
+    encoding: "utf8",
+    mode: 0o600,
+  });
+  await fs.rename(temporaryFile, quotesFile);
+}
+
+function queueQuoteWrite(operation) {
+  const result = quoteWriteQueue.then(operation, operation);
+  quoteWriteQueue = result.catch(() => undefined);
+  return result;
+}
+
+function clean(value, maxLength) {
+  return typeof value === "string" ? value.trim().slice(0, maxLength) : "";
+}
+
+function normalizeNewQuote(value) {
+  if (!value || typeof value !== "object") return null;
+  const quote = {
+    name: clean(value.name, 100), phone: clean(value.phone, 40), email: clean(value.email, 160), zip: clean(value.zip, 10),
+    structure: clean(value.structure, 80), product: clean(value.product, 160), roofColor: clean(value.roofColor, 60),
+    trimColor: clean(value.trimColor, 60), wallColor: clean(value.wallColor, 60), preferredContact: clean(value.preferredContact, 40),
+    timeframe: clean(value.timeframe, 60), intendedUse: clean(value.intendedUse, 100), bestTime: clean(value.bestTime, 40),
+    dimensions: clean(value.dimensions, 80), siteReadiness: clean(value.siteReadiness, 100), details: clean(value.details, 2000),
+  };
+  return quote.name && quote.phone && quote.email && quote.zip && quote.structure ? quote : null;
+}
+
 async function readJsonBody(request) {
   const chunks = [];
   let size = 0;
@@ -105,6 +151,43 @@ const server = createServer(async (request, response) => {
       }
       await saveProducts(body.products);
       return json(response, 200, { ok: true });
+    }
+
+    if (url.pathname === "/quotes" && request.method === "GET") {
+      return json(response, 200, { quotes: await readQuotes() });
+    }
+
+    if (url.pathname === "/quotes" && request.method === "POST") {
+      const body = await readJsonBody(request);
+      const input = normalizeNewQuote(body?.quote);
+      if (!input) return json(response, 400, { message: "Invalid quote." });
+      const now = new Date().toISOString();
+      const quote = { ...input, id: randomUUID(), createdAt: now, updatedAt: now, status: "New", notes: "" };
+      await queueQuoteWrite(async () => {
+        const quotes = await readQuotes();
+        quotes.unshift(quote);
+        await saveQuotes(quotes.slice(0, 10_000));
+      });
+      return json(response, 201, { ok: true, quote });
+    }
+
+    const quoteMatch = url.pathname.match(/^\/quotes\/([^/]+)$/);
+    if (quoteMatch && request.method === "PUT") {
+      const id = decodeURIComponent(quoteMatch[1]).slice(0, 100);
+      const body = await readJsonBody(request);
+      const status = clean(body?.status, 20);
+      const notes = clean(body?.notes, 5000);
+      if (!quoteStatuses.has(status)) return json(response, 400, { message: "Invalid quote status." });
+      const updated = await queueQuoteWrite(async () => {
+        const quotes = await readQuotes();
+        const index = quotes.findIndex((quote) => quote.id === id);
+        if (index < 0) return null;
+        quotes[index] = { ...quotes[index], status, notes, updatedAt: new Date().toISOString() };
+        await saveQuotes(quotes);
+        return quotes[index];
+      });
+      if (!updated) return json(response, 404, { message: "Quote not found." });
+      return json(response, 200, { ok: true, quote: updated });
     }
 
     return json(response, 404, { message: "Not found." });

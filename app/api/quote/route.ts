@@ -1,3 +1,5 @@
+import { createQuoteLead } from "@/lib/quotes";
+
 const DESTINATION_EMAIL = "sales@mycarportguy.com";
 const MAX_BODY_BYTES = 12_000;
 
@@ -121,6 +123,30 @@ export async function POST(request: Request) {
     siteReadiness: escapeHtml(siteReadiness || "Not sure yet"),
     details: escapeHtml(details || "Not provided"),
   };
+
+  try {
+    await createQuoteLead({
+      name,
+      phone,
+      email,
+      zip,
+      structure,
+      product,
+      roofColor,
+      trimColor,
+      wallColor,
+      preferredContact,
+      timeframe,
+      intendedUse,
+      bestTime,
+      dimensions,
+      siteReadiness,
+      details,
+    });
+  } catch (error) {
+    // Email remains a dependable fallback if hosted storage is unavailable.
+    console.error("Quote database storage failed.", error);
+  }
 
   const response = await fetch("https://api.resend.com/emails", {
     method: "POST",

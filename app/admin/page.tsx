@@ -3,9 +3,10 @@ import { redirect } from "next/navigation";
 import AdminDashboard from "@/components/AdminDashboard";
 import { canEditProducts, getProducts } from "@/lib/products";
 import { hasAdminSession, isAdminConfigured } from "@/lib/adminAuth";
+import { canManageQuotes, getQuoteLeads } from "@/lib/quotes";
 
 export const metadata: Metadata = {
-  title: "Product Manager",
+  title: "Admin Dashboard",
   robots: { index: false, follow: false },
 };
 
@@ -16,11 +17,15 @@ export default async function AdminPage() {
     redirect("/admin/login");
   }
   if (isAdminConfigured() && !(await hasAdminSession())) redirect("/admin/login");
-  const products = await getProducts({ includeHidden: true });
+  const [products, quotes] = await Promise.all([
+    getProducts({ includeHidden: true }),
+    getQuoteLeads(),
+  ]);
   return (
     <AdminDashboard
       initialProducts={products}
-      editable={canEditProducts()}
+      initialQuotes={quotes}
+      editable={canEditProducts() && canManageQuotes()}
       loginConfigured={isAdminConfigured()}
     />
   );
