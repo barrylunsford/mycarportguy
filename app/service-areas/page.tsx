@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import Header from "@/components/Header";
+import { serviceAreaStates } from "@/lib/service-area-states";
 
 export const metadata: Metadata = {
   title: "Metal Building Service Area",
@@ -14,20 +15,13 @@ export const metadata: Metadata = {
   },
 };
 
-const states = [
-  "Alabama", "Arkansas", "Colorado", "Florida", "Georgia", "Illinois",
-  "Indiana", "Kansas", "Kentucky", "Louisiana", "Mississippi", "Missouri",
-  "New Mexico", "North Carolina", "Ohio", "Oklahoma", "South Carolina",
-  "Tennessee", "Texas", "Virginia", "West Virginia",
-];
-
 const jsonLd = {
   "@context": "https://schema.org",
   "@type": "Service",
   name: "My Carport Guy metal building service area",
   serviceType: "Metal carport and building sales",
   provider: { "@id": "https://www.mycarportguy.com/#organization" },
-  areaServed: states.map((name) => ({ "@type": "State", name })),
+  areaServed: serviceAreaStates.map(({ name }) => ({ "@type": "State", name })),
   url: "https://www.mycarportguy.com/service-areas",
 };
 
@@ -70,8 +64,12 @@ export default function ServiceAreasPage() {
             <p>Coverage can vary by ZIP code, building specifications, and the nearest manufacturing location. We&apos;ll confirm your address before you order.</p>
           </div>
           <ul className="service-state-grid">
-            {states.map((state) => (
-              <li key={state}>{state}</li>
+            {serviceAreaStates.map((state) => (
+              <li key={state.slug}>
+                <Link href={`/service-areas/${state.slug}`}>
+                  <span>{state.abbreviation}</span>{state.name}
+                </Link>
+              </li>
             ))}
           </ul>
         </section>

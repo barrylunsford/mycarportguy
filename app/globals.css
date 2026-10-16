@@ -307,8 +307,10 @@ footer p:last-child { text-align: right; }
 .service-state-heading h2, .service-area-guidance h2 { margin: 14px 0 18px; color: var(--navy); font-size: clamp(36px,4.5vw,54px); line-height: 1.05; letter-spacing: -.045em; }
 .service-state-heading > p:last-child, .service-area-guidance > div > p:last-child { color: var(--muted); line-height: 1.7; }
 .service-state-grid { margin: 0; padding: 0; display: grid; grid-template-columns: repeat(3,1fr); gap: 12px; list-style: none; }
-.service-state-grid li { min-height: 58px; padding: 17px; border: 1px solid var(--line); border-radius: 8px; background: white; color: var(--navy); font-weight: 800; }
-.service-state-grid li::before { margin-right: 8px; color: var(--orange); content: "✓"; }
+.service-state-grid li { min-height: 58px; border: 1px solid var(--line); border-radius: 8px; background: white; color: var(--navy); font-weight: 800; overflow: hidden; }
+.service-state-grid li a { min-height: 58px; padding: 14px 17px; display: flex; align-items: center; gap: 12px; color: inherit; text-decoration: none; transition: background .2s ease, color .2s ease; }
+.service-state-grid li a:hover { background: var(--navy); color: white; }
+.service-state-grid li a span { min-width: 34px; color: var(--orange); font-size: .76rem; letter-spacing: .08em; }
 .service-area-guidance { display: grid; grid-template-columns: minmax(0,.8fr) minmax(0,1.2fr); gap: clamp(45px,8vw,100px); padding: clamp(70px,8vw,100px) max(28px,calc((100vw - 1120px)/2)); background: #e7efed; }
 .service-area-guidance ul { margin: 0; padding: 0; display: grid; gap: 13px; list-style: none; }
 .service-area-guidance li { padding: 22px 24px; display: flex; flex-direction: column; gap: 5px; border-left: 4px solid var(--orange); background: white; }
