@@ -3,6 +3,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import Header from "@/components/Header";
 import { getServiceAreaState, serviceAreaStates } from "@/lib/service-area-states";
+import { serviceAreaCities } from "@/lib/service-area-cities";
 
 type PageProps = { params: Promise<{ state: string }> };
 
@@ -38,6 +39,7 @@ export default async function StateServiceAreaPage({ params }: PageProps) {
   if (!state || state.slug === "north-carolina") notFound();
 
   const canonical = `https://www.mycarportguy.com/service-areas/${state.slug}`;
+  const cityGuides = serviceAreaCities.filter((location) => location.stateSlug === state.slug);
   const faqs = [
     {
       question: `Are metal buildings available in ${state.name}?`,
@@ -131,6 +133,11 @@ export default async function StateServiceAreaPage({ params }: PageProps) {
           <div><p className="eyebrow"><span />Areas we help serve</p><h2>Building guidance across {state.name}.</h2></div>
           <ul>{state.popularAreas.map((area) => <li key={area}>{area}</li>)}</ul>
         </section>
+
+        {cityGuides.length > 0 && <section className="local-projects">
+          <div className="local-section-heading"><p className="eyebrow"><span />Local city guides</p><h2>Explore building information for your area.</h2></div>
+          <div className="local-building-links">{cityGuides.map((location) => <Link key={location.slug} href={`/service-areas/${state.slug}/${location.slug}`}>{location.city}</Link>)}</div>
+        </section>}
 
         <section className="local-faq">
           <div className="local-section-heading"><p className="eyebrow"><span />Ordering questions</p><h2>What to know about a {state.name} project.</h2></div>
