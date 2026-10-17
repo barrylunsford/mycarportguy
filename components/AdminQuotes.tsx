@@ -72,7 +72,7 @@ export default function AdminQuotes({ initialQuotes, editable }: Props) {
 
   return <main className="admin-shell admin-quotes-shell">
     <aside className="admin-sidebar">
-      <div className="admin-sidebar-heading"><div><span>Quotes</span><strong>{filtered.length} leads</strong></div><button type="button" onClick={exportCsv} disabled={filtered.length === 0}>Export</button></div>
+      <div className="admin-sidebar-heading"><div><span>Quotes</span><strong>{filtered.length} leads</strong></div><div className="admin-backup-actions"><button type="button" onClick={exportCsv} disabled={filtered.length === 0}>CSV</button><a href="/api/admin/quotes/backup">Backup</a></div></div>
       <label className="admin-search"><span className="sr-only">Search quotes</span><input value={query} onChange={(event) => setQuery(event.target.value)} placeholder="Name, ZIP, building…" /></label>
       <label className="admin-quote-filter"><span>Status</span><select value={statusFilter} onChange={(event) => setStatusFilter(event.target.value as QuoteStatus | "All")}><option>All</option>{quoteStatuses.map((status) => <option key={status}>{status}</option>)}</select></label>
       <div className="admin-product-list admin-quote-list">

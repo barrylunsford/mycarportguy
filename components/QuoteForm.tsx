@@ -16,6 +16,7 @@ export default function QuoteForm() {
     wallColor: "",
   });
   const startedAt = useRef(0);
+  const confirmationRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     startedAt.current = Date.now();
@@ -83,6 +84,7 @@ export default function QuoteForm() {
       });
       setStatus("success");
       setMessage("Thanks! Your quote request was sent. We’ll be in touch soon.");
+      window.setTimeout(() => confirmationRef.current?.focus(), 0);
     } catch (error) {
       setStatus("error");
       setMessage(
@@ -301,7 +303,7 @@ export default function QuoteForm() {
         Prefer text? Message (828) 839-1730
       </a>
       {status === "success" && (
-        <div className="form-confirmation form-confirmation-success" role="status" aria-live="polite">
+        <div ref={confirmationRef} className="form-confirmation form-confirmation-success" role="status" aria-live="polite" tabIndex={-1}>
           <span aria-hidden="true">✓</span>
           <div>
             <strong>Quote request sent</strong>

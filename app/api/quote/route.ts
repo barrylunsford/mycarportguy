@@ -1,4 +1,10 @@
 import { createQuoteLead } from "@/lib/quotes";
+import {
+  isDuplicateSubmission,
+  isRateLimited,
+  requestFingerprint,
+  submissionFingerprint,
+} from "@/lib/request-protection";
 
 const DESTINATION_EMAIL = "sales@mycarportguy.com";
 const MAX_BODY_BYTES = 12_000;
@@ -38,6 +44,14 @@ function escapeHtml(value: string) {
 }
 
 export async function POST(request: Request) {
+  const visitor = requestFingerprint(request);
+  if (isRateLimited(`quote:${visitor}`, 5, 15 * 60 * 1_000)) {
+    return Response.json(
+      { message: "Too many requests were sent. Please wait a few minutes or call us." },
+      { status: 429, headers: { "Retry-After": "900" } },
+    );
+  }
+
   const contentLength = Number(request.headers.get("content-length") || 0);
   if (contentLength > MAX_BODY_BYTES) {
     return Response.json({ message: "Request is too large." }, { status: 413 });
@@ -93,6 +107,11 @@ export async function POST(request: Request) {
       { message: "Please check the required fields and try again." },
       { status: 400 },
     );
+  }
+
+  const duplicateKey = submissionFingerprint([visitor, name, phone, email, zip, structure, details]);
+  if (isDuplicateSubmission(duplicateKey, 10 * 60 * 1_000)) {
+    return Response.json({ ok: true, duplicate: true });
   }
 
   const apiKey = process.env.RESEND_API_KEY;

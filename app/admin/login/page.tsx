@@ -8,11 +8,11 @@ export const metadata: Metadata = {
   robots: { index: false, follow: false },
 };
 
-type Props = { searchParams: Promise<{ error?: string }> };
+type Props = { searchParams: Promise<{ error?: string; limited?: string }> };
 
 export default async function AdminLoginPage({ searchParams }: Props) {
   if (await hasAdminSession()) redirect("/admin");
-  const { error } = await searchParams;
+  const { error, limited } = await searchParams;
 
   return (
     <main id="main-content" className="admin-login-page">
@@ -34,7 +34,11 @@ export default async function AdminLoginPage({ searchParams }: Props) {
               Admin password
               <input type="password" name="password" autoComplete="current-password" required autoFocus />
             </label>
-            {error && <p className="admin-login-error">That password was not correct.</p>}
+            {limited ? (
+              <p className="admin-login-error">Too many sign-in attempts were made. Please wait 15 minutes and try again.</p>
+            ) : error ? (
+              <p className="admin-login-error">That password was not correct.</p>
+            ) : null}
             <button className="button button-dark" type="submit">Sign in <span aria-hidden="true">→</span></button>
             <Link className="admin-forgot-link" href="/admin/forgot-password">Forgot your password?</Link>
           </form>
