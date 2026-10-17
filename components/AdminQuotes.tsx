@@ -13,6 +13,14 @@ function formatDate(value: string) {
   return new Intl.DateTimeFormat("en-US", { dateStyle: "medium", timeStyle: "short" }).format(new Date(value));
 }
 
+function emailDraft(email: string, subject: string, body: string) {
+  return `mailto:${email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+}
+
+function customerFirstName(name: string) {
+  return name.trim().split(/\s+/)[0] || "there";
+}
+
 export default function AdminQuotes({ initialQuotes, editable }: Props) {
   const [quotes, setQuotes] = useState(initialQuotes);
   const [selectedId, setSelectedId] = useState(initialQuotes[0]?.id ?? "");
@@ -21,6 +29,53 @@ export default function AdminQuotes({ initialQuotes, editable }: Props) {
   const [notice, setNotice] = useState("");
   const [saving, setSaving] = useState(false);
   const selected = quotes.find((quote) => quote.id === selectedId);
+
+  const emailTemplates = selected ? (() => {
+    const firstName = customerFirstName(selected.name);
+    const structure = selected.structure || "building";
+    const structureLower = structure.toLowerCase();
+    const project = selected.product || structure;
+    const dimensions = selected.dimensions || "Not provided yet";
+    const colors = [
+      selected.roofColor && `roof: ${selected.roofColor}`,
+      selected.trimColor && `trim: ${selected.trimColor}`,
+      selected.wallColor && `walls: ${selected.wallColor}`,
+    ].filter(Boolean).join(", ") || "Not selected yet";
+    const signature = "Thanks,\nMy Carport Guy\n(828) 839-1730\nsales@mycarportguy.com";
+
+    return [
+      {
+        label: "First response",
+        description: "Confirm the request and set expectations.",
+        subject: `Your ${structureLower} request | My Carport Guy`,
+        body: `Hi ${firstName},\n\nThank you for contacting My Carport Guy. I received your request for a ${project} in ZIP code ${selected.zip}.\n\nHere is what I have so far:\n• Building: ${project}\n• Size: ${dimensions}\n• Colors: ${colors}\n• Timeframe: ${selected.timeframe}\n\nI’ll review the details and follow up with the best options. If anything above needs to be changed, just reply and let me know.\n\n${signature}`,
+      },
+      {
+        label: "Request details",
+        description: "Ask for anything needed to finish pricing.",
+        subject: `A few details for your ${structureLower} quote`,
+        body: `Hi ${firstName},\n\nI’m working on your ${structureLower} quote and need a few details to make sure the building fits your needs. Please send anything that wasn’t included in your original request:\n\n• Exact width, length, and height\n• What the building will protect or be used for\n• Garage doors, walk-in doors, windows, or other openings\n• Roof, trim, and wall colors\n• Whether the installation site is level and accessible\n• Installation address or ZIP code\n• Your preferred timing\n\nOnce I have those details, I can help narrow down the right configuration.\n\n${signature}`,
+      },
+      {
+        label: "Send quote",
+        description: "A polished message with spots for price and link.",
+        subject: `Your ${structureLower} quote | My Carport Guy`,
+        body: `Hi ${firstName},\n\nI have your quote ready for the ${project}.\n\nQuoted price: [ENTER PRICE]\nDesign or order link: [PASTE LINK]\n\nProject details:\n• Size: ${dimensions}\n• Colors: ${colors}\n• Installation ZIP code: ${selected.zip}\n\nPlease review the design and details carefully. If you’d like to change the size, colors, doors, windows, or other features, reply to this email and I’ll help update it. Final specifications, pricing, payment terms, and customer responsibilities are listed on the order documents.\n\n${signature}`,
+      },
+      {
+        label: "Follow up",
+        description: "Check in after sending a quote.",
+        subject: `Checking in on your ${structureLower} quote`,
+        body: `Hi ${firstName},\n\nI wanted to check in about the quote for your ${project}. Do you have any questions, or would you like to change the size, colors, or features?\n\nThere’s no pressure—I’m happy to help when you’re ready.\n\n${signature}`,
+      },
+      {
+        label: "Order confirmation",
+        description: "Explain what happens after the order is placed.",
+        subject: "Your My Carport Guy order is moving forward",
+        body: `Hi ${firstName},\n\nThank you for your order. Your order for the ${project} has been received and is moving forward.\n\nPlease keep your order documents for reference. The manufacturer will review the order and contact you as the project moves toward scheduling. Before installation, please make sure the site is level, accessible, and ready, and confirm any permits or local requirements that apply.\n\nThe signed order documents contain the final specifications, pricing, payment terms, scheduling information, and customer responsibilities. If you have any questions along the way, reply here or call me.\n\n${signature}`,
+      },
+    ];
+  })() : [];
 
   const filtered = useMemo(() => {
     const needle = query.trim().toLowerCase();
@@ -98,6 +153,19 @@ export default function AdminQuotes({ initialQuotes, editable }: Props) {
           </div>
           <p><strong>Notes tip:</strong> Record the next action, follow-up date, quoted price, and the customer&apos;s preferred contact method.</p>
         </details>
+        <section className="admin-email-templates" aria-labelledby="email-templates-heading">
+          <div className="admin-email-templates-heading">
+            <div><span>Sales email templates</span><h2 id="email-templates-heading">Open a personalized draft</h2></div>
+            <p>Each button opens an email addressed to {selected.email}. Review the details and replace any bracketed text before sending.</p>
+          </div>
+          <div className="admin-email-template-grid">
+            {emailTemplates.map((template) => <a key={template.label} href={emailDraft(selected.email, template.subject, template.body)}>
+              <strong>{template.label}</strong>
+              <span>{template.description}</span>
+              <small>Open email draft →</small>
+            </a>)}
+          </div>
+        </section>
         <div className="admin-lead-summary">
           <div><span>Status</span><select value={selected.status} onChange={(event) => updateSelected({ status: event.target.value as QuoteStatus })} disabled={!editable}>{quoteStatuses.map((status) => <option key={status}>{status}</option>)}</select></div>
           <div><span>Phone</span><a href={`tel:${selected.phone}`}>{selected.phone}</a></div>
