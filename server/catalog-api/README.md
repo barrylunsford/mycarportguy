@@ -19,3 +19,8 @@ Deployment also requires:
 
 Quote leads are created automatically in `/root/mycarportguy-data/quotes.json`.
 Set `CATALOG_QUOTES_FILE` only if a different storage path is needed.
+
+The current one-way admin password hash is stored in
+`/root/mycarportguy-data/admin-auth.json`. Set `CATALOG_ADMIN_AUTH_FILE` only
+if a different storage path is needed. The website uses this private record for
+email password recovery; the plaintext password is never stored.

@@ -22,7 +22,7 @@ export default async function ChangeAdminPasswordPage({ searchParams }: Props) {
         <h1>Choose a new password.</h1>
         <p>
           Use at least 12 characters. The password is converted to a protected
-          one-way hash before it is saved.
+          one-way hash before it is saved. The plaintext password is never stored.
         </p>
         <form action="/api/admin/change-password" method="post">
           <label>

@@ -36,6 +36,7 @@ export default async function AdminLoginPage({ searchParams }: Props) {
             </label>
             {error && <p className="admin-login-error">That password was not correct.</p>}
             <button className="button button-dark" type="submit">Sign in <span aria-hidden="true">→</span></button>
+            <Link className="admin-forgot-link" href="/admin/forgot-password">Forgot your password?</Link>
           </form>
         )}
         <Link className="admin-login-back" href="/">← Back to website</Link>

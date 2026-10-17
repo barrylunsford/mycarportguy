@@ -8,6 +8,7 @@ const host = process.env.HOST || "127.0.0.1";
 const token = String(process.env.CATALOG_API_TOKEN || "");
 const dataFile = process.env.CATALOG_PRODUCTS_FILE || "/root/mycarportguy-data/products.json";
 const quotesFile = process.env.CATALOG_QUOTES_FILE || "/root/mycarportguy-data/quotes.json";
+const adminAuthFile = process.env.CATALOG_ADMIN_AUTH_FILE || "/root/mycarportguy-data/admin-auth.json";
 const maxBodyBytes = 250_000;
 const quoteStatuses = new Set(["New", "Contacted", "Quoted", "Won", "Lost"]);
 let quoteWriteQueue = Promise.resolve();
@@ -95,6 +96,27 @@ async function saveQuotes(quotes) {
   await fs.rename(temporaryFile, quotesFile);
 }
 
+async function readAdminAuth() {
+  try {
+    const value = JSON.parse(await fs.readFile(adminAuthFile, "utf8"));
+    return typeof value?.passwordHash === "string" ? value : { passwordHash: "" };
+  } catch (error) {
+    if (error?.code === "ENOENT") return { passwordHash: "" };
+    throw error;
+  }
+}
+
+async function saveAdminAuth(passwordHash) {
+  const directory = path.dirname(adminAuthFile);
+  await fs.mkdir(directory, { recursive: true, mode: 0o700 });
+  const temporaryFile = `${adminAuthFile}.tmp`;
+  await fs.writeFile(temporaryFile, `${JSON.stringify({ passwordHash }, null, 2)}\n`, {
+    encoding: "utf8",
+    mode: 0o600,
+  });
+  await fs.rename(temporaryFile, adminAuthFile);
+}
+
 function queueQuoteWrite(operation) {
   const result = quoteWriteQueue.then(operation, operation);
   quoteWriteQueue = result.catch(() => undefined);
@@ -155,6 +177,20 @@ const server = createServer(async (request, response) => {
 
     if (url.pathname === "/quotes" && request.method === "GET") {
       return json(response, 200, { quotes: await readQuotes() });
+    }
+
+    if (url.pathname === "/admin-auth" && request.method === "GET") {
+      return json(response, 200, await readAdminAuth());
+    }
+
+    if (url.pathname === "/admin-auth" && request.method === "PUT") {
+      const body = await readJsonBody(request);
+      const passwordHash = clean(body?.passwordHash, 200);
+      if (!/^[a-f0-9]{32}:[a-f0-9]{128}$/.test(passwordHash)) {
+        return json(response, 400, { message: "Invalid password hash." });
+      }
+      await saveAdminAuth(passwordHash);
+      return json(response, 200, { ok: true });
     }
 
     if (url.pathname === "/quotes" && request.method === "POST") {

@@ -14,7 +14,7 @@ export async function POST(request: Request) {
 
   const form = await request.formData();
   const password = typeof form.get("password") === "string" ? String(form.get("password")) : "";
-  if (!passwordMatches(password)) {
+  if (!(await passwordMatches(password))) {
     return NextResponse.redirect(new URL("/admin/login?error=1", request.url), 303);
   }
 
