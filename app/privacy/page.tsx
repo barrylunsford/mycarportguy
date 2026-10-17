@@ -15,7 +15,7 @@ export default function PrivacyPage() {
         <div className="legal-hero">
           <p className="eyebrow"><span />Your information</p>
           <h1>Privacy Policy</h1>
-          <p>Last updated October 15, 2026</p>
+          <p>Last updated October 17, 2026</p>
         </div>
         <article className="legal-content">
           <p className="legal-note">
@@ -42,10 +42,27 @@ export default function PrivacyPage() {
 
           <h2>Website analytics</h2>
           <p>
-            We use Vercel Web Analytics to understand aggregate website traffic
-            and interactions, such as which pages are visited and when a quote
-            request is completed. This analytics service does not use cookies or
-            collect personal identifiers for this purpose.
+            We use Vercel Web Analytics and Google Analytics to understand how
+            visitors use the website, including pages viewed, traffic sources,
+            general device and browser information, and interactions such as a
+            completed quote request, phone call, or email link. Vercel Web
+            Analytics provides aggregate, cookie-free measurements. Google
+            Analytics may set first-party cookies, including cookies named
+            <code> _ga</code> and <code> _ga_&lt;container-id&gt;</code>, to
+            distinguish visits and sessions.
+          </p>
+          <p>
+            Google processes analytics information under its own privacy terms.
+            You can learn more in the{" "}
+            <a href="https://policies.google.com/privacy" target="_blank" rel="noreferrer">
+              Google Privacy Policy
+            </a>
+            . You can also limit analytics by blocking or deleting cookies in
+            your browser or by using Google&apos;s{" "}
+            <a href="https://tools.google.com/dlpage/gaoptout" target="_blank" rel="noreferrer">
+              Analytics opt-out browser add-on
+            </a>
+            . Blocking analytics does not prevent you from using this website.
           </p>
 
           <h2>How information is shared</h2>
@@ -61,8 +78,9 @@ export default function PrivacyPage() {
           <p>
             We retain inquiry information for as long as reasonably needed to
             respond, provide service, maintain business records, and meet legal
-            obligations. We use reasonable safeguards, but no internet service
-            can guarantee absolute security.
+            obligations. Analytics information is retained according to our
+            provider and account settings. We use reasonable safeguards, but no
+            internet service can guarantee absolute security.
           </p>
 
           <h2>Your choices</h2>

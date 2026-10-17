@@ -87,6 +87,17 @@ export default function AdminQuotes({ initialQuotes, editable }: Props) {
     <section className="admin-editor">
       {selected ? <>
         <div className="admin-editor-heading"><div><span>Quote request · {formatDate(selected.createdAt)}</span><h1>{selected.name}</h1></div><div className="admin-actions"><a href={`tel:${selected.phone}`}>Call</a><a href={`sms:${selected.phone}`}>Text</a><a href={`mailto:${selected.email}`}>Email</a></div></div>
+        <details className="admin-follow-up-guide">
+          <summary>Follow-up playbook</summary>
+          <div className="admin-follow-up-steps">
+            <div><strong>New</strong><span>Reply as soon as practical. Confirm the ZIP code, building use, approximate size, and preferred timeline.</span></div>
+            <div><strong>Contacted</strong><span>Confirm site readiness, colors, and any doors, windows, or other must-have features.</span></div>
+            <div><strong>Quoted</strong><span>Save the configuration and price in private notes, then follow up in one to two business days.</span></div>
+            <div><strong>Won</strong><span>Confirm the signed order, payment requirements, and that the order was submitted for scheduling.</span></div>
+            <div><strong>Lost</strong><span>Record the reason in private notes. Avoid repeated outreach unless the customer asks you to reconnect.</span></div>
+          </div>
+          <p><strong>Notes tip:</strong> Record the next action, follow-up date, quoted price, and the customer&apos;s preferred contact method.</p>
+        </details>
         <div className="admin-lead-summary">
           <div><span>Status</span><select value={selected.status} onChange={(event) => updateSelected({ status: event.target.value as QuoteStatus })} disabled={!editable}>{quoteStatuses.map((status) => <option key={status}>{status}</option>)}</select></div>
           <div><span>Phone</span><a href={`tel:${selected.phone}`}>{selected.phone}</a></div>

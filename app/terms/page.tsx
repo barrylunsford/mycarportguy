@@ -15,7 +15,7 @@ export default function TermsPage() {
         <div className="legal-hero">
           <p className="eyebrow"><span />Please review</p>
           <h1>Website Terms</h1>
-          <p>Last updated October 13, 2026</p>
+          <p>Last updated October 17, 2026</p>
         </div>
         <article className="legal-content">
           <p className="legal-note">
