@@ -404,7 +404,7 @@ export default async function Home() {
             <a href="/terms">Terms</a>
           </div>
           <p>
-            © {new Date().getFullYear()} My Carport Guy. Eagle Carports is a
+            © {new Date().getFullYear()} My Carport Guy LLC. Eagle Carports is a
             separate manufacturer.
           </p>
         </div>
