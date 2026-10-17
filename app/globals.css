@@ -507,6 +507,8 @@ footer p:last-child { text-align: right; }
 .admin-forgot-link { margin-top: 17px; display: block; color: var(--orange-dark); font-size: 12px; font-weight: 800; text-align: center; }
 .admin-honeypot { position: absolute !important; left: -10000px !important; width: 1px !important; height: 1px !important; opacity: 0 !important; }
 .admin-login-back { display: inline-block; margin-top: 25px; color: var(--muted); font-size: 12px; font-weight: 750; }
+.not-found-actions { display: flex; align-items: center; gap: 22px; margin-top: 28px; }
+.not-found-actions .admin-login-back { margin-top: 0; }
 
 .catalog-page { min-height: 100vh; background: #f5f4ef; }
 .catalog-hero { padding: 76px max(28px,calc((100vw - 1240px)/2)) 62px; border-bottom: 1px solid var(--line); background: var(--cream); }
@@ -776,6 +778,8 @@ footer p:last-child { text-align: right; }
 
 @media (max-width: 580px) {
   .announcement p { display: none; }
+  .not-found-actions { align-items: stretch; flex-direction: column; }
+  .not-found-actions .button { width: 100%; }
   .announcement { justify-content: center; }
   .nav-shell { height: 70px; }
   .hero-content { padding-top: 65px; }
