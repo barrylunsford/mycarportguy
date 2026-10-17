@@ -48,24 +48,8 @@ export default async function ProductPage({ params }: Props) {
           : "Garage";
   const quoteUrl = `/?structure=${encodeURIComponent(structureType)}&product=${encodeURIComponent(product.name)}#quote`;
 
-  const jsonLd = {
-    "@context": "https://schema.org",
-    "@type": "Product",
-    name: product.name,
-    description: product.description,
-    image: product.imageUrl || undefined,
-    sku: product.id.startsWith("sku-") ? product.id.slice(4).toUpperCase() : undefined,
-    category: product.category,
-    brand: { "@type": "Brand", name: "Eagle Carports" },
-    url: `https://www.mycarportguy.com/products/${product.slug}`,
-  };
-
   return (
     <>
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd).replace(/</g, "\\u003c") }}
-      />
       <Header />
       <main id="main-content" className="product-page">
         <section className="product-hero">
