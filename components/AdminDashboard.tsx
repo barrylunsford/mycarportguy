@@ -35,7 +35,7 @@ const blankProduct = (): Product => ({
 });
 
 export default function AdminDashboard({ initialProducts, initialQuotes, editable, loginConfigured }: Props) {
-  const [view, setView] = useState<"products" | "quotes">("products");
+  const [view, setView] = useState<"products" | "quotes">("quotes");
   const [products, setProducts] = useState(initialProducts);
   const [selectedId, setSelectedId] = useState(initialProducts[0]?.id ?? "");
   const [query, setQuery] = useState("");
@@ -126,7 +126,7 @@ export default function AdminDashboard({ initialProducts, initialQuotes, editabl
         <Link className="admin-brand" href="/">My Carport Guy</Link>
         <nav className="admin-primary-nav" aria-label="Admin sections">
           <button type="button" className={view === "products" ? "active" : ""} onClick={() => setView("products")}>Products</button>
-          <button type="button" className={view === "quotes" ? "active" : ""} onClick={() => setView("quotes")}>Quotes{initialQuotes.filter((quote) => quote.status === "New").length > 0 && <span>{initialQuotes.filter((quote) => quote.status === "New").length}</span>}</button>
+          <button type="button" className={view === "quotes" ? "active" : ""} onClick={() => setView("quotes")}>Leads{initialQuotes.filter((quote) => quote.status === "New").length > 0 && <span>{initialQuotes.filter((quote) => quote.status === "New").length}</span>}</button>
         </nav>
         <div>
           <span className={`admin-mode ${editable ? "" : "locked"}`}>
@@ -150,7 +150,8 @@ export default function AdminDashboard({ initialProducts, initialQuotes, editabl
         </div>
       )}
 
-      {view === "quotes" ? <AdminQuotes initialQuotes={initialQuotes} editable={editable} /> : <main className="admin-shell">
+      <div hidden={view !== "quotes"}><AdminQuotes initialQuotes={initialQuotes} editable={editable} /></div>
+      {view === "products" && <main className="admin-shell">
         <aside className="admin-sidebar">
           <div className="admin-sidebar-heading">
             <div>

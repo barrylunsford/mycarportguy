@@ -24,3 +24,14 @@ The current one-way admin password hash is stored in
 `/root/mycarportguy-data/admin-auth.json`. Set `CATALOG_ADMIN_AUTH_FILE` only
 if a different storage path is needed. The website uses this private record for
 email password recovery; the plaintext password is never stored.
+
+## Lead tracker updates
+
+Deploy the website and this API together when updating lead tracking. The API
+accepts the expanded sales stages plus `nextFollowUp` (YYYY-MM-DD or an empty
+string) and `lastContactedAt` (ISO timestamp or an empty string) on quote updates.
+Existing quote records and legacy statuses remain supported without a migration.
+The admin opens to Leads, supports manual lead entry, and sorts the follow-up
+queue by date. Completing a contact advances the stage and saves its next date;
+it does not send messages. Follow-up suggestions use calendar days: 2 days for
+the first follow-up, 7 for the second, 30 for long-term, and 7 after purchase.

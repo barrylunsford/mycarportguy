@@ -10,7 +10,7 @@ const dataFile = process.env.CATALOG_PRODUCTS_FILE || "/root/mycarportguy-data/p
 const quotesFile = process.env.CATALOG_QUOTES_FILE || "/root/mycarportguy-data/quotes.json";
 const adminAuthFile = process.env.CATALOG_ADMIN_AUTH_FILE || "/root/mycarportguy-data/admin-auth.json";
 const maxBodyBytes = 250_000;
-const quoteStatuses = new Set(["New", "Contacted", "Quoted", "Won", "Lost"]);
+const quoteStatuses = new Set(["New", "First follow-up", "Second follow-up", "Long-term follow-up", "Purchased", "Purchase follow-up", "Closed", "Contacted", "Quoted", "Won", "Lost"]);
 let quoteWriteQueue = Promise.resolve();
 
 function json(response, status, body) {
@@ -211,14 +211,20 @@ const server = createServer(async (request, response) => {
     if (quoteMatch && request.method === "PUT") {
       const id = decodeURIComponent(quoteMatch[1]).slice(0, 100);
       const body = await readJsonBody(request);
-      const status = clean(body?.status, 20);
+      const status = clean(body?.status, 40);
       const notes = clean(body?.notes, 5000);
       if (!quoteStatuses.has(status)) return json(response, 400, { message: "Invalid quote status." });
+      const followUp = body?.nextFollowUp;
+      const contacted = body?.lastContactedAt;
+      if ((followUp !== undefined && (typeof followUp !== "string" || (followUp !== "" && (!/^\d{4}-\d{2}-\d{2}$/.test(followUp) || !Number.isFinite(Date.parse(followUp)) || new Date(followUp).toISOString().slice(0, 10) !== followUp)))) ||
+          (contacted !== undefined && (typeof contacted !== "string" || (contacted !== "" && !Number.isFinite(Date.parse(contacted)))))) {
+        return json(response, 400, { message: "Invalid follow-up date." });
+      }
       const updated = await queueQuoteWrite(async () => {
         const quotes = await readQuotes();
         const index = quotes.findIndex((quote) => quote.id === id);
         if (index < 0) return null;
-        quotes[index] = { ...quotes[index], status, notes, updatedAt: new Date().toISOString() };
+        quotes[index] = { ...quotes[index], status, notes, ...(followUp !== undefined ? { nextFollowUp: followUp } : {}), ...(contacted !== undefined ? { lastContactedAt: contacted } : {}), updatedAt: new Date().toISOString() };
         await saveQuotes(quotes);
         return quotes[index];
       });

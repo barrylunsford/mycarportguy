@@ -2,7 +2,7 @@ import "server-only";
 
 import { promises as fs } from "node:fs";
 import path from "node:path";
-import type { NewQuoteLead, QuoteLead, QuoteStatus } from "@/lib/quote-types";
+import type { NewQuoteLead, QuoteLead, QuotePatch } from "@/lib/quote-types";
 
 const quotesPath = path.join(process.cwd(), "data", "quotes.json");
 
@@ -74,7 +74,7 @@ export async function createQuoteLead(input: NewQuoteLead) {
   await writeLocalQuotes(quotes);
 }
 
-export async function updateQuoteLead(id: string, patch: { status: QuoteStatus; notes: string }) {
+export async function updateQuoteLead(id: string, patch: QuotePatch) {
   const remote = remoteCatalogConfig();
   if (remote) {
     const response = await fetch(`${remote.url}/quotes/${encodeURIComponent(id)}`, {
