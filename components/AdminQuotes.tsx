@@ -191,17 +191,9 @@ export default function AdminQuotes({ initialQuotes, editable }: Props) {
           dueDate: invoiceDueDate,
         }),
       });
-      const result = (await response.json()) as { message?: string; invoiceId?: string; invoiceUrl?: string };
+      const result = (await response.json()) as { message?: string; invoiceId?: string; invoiceUrl?: string; quote?: QuoteLead };
       if (!response.ok || !result.invoiceId) throw new Error(result.message || "Square could not send the invoice.");
-      const sentAt = new Date().toLocaleString("en-US");
-      const invoiceRecord = `Square deposit invoice sent ${sentAt}: $${amount.toFixed(2)}, due ${invoiceDueDate}, ID ${result.invoiceId}${result.invoiceUrl ? `, ${result.invoiceUrl}` : ""}`;
-      const next = new Date(); next.setDate(next.getDate() + 2);
-      await save({
-        status: "Quoted",
-        notes: `${selected.notes}${selected.notes ? "\n" : ""}${invoiceRecord}`,
-        lastContactedAt: new Date().toISOString(),
-        nextFollowUp: localDay(next),
-      });
+      if (result.quote) setQuotes((current) => current.map((quote) => quote.id === result.quote?.id ? result.quote : quote));
       setInvoiceNotice("Invoice sent by Square and recorded in this lead.");
       setInvoiceAmount("");
     } catch (error) {
@@ -280,6 +272,11 @@ export default function AdminQuotes({ initialQuotes, editable }: Props) {
             <button type="submit" className="admin-save" disabled={!editable || sendingInvoice}>{sendingInvoice ? "Sending…" : "Send deposit invoice"}</button>
           </form>
           <p className="admin-square-notice" role="status" aria-live="polite">{invoiceNotice}</p>
+          {selected.squareInvoiceId && <div className={`admin-square-status ${selected.squareInvoiceStatus === "PAID" ? "paid" : ""}`}>
+            <strong>{selected.squareInvoiceStatus === "PAID" ? "Deposit paid" : `Invoice ${selected.squareInvoiceStatus?.toLowerCase() || "sent"}`}</strong>
+            <span>{selected.squareInvoiceAmount ? `$${selected.squareInvoiceAmount.toFixed(2)}` : ""}{selected.squareInvoicePaidAt ? ` · Paid ${formatDate(selected.squareInvoicePaidAt)}` : ""}</span>
+            {selected.squareInvoiceUrl && <a href={selected.squareInvoiceUrl} target="_blank" rel="noreferrer">View Square invoice ↗</a>}
+          </div>}
         </section>
         <div className="admin-lead-summary">
           <div><span>Status</span><select value={selected.status} aria-label="Lead stage" onChange={(event) => {

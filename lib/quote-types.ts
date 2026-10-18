@@ -10,6 +10,12 @@ export type QuoteLead = {
   notes: string;
   nextFollowUp?: string;
   lastContactedAt?: string;
+  squareInvoiceId?: string;
+  squareInvoiceUrl?: string;
+  squareInvoiceStatus?: string;
+  squareInvoiceAmount?: number;
+  squareInvoiceDueDate?: string;
+  squareInvoicePaidAt?: string;
   name: string;
   phone: string;
   email: string;
@@ -30,7 +36,20 @@ export type QuoteLead = {
 
 export type NewQuoteLead = Omit<
   QuoteLead,
-  "id" | "createdAt" | "updatedAt" | "status" | "notes" | "nextFollowUp" | "lastContactedAt"
+  "id" | "createdAt" | "updatedAt" | "status" | "notes" | "nextFollowUp" | "lastContactedAt" |
+  "squareInvoiceId" | "squareInvoiceUrl" | "squareInvoiceStatus" | "squareInvoiceAmount" |
+  "squareInvoiceDueDate" | "squareInvoicePaidAt"
 >;
 
-export type QuotePatch = { status: QuoteStatus; notes: string; nextFollowUp?: string; lastContactedAt?: string };
+export type QuotePatch = {
+  status: QuoteStatus;
+  notes: string;
+  nextFollowUp?: string;
+  lastContactedAt?: string;
+  squareInvoiceId?: string;
+  squareInvoiceUrl?: string;
+  squareInvoiceStatus?: string;
+  squareInvoiceAmount?: number;
+  squareInvoiceDueDate?: string;
+  squareInvoicePaidAt?: string;
+};

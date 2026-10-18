@@ -216,6 +216,14 @@ const server = createServer(async (request, response) => {
       if (!quoteStatuses.has(status)) return json(response, 400, { message: "Invalid quote status." });
       const followUp = body?.nextFollowUp;
       const contacted = body?.lastContactedAt;
+      const squareFields = {
+        squareInvoiceId: clean(body?.squareInvoiceId, 100),
+        squareInvoiceUrl: clean(body?.squareInvoiceUrl, 500),
+        squareInvoiceStatus: clean(body?.squareInvoiceStatus, 40),
+        squareInvoiceAmount: Number(body?.squareInvoiceAmount) || 0,
+        squareInvoiceDueDate: clean(body?.squareInvoiceDueDate, 20),
+        squareInvoicePaidAt: clean(body?.squareInvoicePaidAt, 60),
+      };
       if ((followUp !== undefined && (typeof followUp !== "string" || (followUp !== "" && (!/^\d{4}-\d{2}-\d{2}$/.test(followUp) || !Number.isFinite(Date.parse(followUp)) || new Date(followUp).toISOString().slice(0, 10) !== followUp)))) ||
           (contacted !== undefined && (typeof contacted !== "string" || (contacted !== "" && !Number.isFinite(Date.parse(contacted)))))) {
         return json(response, 400, { message: "Invalid follow-up date." });
@@ -224,7 +232,7 @@ const server = createServer(async (request, response) => {
         const quotes = await readQuotes();
         const index = quotes.findIndex((quote) => quote.id === id);
         if (index < 0) return null;
-        quotes[index] = { ...quotes[index], status, notes, ...(followUp !== undefined ? { nextFollowUp: followUp } : {}), ...(contacted !== undefined ? { lastContactedAt: contacted } : {}), updatedAt: new Date().toISOString() };
+        quotes[index] = { ...quotes[index], status, notes, ...(followUp !== undefined ? { nextFollowUp: followUp } : {}), ...(contacted !== undefined ? { lastContactedAt: contacted } : {}), ...(body?.squareInvoiceId !== undefined ? squareFields : {}), updatedAt: new Date().toISOString() };
         await saveQuotes(quotes);
         return quotes[index];
       });

@@ -1,4 +1,5 @@
 import { hasAdminSession, isAdminConfigured } from "@/lib/adminAuth";
+import { getQuoteLeads, updateQuoteLead } from "@/lib/quotes";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
@@ -6,13 +7,13 @@ export const dynamic = "force-dynamic";
 const squareBaseUrl = "https://connect.squareup.com/v2";
 const squareVersion = "2026-09-16";
 
-function easternDate() {
+function easternDate(date = new Date()) {
   const parts = new Intl.DateTimeFormat("en-US", {
     timeZone: "America/New_York",
     year: "numeric",
     month: "2-digit",
     day: "2-digit",
-  }).formatToParts(new Date());
+  }).formatToParts(date);
   const values = Object.fromEntries(parts.map(({ type, value }) => [type, value]));
   return `${values.year}-${values.month}-${values.day}`;
 }
@@ -120,13 +121,34 @@ export async function POST(request: Request) {
       idempotency_key: `${requestKey}-publish`,
       version,
     });
+    const quotes = await getQuoteLeads();
+    const lead = quotes.find((quote) => quote.id === quoteId);
+    if (!lead) throw new Error("The matching lead could not be found.");
+    const invoiceUrl = published.invoice?.public_url || "";
+    const invoiceRecord = `Square deposit invoice sent ${new Date().toLocaleString("en-US", { timeZone: "America/New_York" })}: $${(amountCents / 100).toFixed(2)}, due ${dueDate}, ID ${invoiceId}${invoiceUrl ? `, ${invoiceUrl}` : ""}`;
+    const next = new Date();
+    next.setDate(next.getDate() + 2);
+    const nextFollowUp = easternDate(next);
+    const quote = await updateQuoteLead(quoteId, {
+      status: "Quoted",
+      notes: `${lead.notes}${lead.notes ? "\n" : ""}${invoiceRecord}`,
+      lastContactedAt: new Date().toISOString(),
+      nextFollowUp,
+      squareInvoiceId: invoiceId,
+      squareInvoiceUrl: invoiceUrl,
+      squareInvoiceStatus: published.invoice?.status || "UNPAID",
+      squareInvoiceAmount: amountCents / 100,
+      squareInvoiceDueDate: dueDate,
+      squareInvoicePaidAt: "",
+    });
     return Response.json({
       ok: true,
       invoiceId,
-      invoiceUrl: published.invoice?.public_url || "",
+      invoiceUrl,
       status: published.invoice?.status || "UNPAID",
       amount: amountCents / 100,
       dueDate,
+      quote,
     });
   } catch (error) {
     return Response.json({ message: error instanceof Error ? error.message : "Square could not send the invoice." }, { status: 502 });
