@@ -6,6 +6,17 @@ export const dynamic = "force-dynamic";
 const squareBaseUrl = "https://connect.squareup.com/v2";
 const squareVersion = "2026-09-16";
 
+function easternDate() {
+  const parts = new Intl.DateTimeFormat("en-US", {
+    timeZone: "America/New_York",
+    year: "numeric",
+    month: "2-digit",
+    day: "2-digit",
+  }).formatToParts(new Date());
+  const values = Object.fromEntries(parts.map(({ type, value }) => [type, value]));
+  return `${values.year}-${values.month}-${values.day}`;
+}
+
 async function authorized() {
   if (!isAdminConfigured() && process.env.NODE_ENV === "production") return false;
   return !isAdminConfigured() || (await hasAdminSession());
@@ -52,7 +63,7 @@ export async function POST(request: Request) {
   const amount = typeof body.amount === "number" ? body.amount : Number(body.amount);
   const amountCents = Math.round(amount * 100);
 
-  if (!quoteId || !name || !email || !/^\S+@\S+\.\S+$/.test(email) || !/^\d{4}-\d{2}-\d{2}$/.test(dueDate) || dueDate < new Date().toISOString().slice(0, 10) || !Number.isSafeInteger(amountCents) || amountCents < 100 || amountCents > 10_000_000) {
+  if (!quoteId || !name || !email || !/^\S+@\S+\.\S+$/.test(email) || !/^\d{4}-\d{2}-\d{2}$/.test(dueDate) || dueDate < easternDate() || !Number.isSafeInteger(amountCents) || amountCents < 100 || amountCents > 10_000_000) {
     return Response.json({ message: "Enter a valid deposit of at least $1 and a current or future due date." }, { status: 400 });
   }
 
