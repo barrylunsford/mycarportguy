@@ -59,9 +59,6 @@ export default function AdminQuotes({ initialQuotes, editable }: Props) {
   const [invoiceDueDate, setInvoiceDueDate] = useState(localDay());
   const [invoiceNotice, setInvoiceNotice] = useState("");
   const [sendingInvoice, setSendingInvoice] = useState(false);
-  const [webhookSignatureKey, setWebhookSignatureKey] = useState("");
-  const [webhookNotice, setWebhookNotice] = useState("");
-  const [settingUpWebhook, setSettingUpWebhook] = useState(false);
   const today = localDay();
   const selected = quotes.find((quote) => quote.id === selectedId);
 
@@ -206,28 +203,6 @@ export default function AdminQuotes({ initialQuotes, editable }: Props) {
     }
   }
 
-  async function setupSquareWebhook() {
-    setSettingUpWebhook(true);
-    setWebhookNotice("Connecting Square payment updates…");
-    try {
-      const response = await fetch("/api/admin/square-webhook", { method: "POST" });
-      const result = (await response.json()) as { message?: string; signatureKey?: string };
-      if (!response.ok || !result.signatureKey) throw new Error(result.message || "Square could not create the webhook.");
-      setWebhookSignatureKey(result.signatureKey);
-      setWebhookNotice("Square payment updates are connected. Copy the signing key to finish activation.");
-    } catch (error) {
-      setWebhookNotice(error instanceof Error ? error.message : "Square could not create the webhook.");
-    } finally {
-      setSettingUpWebhook(false);
-    }
-  }
-
-  async function copyWebhookKey() {
-    if (!webhookSignatureKey) return;
-    await navigator.clipboard.writeText(webhookSignatureKey);
-    setWebhookNotice("Signing key copied.");
-  }
-
   function exportCsv() {
     const headings = ["Date", "Status", "Name", "Phone", "Email", "ZIP", "Structure", "Product", "Preferred contact", "Timeframe", "Dimensions", "Site readiness", "Details", "Private notes", "Next follow-up", "Last contacted"];
     const rows = filtered.map((quote) => [quote.createdAt, quote.status, quote.name, quote.phone, quote.email, quote.zip, quote.structure, quote.product, quote.preferredContact, quote.timeframe, quote.dimensions, quote.siteReadiness, quote.details, quote.notes, quote.nextFollowUp || "", quote.lastContactedAt || ""]);
@@ -297,11 +272,6 @@ export default function AdminQuotes({ initialQuotes, editable }: Props) {
             <button type="submit" className="admin-save" disabled={!editable || sendingInvoice}>{sendingInvoice ? "Sending…" : "Send deposit invoice"}</button>
           </form>
           <p className="admin-square-notice" role="status" aria-live="polite">{invoiceNotice}</p>
-          <div className="admin-square-webhook-tools">
-            <button type="button" className="admin-secondary" onClick={setupSquareWebhook} disabled={settingUpWebhook}>{settingUpWebhook ? "Connecting…" : "Connect automatic payment updates"}</button>
-            {webhookSignatureKey && <button type="button" className="admin-secondary" onClick={copyWebhookKey}>Copy signing key</button>}
-            <p className="admin-square-notice" role="status" aria-live="polite">{webhookNotice}</p>
-          </div>
           {selected.squareInvoiceId && <div className={`admin-square-status ${selected.squareInvoiceStatus === "PAID" ? "paid" : ""}`}>
             <strong>{selected.squareInvoiceStatus === "PAID" ? "Deposit paid" : `Invoice ${selected.squareInvoiceStatus?.toLowerCase() || "sent"}`}</strong>
             <span>{selected.squareInvoiceAmount ? `$${selected.squareInvoiceAmount.toFixed(2)}` : ""}{selected.squareInvoicePaidAt ? ` · Paid ${formatDate(selected.squareInvoicePaidAt)}` : ""}</span>
