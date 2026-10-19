@@ -267,7 +267,7 @@ export async function POST(request: Request) {
                 <tr><td style="padding:9px 0;border-bottom:1px solid #e4e8e8;font-weight:bold">Preferred contact</td><td style="padding:9px 0;border-bottom:1px solid #e4e8e8;text-align:right">${safe.preferredContact}</td></tr>
                 <tr><td style="padding:9px 0;font-weight:bold">Timeframe</td><td style="padding:9px 0;text-align:right">${safe.timeframe}</td></tr>
               </table>
-              <p style="margin:28px 0 0;line-height:1.65">Need to add something? Reply to this email, call, or text <a href="tel:+18288391730" style="color:#c95226;font-weight:bold">(828) 839-1730</a>.</p>
+              <p style="margin:28px 0 0;line-height:1.65">Need to add something? Reply to this email, call, or text <a href="tel:+18284497158" style="color:#c95226;font-weight:bold">(828) 449-7158</a>.</p>
             </div>
             <div style="padding:20px 32px;background:#eef3f3;color:#526774;font-size:12px;line-height:1.6">My Carport Guy is an online metal-building dealer. There is no public showroom or customer pickup location.</div>
           </div>
@@ -286,7 +286,7 @@ export async function POST(request: Request) {
         `Preferred contact: ${preferredContact}`,
         `Timeframe: ${timeframe}`,
         "",
-        "Need to add something? Reply to this email, call, or text (828) 839-1730.",
+        "Need to add something? Reply to this email, call, or text (828) 449-7158.",
       ].join("\n"),
     }),
   });

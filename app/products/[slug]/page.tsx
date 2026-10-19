@@ -60,7 +60,7 @@ export default async function ProductPage({ params }: Props) {
             <div className="product-hero-actions">
               <Link className="button button-builder" href={quoteUrl}>Design your building <span aria-hidden="true">→</span></Link>
               <Link className="text-link" href="/colors">Explore colors</Link>
-              <a className="text-link" href="tel:+18288391730">Call (828) 839-1730</a>
+              <a className="text-link" href="tel:+18284497158">Call (828) 449-7158</a>
             </div>
           </div>
           <div className="product-visual" aria-label={product.imageUrl ? `${product.name} image` : undefined}>

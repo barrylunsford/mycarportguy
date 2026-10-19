@@ -90,7 +90,7 @@ export default function ServiceAreasPage() {
         <section className="faq-cta service-area-cta">
           <div><strong>Is your property in the service area?</strong><span>Send your ZIP code and we&apos;ll confirm coverage and current timing.</span></div>
           <div>
-            <a className="button" href="tel:+18288391730">Call (828) 839-1730</a>
+            <a className="button" href="tel:+18284497158">Call (828) 449-7158</a>
             <Link className="button button-dark" href="/#quote">Check my ZIP code</Link>
           </div>
         </section>

@@ -84,7 +84,7 @@ export default function NorthCarolinaServiceAreaPage() {
             <span>Talk with us</span>
             <h3>Get straightforward help choosing your building.</h3>
             <p>Tell us what you want to cover, your preferred size, and where the building will be installed.</p>
-            <a href="tel:+18288391730">Call (828) 839-1730</a>
+            <a href="tel:+18284497158">Call (828) 449-7158</a>
             <a href="mailto:sales@mycarportguy.com">sales@mycarportguy.com</a>
           </aside>
         </section>

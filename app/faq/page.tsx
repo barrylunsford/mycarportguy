@@ -119,7 +119,7 @@ export default function FaqPage() {
         <section className="faq-cta">
           <div><strong>Still have a question?</strong><span>Tell us about your property and the building you have in mind.</span></div>
           <div>
-            <a className="button" href="tel:+18288391730">Call (828) 839-1730</a>
+            <a className="button" href="tel:+18284497158">Call (828) 449-7158</a>
             <Link className="button button-dark" href="/#quote">Request a quote</Link>
           </div>
         </section>

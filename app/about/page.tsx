@@ -29,7 +29,7 @@ export default function AboutPage() {
             </p>
             <div className="about-actions">
               <Link href="/#quote" className="button">Tell us about your project <span aria-hidden="true">→</span></Link>
-              <a href="tel:+18288391730" className="text-link">Call (828) 839-1730</a>
+              <a href="tel:+18284497158" className="text-link">Call (828) 449-7158</a>
             </div>
           </div>
           <aside className="about-card">

@@ -57,7 +57,7 @@ export default async function CityServiceAreaPage({ params }: PageProps) {
         <p className="eyebrow"><span />Serving {location.city}, {location.stateAbbreviation}</p>
         <h1>Metal carports, garages, and buildings for {location.city}.</h1>
         <p>{location.description} We’ll help you compare the practical options for your property and plans.</p>
-        <div className="local-area-actions"><Link className="button" href="/#quote">Check my ZIP code <span aria-hidden="true">→</span></Link><a className="text-link" href="tel:+18288391730">Call (828) 839-1730</a></div>
+        <div className="local-area-actions"><Link className="button" href="/#quote">Check my ZIP code <span aria-hidden="true">→</span></Link><a className="text-link" href="tel:+18284497158">Call (828) 449-7158</a></div>
         <p className="local-online-note">Online dealer serving {location.region}. No public showroom or customer pickup location.</p>
       </section>
       <section className="local-area-intro"><div><p className="eyebrow"><span />Plan around your property</p><h2>Start with the site, access, and local requirements.</h2></div><p>{location.planningNote}</p></section>

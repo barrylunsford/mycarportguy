@@ -92,7 +92,7 @@ export default function FinancingPage() {
               deposits, and program fees can affect the amount due. We&apos;ll help
               you get a current estimate for your exact structure and location.
             </p>
-            <a href="tel:+18288391730">Call (828) 839-1730</a>
+            <a href="tel:+18284497158">Call (828) 449-7158</a>
             <a href="mailto:sales@mycarportguy.com">sales@mycarportguy.com</a>
           </aside>
         </section>

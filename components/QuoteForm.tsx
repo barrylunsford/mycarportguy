@@ -299,8 +299,8 @@ export default function QuoteForm() {
         By submitting, you agree that we may contact you about your project.
         See our <Link href="/privacy">Privacy Policy</Link>.
       </p>
-      <a className="form-text-option" href="sms:+18288391730">
-        Prefer text? Message (828) 839-1730
+      <a className="form-text-option" href="sms:+18284497158">
+        Prefer text? Message (828) 449-7158
       </a>
       {status === "success" && (
         <div ref={confirmationRef} className="form-confirmation form-confirmation-success" role="status" aria-live="polite" tabIndex={-1}>

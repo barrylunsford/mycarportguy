@@ -32,7 +32,7 @@ export default function OpenGraphImage() {
           </div>
         </div>
         <div style={{ display: "flex", fontSize: 22, color: "#f4cab7" }}>
-          Friendly carport and metal-building help · (828) 839-1730
+          Friendly carport and metal-building help · (828) 449-7158
         </div>
       </div>
     ),

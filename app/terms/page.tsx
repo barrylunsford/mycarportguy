@@ -90,7 +90,7 @@ export default function TermsPage() {
           <p>
             We may update these terms, with the revision date shown above. Questions
             may be sent to <a href="mailto:sales@mycarportguy.com">sales@mycarportguy.com</a>
-            {" "}or <a href="tel:+18288391730">(828) 839-1730</a>.
+            {" "}or <a href="tel:+18284497158">(828) 449-7158</a>.
           </p>
         </article>
       </main>

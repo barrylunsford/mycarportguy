@@ -73,7 +73,7 @@ export default function AdminQuotes({ initialQuotes, editable }: Props) {
       selected.trimColor && `trim: ${selected.trimColor}`,
       selected.wallColor && `walls: ${selected.wallColor}`,
     ].filter(Boolean).join(", ") || "Not selected yet";
-    const signature = "Thanks,\nMy Carport Guy\n(828) 839-1730\nsales@mycarportguy.com";
+    const signature = "Thanks,\nMy Carport Guy\n(828) 449-7158\nsales@mycarportguy.com";
 
     return [
       {

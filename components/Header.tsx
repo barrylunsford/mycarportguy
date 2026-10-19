@@ -15,7 +15,7 @@ export default function Header() {
     <header className="site-header">
       <div className="announcement">
         <p>Your local source for carports and metal buildings.</p>
-        <a href="tel:+18288391730">Call (828) 839-1730</a>
+        <a href="tel:+18284497158">Call (828) 449-7158</a>
       </div>
 
       <div className="nav-shell">
@@ -53,7 +53,7 @@ export default function Header() {
                 {item.label}
               </Link>
             ))}
-            <a href="tel:+18288391730">Call (828) 839-1730</a>
+            <a href="tel:+18284497158">Call (828) 449-7158</a>
           </nav>
         </details>
       </div>

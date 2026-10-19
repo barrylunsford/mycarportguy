@@ -105,7 +105,7 @@ export default function PrivacyPage() {
           <h2>Contact us</h2>
           <p>
             Email <a href="mailto:sales@mycarportguy.com">sales@mycarportguy.com</a>
-            {" "}or call <a href="tel:+18288391730">(828) 839-1730</a>.
+            {" "}or call <a href="tel:+18284497158">(828) 449-7158</a>.
           </p>
         </article>
       </main>
