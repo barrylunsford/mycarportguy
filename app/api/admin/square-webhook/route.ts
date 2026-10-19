@@ -21,11 +21,13 @@ export async function POST() {
       headers: { Authorization: `Bearer ${token}`, "Content-Type": "application/json", "Square-Version": squareVersion },
       body: JSON.stringify({
         idempotency_key: crypto.randomUUID(),
-        name: "My Carport Guy invoice status",
-        enabled: true,
-        notification_url: "https://www.mycarportguy.com/api/webhooks/square",
-        api_version: squareVersion,
-        event_types: ["invoice.canceled", "invoice.payment_made", "invoice.refunded", "invoice.updated"],
+        subscription: {
+          name: "My Carport Guy invoice status",
+          enabled: true,
+          notification_url: "https://www.mycarportguy.com/api/webhooks/square",
+          api_version: squareVersion,
+          event_types: ["invoice.canceled", "invoice.payment_made", "invoice.refunded", "invoice.updated"],
+        },
       }),
       cache: "no-store",
     });
