@@ -2,14 +2,13 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import Header from "@/components/Header";
 import QuoteForm from "@/components/QuoteForm";
-import Image from "next/image";
 import { getProducts } from "@/lib/products";
 
 export const dynamic = "force-dynamic";
 
 export const metadata: Metadata = {
   title: { absolute: "My Carport Guy | Carports, Garages, Barns & RV Covers" },
-  description: "My Carport Guy helps you shop and customize metal carports, garages, barns, RV covers, and steel buildings across 21 states.",
+  description: "My Carport Guy helps you shop and customize metal carports, garages, barns, RV covers, and steel buildings.",
   alternates: { canonical: "/" },
   openGraph: {
     url: "/",
@@ -25,40 +24,9 @@ const benefits = [
   "Delivery & installation",
 ];
 
-const serviceStates = [
-  "Alabama",
-  "Arkansas",
-  "Colorado",
-  "Florida",
-  "Georgia",
-  "Illinois",
-  "Indiana",
-  "Kansas",
-  "Kentucky",
-  "Louisiana",
-  "Mississippi",
-  "Missouri",
-  "New Mexico",
-  "North Carolina",
-  "Ohio",
-  "Oklahoma",
-  "South Carolina",
-  "Tennessee",
-  "Texas",
-  "Virginia",
-  "West Virginia",
-];
-
 export default async function Home() {
   const products = await getProducts();
   const structures = products.filter((product) => product.featured);
-  const heroImage = products.find((product) => product.id === "sku-fb30")?.imageUrl;
-  const representativeImages: Record<string, string> = {
-    carports: "sku-fb13",
-    garages: "sku-fb30",
-    "rv-covers": "sku-fb51",
-    "barns-buildings": "sku-fb196",
-  };
 
   return (
     <>
@@ -71,7 +39,7 @@ export default async function Home() {
           <div className="hero-content">
             <p className="eyebrow light-eyebrow">
               <span />
-              Your local Eagle Carports dealer
+              Friendly metal-building guidance
             </p>
             <h1>
               More than a building.
@@ -107,11 +75,6 @@ export default async function Home() {
           </div>
 
           <div className="hero-visual" aria-hidden="true">
-            {heroImage ? (
-              // This photo is decorative; the adjacent hero copy describes the offering.
-              // eslint-disable-next-line @next/next/no-img-element
-              <img src={heroImage} alt="" />
-            ) : null}
             <p className="visual-caption">Designed around your property</p>
           </div>
         </section>
@@ -123,19 +86,6 @@ export default async function Home() {
               {benefit}
             </div>
           ))}
-        </section>
-
-        <section className="eagle-partner" aria-label="Eagle Carports dealer information">
-          <div>
-            <span className="eagle-wordmark">EAGLE CARPORTS</span>
-            <p>
-              My Carport Guy is your local dealer. Eagle Carports manufactures,
-              delivers, and installs your selected metal structure.
-            </p>
-          </div>
-          <a href="/colors" className="text-link">
-            Explore building colors <span aria-hidden="true">→</span>
-          </a>
         </section>
 
         <section className="section structures-section" id="structures">
@@ -163,14 +113,7 @@ export default async function Home() {
                 aria-label={structure.name}
               >
                 <div className="card-art" aria-hidden="true">
-                  {products.find((product) => product.id === representativeImages[structure.id])?.imageUrl ? (
-                    // These catalog photos are decorative here; the link already has an accessible name.
-                    // eslint-disable-next-line @next/next/no-img-element
-                    <img
-                      src={products.find((product) => product.id === representativeImages[structure.id])?.imageUrl}
-                      alt=""
-                    />
-                  ) : null}
+                  <span className="structure-card-mark">{structure.name.slice(0, 1)}</span>
                 </div>
                 <div className="card-body">
                   <h3>{structure.name}<span className="card-arrow" aria-hidden="true">→</span></h3>
@@ -216,8 +159,8 @@ export default async function Home() {
             <li>
               <span>3</span>
               <div>
-                <h3>Eagle delivers and installs</h3>
-                <p>Once your site is ready and the order is scheduled, an Eagle Carports crew delivers and installs the structure.</p>
+                <h3>Confirm delivery and installation</h3>
+                <p>We&apos;ll review the manufacturer&apos;s current delivery, site, and installation details with you before the order is placed.</p>
               </div>
             </li>
           </ol>
@@ -280,12 +223,11 @@ export default async function Home() {
               <span />
               Carport and metal-building service area
             </p>
-            <h2>Delivery and installation across 21 states.</h2>
+            <h2>We&apos;ll confirm availability for your property.</h2>
             <p>
-              Delivery and installation are available across the South, Southeast,
-              Midwest, and Southwest. Share your ZIP code and we&apos;ll confirm
-              product availability, delivery details, and requirements for your
-              exact location.
+              Product availability, delivery, installation, and site requirements
+              vary by manufacturer and location. Share your ZIP code and we&apos;ll
+              confirm the current options for your property.
             </p>
             <a href="#quote" className="button">
               Check my ZIP code <span aria-hidden="true">→</span>
@@ -294,52 +236,15 @@ export default async function Home() {
               North Carolina service details <span aria-hidden="true">→</span>
             </Link>
           </div>
-          <div className="service-map">
-            <Image
-              src="/service-area-map-brand.png"
-              alt="Eagle Carports service area covering 21 states from Colorado and New Mexico through the Midwest, South, and East Coast"
-              width={1429}
-              height={1101}
-              sizes="(max-width: 900px) 100vw, 58vw"
-            />
-            <details>
-              <summary>View all covered states</summary>
-              <ul>
-                {serviceStates.map((state) => (
-                  <li key={state}>{state}</li>
-                ))}
-              </ul>
-            </details>
+          <div className="service-availability-card">
+            <strong>What we&apos;ll verify</strong>
+            <ul>
+              <li>Products available for your ZIP code</li>
+              <li>Current delivery and installation terms</li>
+              <li>Site, permit, wind, and snow requirements</li>
+              <li>Estimated lead time for your selected building</li>
+            </ul>
           </div>
-          <details className="lead-time-card">
-            <summary>
-              <span>
-                <strong>Estimated installation lead times</strong>
-                <small>Eagle Carports map · January 2026</small>
-              </span>
-              <span className="lead-time-action">View map</span>
-            </summary>
-            <div className="lead-time-content">
-              <p>
-                Estimates vary by location and may change. Lead time typically
-                begins after the installation site is ready and all required
-                permits have been obtained.
-              </p>
-              <div className="lead-time-scroll">
-                <Image
-                  src="/eagle-lead-time-map-jan-2026.png"
-                  alt="Eagle Carports estimated installation lead-time map dated January 2026, with regional estimates ranging from 2 to 15 weeks"
-                  width={2560}
-                  height={1707}
-                  sizes="(max-width: 900px) 1200px, 1200px"
-                />
-              </div>
-              <p className="lead-time-note">
-                For the latest estimate for your ZIP code, contact My Carport
-                Guy before ordering.
-              </p>
-            </div>
-          </details>
         </section>
 
         <section className="section financing-section" id="financing">
@@ -352,12 +257,12 @@ export default async function Home() {
           </div>
           <div>
             <p>
-              Eagle Carports offers payment on delivery, traditional financing,
-              and rent-to-own options. Eligibility, terms, and availability
-              vary.
+              Payment and financing options depend on the building and provider.
+              We&apos;ll show you the current choices and written terms before you
+              commit.
             </p>
             <a href="/financing" className="text-link">
-              Explore rent-to-own <span aria-hidden="true">→</span>
+              Explore payment options <span aria-hidden="true">→</span>
             </a>
           </div>
         </section>
@@ -404,8 +309,7 @@ export default async function Home() {
             <a href="/terms">Terms</a>
           </div>
           <p>
-            © {new Date().getFullYear()} My Carport Guy LLC. Eagle Carports is a
-            separate manufacturer.
+            © {new Date().getFullYear()} My Carport Guy LLC. All rights reserved.
           </p>
         </div>
       </footer>

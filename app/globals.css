@@ -126,10 +126,6 @@ h1 em { color: #f39a72; font-style: normal; }
 .trust-strip div { display: flex; justify-content: center; align-items: center; gap: 12px; color: #3b505f; font-size: 13px; font-weight: 750; border-right: 1px solid var(--line); }
 .trust-strip div:last-child { border: 0; }
 .trust-strip span { width: 22px; height: 22px; display: grid; place-items: center; border-radius: 50%; background: #e1eee7; color: #3c7b5d; font-size: 11px; }
-.eagle-partner { padding: 30px max(28px,calc((100vw - 1240px)/2)); display: flex; align-items: center; justify-content: space-between; gap: 40px; background: #eef2ef; border-bottom: 1px solid var(--line); }
-.eagle-partner > div { display: flex; align-items: center; gap: 25px; }
-.eagle-partner p { max-width: 650px; margin: 0; color: var(--muted); font-size: 13px; line-height: 1.6; }
-.eagle-wordmark { padding-right: 25px; border-right: 1px solid #cbd3d0; color: var(--navy); font-family: var(--font-display); font-size: 17px; font-weight: 900; letter-spacing: .08em; white-space: nowrap; }
 .section { padding: 110px max(28px,calc((100vw - 1240px)/2)); }
 .structures-section { background: var(--paper); }
 .section-heading h2, .process-intro h2, .why-copy h2, .financing-section h2, .quote-section h2 {
@@ -143,6 +139,7 @@ h1 em { color: #f39a72; font-style: normal; }
 .structure-card:focus-visible { outline: 3px solid var(--orange); outline-offset: 4px; }
 .card-art { height: 205px; position: relative; overflow: hidden; background: #dce8e8; }
 .card-art img { width: 100%; height: 100%; display: block; object-fit: cover; object-position: center; transition: transform .4s ease; }
+.structure-card-mark { width: 82px; height: 82px; position: absolute; inset: 50% auto auto 50%; display: grid; place-items: center; transform: translate(-50%,-50%); border: 2px solid rgba(255,255,255,.8); border-radius: 50%; background: var(--navy); color: white; font-family: var(--font-display); font-size: 34px; font-weight: 900; box-shadow: 0 14px 35px rgba(6,29,48,.18); }
 .structure-card:hover .card-art img { transform: scale(1.035); }
 .card-body { padding: 25px 24px 27px; }
 .card-body h3 { margin: 0; display: flex; align-items: center; justify-content: space-between; gap: 14px; color: var(--navy); font-size: 22px; }
@@ -774,7 +771,6 @@ footer p:last-child { text-align: right; }
   footer { grid-template-columns: 1fr; }
   footer p:last-child { text-align: left; }
   .footer-legal { align-items: flex-start; }
-  .eagle-partner { align-items: flex-start; flex-direction: column; }
   .product-hero, .product-details { grid-template-columns: 1fr; }
   .product-hero > div:first-child { padding: 75px 28px; }
   .product-visual { min-height: 420px; }
@@ -833,8 +829,6 @@ footer p:last-child { text-align: right; }
   .building { width: 75%; left: 9%; }
   .trust-strip { padding: 22px 20px; grid-template-columns: 1fr; }
   .trust-strip div { justify-content: flex-start; border-right: 0; }
-  .eagle-partner > div { align-items: flex-start; flex-direction: column; gap: 14px; }
-  .eagle-wordmark { padding: 0 0 13px; border-right: 0; border-bottom: 1px solid #cbd3d0; }
   .split-heading { gap: 24px; }
   .structure-grid { grid-template-columns: 1fr; }
   .card-body p { min-height: auto; }
@@ -943,6 +937,15 @@ footer p:last-child { text-align: right; }
   html { scroll-behavior: auto; }
   *, *::before, *::after { transition-duration: .01ms !important; }
 }
+
+.service-availability-card { padding: 34px; border: 1px solid var(--line); border-radius: 12px; background: #eef4f2; color: var(--navy); }
+.service-availability-card strong { display: block; margin-bottom: 18px; font-size: 22px; }
+.service-availability-card ul { margin: 0; padding-left: 22px; display: grid; gap: 12px; color: var(--muted); line-height: 1.5; }
+.color-swatch-grid { display: grid; grid-template-columns: repeat(4,minmax(0,1fr)); gap: 16px; }
+.color-swatch { overflow: hidden; border: 1px solid var(--line); border-radius: 10px; background: white; }
+.color-swatch > span { display: block; height: 110px; }
+.color-swatch strong { display: block; padding: 14px; color: var(--navy); font-size: 14px; }
+@media (max-width: 580px) { .color-swatch-grid { grid-template-columns: 1fr 1fr; } }
 
 /* Lead tracker */
 .lead-queue { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; padding: 0 22px 18px; }

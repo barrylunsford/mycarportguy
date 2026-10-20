@@ -14,7 +14,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   if (!product) return { title: "Product not found" };
   return {
     title: `${product.name} | Metal Building`,
-    description: `${product.summary} View details and request current pricing from My Carport Guy, an Eagle Carports dealer.`,
+    description: `${product.summary} View details and request current pricing from My Carport Guy.`,
     alternates: { canonical: `/products/${product.slug}` },
     openGraph: {
       type: "website",

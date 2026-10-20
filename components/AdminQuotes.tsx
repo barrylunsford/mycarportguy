@@ -265,7 +265,7 @@ export default function AdminQuotes({ initialQuotes, editable }: Props) {
           </div>
         </section>
         <section className="admin-square-invoice" aria-labelledby="square-invoice-heading">
-          <div><span>Square deposit invoice</span><h2 id="square-invoice-heading">Collect the required deposit</h2><p>Square emails the customer a secure invoice and payment page. Enter only the deposit Eagle requires, not the building&apos;s full price.</p></div>
+          <div><span>Square deposit invoice</span><h2 id="square-invoice-heading">Collect the required deposit</h2><p>Square emails the customer a secure invoice and payment page. Enter only the deposit shown in the customer&apos;s order, not the building&apos;s full price.</p></div>
           <form onSubmit={sendDepositInvoice}>
             <label>Deposit amount ($)<input type="number" min="1" max="100000" step="0.01" inputMode="decimal" value={invoiceAmount} onChange={(event) => setInvoiceAmount(event.target.value)} placeholder="500.00" required /></label>
             <label>Due date<input type="date" min={today} value={invoiceDueDate} onChange={(event) => setInvoiceDueDate(event.target.value)} required /></label>

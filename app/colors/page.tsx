@@ -1,83 +1,32 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import Header from "@/components/Header";
-import ColorVisualizer from "@/components/ColorVisualizer";
 
 export const metadata: Metadata = {
-  title: "Metal Building Color Visualizer",
-  description:
-    "Use My Carport Guy's interactive visualizer to compare roof, trim, and wall colors for carports and metal buildings.",
+  title: "Metal Building Colors",
+  description: "Explore popular metal-building color families and request current roof, trim, and wall color options from My Carport Guy.",
   alternates: { canonical: "/colors" },
-  openGraph: {
-    url: "/colors",
-    title: "Metal Building Color Visualizer | My Carport Guy",
-    description:
-      "Compare metal-building color combinations with My Carport Guy and start planning your carport, garage, barn, or RV cover.",
-  },
 };
+
+const colors = [
+  ["Evergreen", "#244f3b"], ["Bright White", "#f1f0e8"], ["Barn Red", "#87352e"],
+  ["Clay", "#9b856a"], ["Black", "#202224"], ["Tan", "#c7b698"],
+  ["Pewter Gray", "#7c8588"], ["Gallery Blue", "#315c74"],
+];
 
 export default function ColorsPage() {
   return (
-    <>
-      <Header />
-      <main id="main-content" className="colors-page">
-        <section className="colors-hero">
-          <div>
-            <p className="eyebrow"><span />Make it yours</p>
-            <h1>Choose colors that feel at home on your property.</h1>
-            <p>
-              Coordinate the roof, trim, and walls of your metal
-              building. Start with one of these popular combinations, then
-              share your choices when you request a quote.
-            </p>
-            <a className="button" href="#color-visualizer">
-              Try the color visualizer <span aria-hidden="true">↓</span>
-            </a>
-          </div>
-          <div className="colors-hero-palette" aria-hidden="true">
-            <span style={{ background: "#244f3b" }} />
-            <span style={{ background: "#f1f0e8" }} />
-            <span style={{ background: "#87352e" }} />
-            <span style={{ background: "#9b856a" }} />
-            <span style={{ background: "#202224" }} />
-            <span style={{ background: "#c7b698" }} />
-            <div>
-              <small>ROOF</small><strong>TRIM</strong><em>WALLS</em>
-            </div>
-          </div>
-        </section>
-
-        <ColorVisualizer />
-
-        <section className="colors-guide">
-          <div>
-            <p className="eyebrow"><span />Before you decide</p>
-            <h2>See the colors in context.</h2>
-          </div>
-          <ol>
-            <li><span>1</span><div><strong>Compare combinations</strong><p>Choose a starting point for the roof, trim, and walls.</p></div></li>
-            <li><span>2</span><div><strong>Design your building</strong><p>Use Eagle&apos;s 3D Builder to see colors on the structure you want.</p></div></li>
-            <li><span>3</span><div><strong>Confirm before ordering</strong><p>Ask for current availability or a physical color sample when an exact match matters.</p></div></li>
-          </ol>
-        </section>
-
-        <aside className="colors-note">
-          <strong>Color note</strong>
-          <p>
-            On-screen colors are approximate and can vary by display. Two-tone
-            matching may be an upgraded option. Final colors and availability
-            should be confirmed before ordering.
-          </p>
-        </aside>
-
-        <section className="colors-cta">
-          <div><strong>Ready to build your combination?</strong><span>Browse structures or tell us what you have in mind.</span></div>
-          <div>
-            <Link href="/buildings" className="text-link">Browse buildings <span aria-hidden="true">→</span></Link>
-            <Link href="/#quote" className="button">Request a quote <span aria-hidden="true">→</span></Link>
-          </div>
-        </section>
-      </main>
-    </>
+    <><Header /><main id="main-content" className="colors-page">
+      <section className="colors-hero">
+        <div><p className="eyebrow"><span />Make it yours</p><h1>Choose colors that feel at home on your property.</h1><p>Explore popular color families for the roof, trim, and walls. Available names and finishes vary by manufacturer, so we&apos;ll confirm the current palette for your selected building.</p><Link className="button" href="/#quote">Request current colors <span aria-hidden="true">→</span></Link></div>
+        <div className="colors-hero-palette" aria-hidden="true">{colors.slice(0, 6).map(([name, hex]) => <span key={name} style={{ background: hex }} />)}<div><small>ROOF</small><strong>TRIM</strong><em>WALLS</em></div></div>
+      </section>
+      <section className="colors-guide" id="color-options">
+        <div><p className="eyebrow"><span />Popular color families</p><h2>Find a direction you like.</h2><p>These swatches are planning references. Your final quote will show the colors available for your building.</p></div>
+        <div className="color-swatch-grid">{colors.map(([name, hex]) => <div className="color-swatch" key={name}><span style={{ background: hex }} aria-hidden="true" /><strong>{name}</strong></div>)}</div>
+      </section>
+      <aside className="colors-note"><strong>Color note</strong><p>On-screen colors are approximate and can vary by display. Final colors, finishes, and availability should be confirmed before ordering. Ask for a physical sample when an exact match matters.</p></aside>
+      <section className="colors-cta"><div><strong>Ready to choose your building?</strong><span>Browse structures or tell us what you have in mind.</span></div><div><Link href="/buildings" className="text-link">Browse buildings <span aria-hidden="true">→</span></Link><Link href="/#quote" className="button">Request a quote <span aria-hidden="true">→</span></Link></div></section>
+    </main></>
   );
 }

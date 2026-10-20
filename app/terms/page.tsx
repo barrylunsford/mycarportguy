@@ -42,9 +42,9 @@ export default function TermsPage() {
 
           <h2>Dealer and manufacturer roles</h2>
           <p>
-            My Carport Guy is an independent dealer. Eagle Carports is a separate
-            manufacturer and is responsible for the products, delivery, and
-            installation it agrees to provide under its applicable order terms.
+            My Carport Guy is an independent dealer. The manufacturer identified
+            in your written order is responsible for the products, delivery, and
+            installation it agrees to provide under its applicable terms.
           </p>
 
           <h2>Site preparation and permits</h2>
@@ -73,8 +73,8 @@ export default function TermsPage() {
           <h2>Trademarks and content</h2>
           <p>
             My Carport Guy website content may not be copied or reused without
-            permission. Eagle Carports names and marks belong to their respective
-            owner and are used to identify the manufacturer and its products.
+            permission. Manufacturer names and marks belong to their respective
+            owners and are used only to identify applicable products or services.
           </p>
 
           <h2>Disclaimer and limitation</h2>

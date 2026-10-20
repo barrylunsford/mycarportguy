@@ -263,7 +263,7 @@ export default function AdminDashboard({ initialProducts, initialQuotes, editabl
                     type="url"
                     value={selected.designUrl}
                     onChange={(e) => updateSelected({ designUrl: e.target.value })}
-                    placeholder="https://build.eaglecarports.com/your-prebuilt-design"
+                    placeholder="https://manufacturer.example/your-prebuilt-design"
                     disabled={!editable}
                   />
                   <small>Customers will use this link to open and customize this exact structure.</small>

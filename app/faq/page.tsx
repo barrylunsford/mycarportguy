@@ -16,11 +16,11 @@ export const metadata: Metadata = {
 const faqs = [
   {
     question: "What does My Carport Guy do?",
-    answer: "My Carport Guy is an independent Eagle Carports dealer. We help you compare building types, sizes, colors, options, and payment choices, then assist with preparing and submitting the order. Eagle Carports manufactures the building and coordinates delivery and installation.",
+    answer: "My Carport Guy is an independent online metal-building dealer. We help you compare building types, sizes, colors, options, and payment choices, then identify the available product and manufacturer that fit your project.",
   },
   {
     question: "How does the ordering process work?",
-    answer: "We begin with your intended use, dimensions, location, colors, and options. After you approve the building and place the required down payment, the order is submitted to Eagle Carports for review. Eagle then confirms the order, discusses site requirements, schedules the route, manufactures the components, and sends an installation crew.",
+    answer: "We begin with your intended use, dimensions, location, colors, and options. After we confirm availability and you approve the written quote, the applicable manufacturer reviews the order, confirms site requirements, and provides delivery and installation details.",
   },
   {
     question: "Do I need a permit?",
@@ -28,11 +28,11 @@ const faqs = [
   },
   {
     question: "How should I prepare the installation site?",
-    answer: "The site must be cleared, accessible, and level before the crew arrives. Mark underground water, gas, electric, and other utility lines; 811 can help locate public utilities. Remove vehicles, debris, branches, and overhead obstructions, and allow working room around the building. Eagle currently requests at least 36 inches of clearance around enclosed structures.",
+    answer: "The site generally must be cleared, accessible, and level before the crew arrives. Mark underground water, gas, electric, and other utility lines; 811 can help locate public utilities. Remove vehicles, debris, branches, and overhead obstructions, and follow the clearance requirements in your final order.",
   },
   {
     question: "What should I know about a concrete pad?",
-    answer: "Eagle's current guidance says a concrete pad should extend at least two inches beyond the frame on every side. For example, a 20-by-30-foot frame would need a 20-foot-4-inch by 30-foot-4-inch pad. Foundation and footer requirements can vary by building and local code, so confirm the final dimensions before concrete is poured.",
+    answer: "Foundation and footer requirements vary by building, manufacturer, and local code. Do not pour concrete from a preliminary estimate. Confirm the final frame dimensions, engineered requirements, and written foundation instructions first.",
   },
   {
     question: "Does the price include site preparation or concrete?",
@@ -40,15 +40,15 @@ const faqs = [
   },
   {
     question: "How long does delivery take?",
-    answer: "Lead times vary by state, manufacturing facility, order volume, weather, permitting, and site readiness. The estimate begins once the order is complete and the site is ready. We will check the latest Eagle scheduling information for your ZIP code rather than promise a fixed date.",
+    answer: "Lead times vary by manufacturer, location, order volume, weather, permitting, and site readiness. We will request the latest scheduling estimate for your ZIP code rather than promise a fixed date.",
   },
   {
     question: "How long does installation take?",
-    answer: "Eagle says installation can range from about an hour for a small structure to as long as two days for a larger or more complex building. Weather, access, site conditions, and the final configuration can affect the schedule.",
+    answer: "Installation time depends on the building size and complexity, weather, access, and site conditions. The manufacturer or installer will provide the best estimate for your confirmed order.",
   },
   {
     question: "Is installation included?",
-    answer: "Standard delivery and installation are included with many Eagle buildings on a properly prepared, level, and accessible site, subject to the terms and restrictions in the final order. Your quote will identify any options, upgrades, or site conditions that could add cost.",
+    answer: "Delivery and installation terms vary by product and manufacturer. Your written quote and order will identify what is included and any options, upgrades, travel charges, or site conditions that could add cost.",
   },
   {
     question: "When is payment due?",
@@ -56,11 +56,11 @@ const faqs = [
   },
   {
     question: "Are financing and rent-to-own available?",
-    answer: "Yes. Eagle offers traditional financing and rent-to-own programs in addition to payment on delivery. Approval, terms, limits, and state availability vary. We can help you compare the options, but the finance or rent-to-own provider makes the approval decision.",
+    answer: "Options may be available depending on the product, manufacturer, provider, and state. We can share the current choices for your project, but any third-party provider makes the approval decision and controls the terms.",
   },
   {
     question: "What warranties are available?",
-    answer: "Eagle currently lists a 90-day workmanship warranty and a 20-year limited warranty on qualifying painted sheet-metal panels, subject to maintenance requirements, roof style, building length, alterations, and other exclusions. Warranty coverage can differ by building, so the written warranty and signed order control.",
+    answer: "Warranty coverage differs by building and manufacturer. We will provide the applicable written warranty before ordering; that warranty and your signed order control the coverage, maintenance requirements, and exclusions.",
   },
   {
     question: "Can I customize the building?",

@@ -81,7 +81,7 @@ const siteStructuredData = {
       url: "https://www.mycarportguy.com/",
       telephone: "+1-828-449-7158",
       email: "sales@mycarportguy.com",
-      description: "Independent Eagle Carports dealer helping customers choose, customize, and order metal carports, garages, RV covers, barns, and other steel buildings.",
+      description: "Independent metal-building dealer helping customers choose, customize, and order metal carports, garages, RV covers, barns, and other steel buildings.",
       contactPoint: {
         "@type": "ContactPoint",
         telephone: "+1-828-449-7158",

@@ -57,10 +57,9 @@ export default function AboutPage() {
               high-pressure sales pitch.
             </p>
             <p>
-              My Carport Guy is an independent Eagle Carports dealer. Eagle
-              manufactures the structure and coordinates delivery and installation;
-              My Carport Guy helps you choose the right configuration and prepare
-              an accurate order.
+              My Carport Guy is an independent online metal-building dealer. We
+              help you compare available structures, choose the right configuration,
+              and understand the manufacturer&apos;s written terms before you order.
             </p>
           </div>
         </section>

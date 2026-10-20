@@ -46,8 +46,8 @@ export default function NorthCarolinaServiceAreaPage() {
           <h1>Metal carports and buildings made for North Carolina properties.</h1>
           <p>
             My Carport Guy helps North Carolina customers compare, customize,
-            and order Eagle Carports structures. Eagle Carports handles delivery
-            and professional installation at your prepared site.
+            and order metal structures. We confirm the available manufacturer,
+            delivery terms, and installation details for your prepared site.
           </p>
         </section>
 

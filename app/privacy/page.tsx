@@ -70,7 +70,7 @@ export default function PrivacyPage() {
             We do not sell your personal information. We may share information
             with service providers that help operate the website and deliver
             email. If you proceed with a purchase, relevant project information
-            may be shared with Eagle Carports and other providers involved in
+            may be shared with manufacturers and other providers involved in
             quoting, financing, scheduling, delivery, or installation.
           </p>
 
