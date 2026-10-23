@@ -41,6 +41,26 @@ export default function ServiceAreasPage() {
           <ul><li><strong>Availability</strong><span>Confirm the building and options offered in your area.</span></li><li><strong>Requirements</strong><span>Check local permits, setbacks, and engineering needs.</span></li><li><strong>Timing</strong><span>Get the current estimated installation window for your ZIP code.</span></li></ul>
         </section>
 
+        <section className="lead-time-regions" aria-labelledby="lead-time-heading">
+          <div className="service-state-heading">
+            <p className="eyebrow"><span />Current scheduling guide</p>
+            <h2 id="lead-time-heading">Estimated standard-building lead times.</h2>
+            <p>These regional estimates were updated October 8, 2026. They are planning ranges, not guaranteed installation dates.</p>
+          </div>
+          <div className="lead-time-grid">
+            <article><strong>1–3 weeks</strong><p>Michigan, Indiana, and Ohio</p></article>
+            <article><strong>2–4 weeks</strong><p>Minnesota, Wisconsin, Illinois, Missouri, Pennsylvania, West Virginia, Kentucky, Tennessee, Arizona, New Mexico, Utah, and Colorado</p></article>
+            <article><strong>3–5 weeks</strong><p>Kansas, Oklahoma, Texas, Arkansas, Louisiana, Mississippi, New York, Massachusetts, New Jersey, and Maryland</p></article>
+            <article><strong>2–6 weeks</strong><p>Oregon and Iowa</p></article>
+            <article><strong>1–4 weeks</strong><p>Parts of California and Nevada</p></article>
+            <article><strong>3–6 weeks</strong><p>Washington and designated parts of California and Nevada</p></article>
+          </div>
+          <aside className="lead-time-notice">
+            <strong>Wide-span buildings: approximately 4–6 weeks.</strong>
+            <p>Lead time begins after required permits are obtained or confirmed unnecessary, the installation site is fully prepared, and any concrete foundation is fully cured. Weather, plans, permits, seasonal conditions, and order volume can change these estimates.</p>
+          </aside>
+        </section>
+
         <section className="faq-cta service-area-cta">
           <div><strong>Want us to check your property?</strong><span>Send your ZIP code and we&apos;ll research current availability.</span></div>
           <div><a className="button" href="tel:+18284497158">Call (828) 449-7158</a><Link className="button button-dark" href="/#quote">Check my ZIP code</Link></div>

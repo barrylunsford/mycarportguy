@@ -235,6 +235,9 @@ export default async function Home() {
             <Link href="/service-areas/north-carolina" className="text-link">
               North Carolina service details <span aria-hidden="true">→</span>
             </Link>
+            <Link href="/service-areas#lead-time-heading" className="text-link">
+              View current lead-time estimates <span aria-hidden="true">→</span>
+            </Link>
           </div>
           <div className="service-availability-card">
             <strong>What we&apos;ll verify</strong>
