@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { buildingDesignerUrl } from "@/lib/building-designer";
 
 const navigation = [
   { label: "Browse buildings", href: "/buildings" },
@@ -30,6 +31,7 @@ export default function Header() {
         </Link>
 
         <nav className="desktop-nav" aria-label="Main navigation">
+          <a href={buildingDesignerUrl} target="_blank" rel="noopener noreferrer">3D designer <span className="sr-only">(opens in a new tab)</span></a>
           {navigation.map((item) => (
             <Link key={item.href} href={item.href}>
               {item.label}
@@ -48,6 +50,7 @@ export default function Header() {
             <span />
           </summary>
           <nav aria-label="Mobile navigation">
+            <a href={buildingDesignerUrl} target="_blank" rel="noopener noreferrer">3D designer <span className="sr-only">(opens in a new tab)</span></a>
             {navigation.map((item) => (
               <Link key={item.href} href={item.href}>
                 {item.label}

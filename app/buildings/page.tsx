@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { buildingDesignerUrl } from "@/lib/building-designer";
 import Header from "@/components/Header";
 import BuildingCatalog from "@/components/BuildingCatalog";
 import { getProducts } from "@/lib/products";
@@ -50,7 +51,7 @@ export default async function BuildingsPage() {
           <h1>Start with an idea. Make the building your own.</h1>
           <p>Choose a structure type, explore examples by size and features, then tell us how you want yours configured. The buildings shown here are starting points—not your only choices.</p>
           <div className="catalog-hero-actions">
-            <Link className="button" href="/#quote">Design your building <span aria-hidden="true">→</span></Link>
+            <a className="button" href={buildingDesignerUrl} target="_blank" rel="noopener noreferrer">Design your building <span className="sr-only">(opens in a new tab)</span><span aria-hidden="true">↗</span></a>
             <Link className="text-link" href="/colors">Explore available colors</Link>
           </div>
         </section>

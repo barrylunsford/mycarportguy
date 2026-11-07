@@ -2,6 +2,7 @@
 
 import { useMemo, useState } from "react";
 import Link from "next/link";
+import { buildingDesignerUrl } from "@/lib/building-designer";
 import type { Product } from "@/lib/products";
 
 type Props = { products: Product[] };
@@ -125,9 +126,9 @@ export default function BuildingCatalog({ products }: Props) {
                   <button type="button" onClick={() => chooseBuildingType(item.category)} aria-pressed={category === item.category}>
                     Explore examples
                   </button>
-                  <Link href={`/?structure=${encodeURIComponent(item.structure)}#quote`}>
-                    Design yours <span aria-hidden="true">→</span>
-                  </Link>
+                  <a href={buildingDesignerUrl} target="_blank" rel="noopener noreferrer">
+                    Design yours <span className="sr-only">(opens in a new tab)</span><span aria-hidden="true">↗</span>
+                  </a>
                 </div>
               </article>
             );
