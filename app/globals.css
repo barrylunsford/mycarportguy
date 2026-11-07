@@ -975,3 +975,8 @@ footer p:last-child { text-align: right; }
 .lead-add form { display: grid; gap: 12px; margin-top: 16px; font-size: 13px; }
 .lead-add label { display: grid; gap: 5px; }
 .lead-add input, .lead-add textarea { width: 100%; padding: 10px; border: 1px solid #ccd5d7; border-radius: 6px; background: white; color: var(--navy); }
+
+/* Real building photography */
+.product-visual.has-photo::after { display: none; }
+.product-visual.has-photo img { position: absolute; inset: 0; }
+.structure-photo-note { color: var(--muted); line-height: 1.6; margin: 0 0 24px; }

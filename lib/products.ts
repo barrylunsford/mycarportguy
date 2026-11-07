@@ -24,6 +24,14 @@ export type Product = {
   sortOrder: number;
 };
 
+// Default category photos also cover catalogs loaded from hosted storage.
+const categoryPhotos: Record<string, string> = {
+  carports: "/images/buildings/carports.webp",
+  garages: "/images/buildings/garages.webp",
+  "rv-covers": "/images/buildings/rv-covers.webp",
+  "barns-buildings": "/images/buildings/barns-buildings.webp",
+};
+
 const productsPath = path.join(process.cwd(), "data", "products.json");
 
 function remoteCatalogConfig() {
@@ -59,7 +67,12 @@ export async function getProducts(options?: { includeHidden?: boolean }) {
     ? products
     : products.filter((product) => product.published);
 
-  return filtered.sort((a, b) => a.sortOrder - b.sortOrder);
+  return filtered
+    .map((product) => ({
+      ...product,
+      imageUrl: product.imageUrl || categoryPhotos[product.slug] || "",
+    }))
+    .sort((a, b) => a.sortOrder - b.sortOrder);
 }
 
 export async function getProduct(slug: string) {

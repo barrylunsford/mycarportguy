@@ -64,11 +64,11 @@ export default async function ProductPage({ params }: Props) {
               <a className="text-link" href="tel:+18284497158">Call (828) 449-7158</a>
             </div>
           </div>
-          <div className="product-visual" aria-label={product.imageUrl ? `${product.name} image` : undefined}>
+          <div className={`product-visual${product.imageUrl ? " has-photo" : ""}`} aria-label={product.imageUrl ? `${product.name} image` : undefined}>
             {product.imageUrl ? (
               // Product images may come from the hosted media library once connected.
               // eslint-disable-next-line @next/next/no-img-element
-              <img src={product.imageUrl} alt={product.name} />
+              <img src={product.imageUrl} alt={`${product.name} example building`} />
             ) : (
               <div className="product-building" aria-hidden="true"><span /></div>
             )}
@@ -79,6 +79,7 @@ export default async function ProductPage({ params }: Props) {
             <p className="eyebrow"><span />Built around your needs</p>
             <h2>Let&apos;s plan the right building for your property.</h2>
             <p>{product.description}</p>
+            {product.imageUrl && <p>Photo shows an example building. Your quote will confirm dimensions, colors, features, and availability for your property.</p>}
           </div>
           <aside>
             <div><span>Options</span><strong>{product.sizeNote || "Ask about available configurations"}</strong></div>

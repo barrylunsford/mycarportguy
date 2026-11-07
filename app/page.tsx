@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import Image from "next/image";
 import Header from "@/components/Header";
 import QuoteForm from "@/components/QuoteForm";
 import { getProducts } from "@/lib/products";
@@ -75,6 +76,7 @@ export default async function Home() {
           </div>
 
           <div className="hero-visual" aria-hidden="true">
+            <Image src="/images/buildings/garages.webp" alt="" fill sizes="(max-width: 900px) 100vw, 50vw" preload style={{ objectFit: "cover", objectPosition: "center" }} />
             <p className="visual-caption">Designed around your property</p>
           </div>
         </section>
@@ -104,6 +106,7 @@ export default async function Home() {
             </p>
           </div>
 
+          <p className="structure-photo-note">Example buildings shown. Colors, dimensions, features, and availability are confirmed with your quote.</p>
           <div className="structure-grid">
             {structures.map((structure, index) => (
               <Link
@@ -113,7 +116,10 @@ export default async function Home() {
                 aria-label={structure.name}
               >
                 <div className="card-art" aria-hidden="true">
-                  <span className="structure-card-mark">{structure.name.slice(0, 1)}</span>
+                  {structure.imageUrl ? (
+                    // eslint-disable-next-line @next/next/no-img-element
+                    <img src={structure.imageUrl} alt="" loading="lazy" decoding="async" />
+                  ) : <span className="structure-card-mark">{structure.name.slice(0, 1)}</span>}
                 </div>
                 <div className="card-body">
                   <h3>{structure.name}<span className="card-arrow" aria-hidden="true">→</span></h3>
